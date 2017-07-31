@@ -26,6 +26,7 @@ class GroupController {
     }
 
     addNewGroup(group) {
+        this.groups.push(group);
         let view = new GroupItemView(group);
         view.render();
     }
