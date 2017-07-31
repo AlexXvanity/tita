@@ -25,8 +25,8 @@ class DayItemView {
         let btn = '<i id="add-day" class="add-button fa fa-plus-circle" aria-hidden="true"></i>',
             slotContainer = this.container.querySelector('.group-item');
 
-        if(this.day.time){
-            this.day.time.forEach ((timeSlot)=>{
+        if(this.day.time) {
+            this.day.time.forEach ((timeSlot)=> {
                 let template = `<div class="panel-body"><div class="time-slot">${timeSlot}</div></div>`;
 
                 slotContainer.insertAdjacentHTML ('beforeend', template);

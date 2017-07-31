@@ -8,8 +8,8 @@ class ResultTestsView {
     }
 
     createTable () {
-        let table = `<table><tr><th>Surname</th><th>Name</th><th>Institution</th><th>Department</th>
-            <th>Email</th><th>State</th><th>Started on</th><th>Completed</th>`;
+        let table = `<table><tr><th>Surname</th><th>First Name</th><th>Institution</th><th>Department</th>
+            <th>Email</th><th>State</th><th>Started on</th><th>Completed</th><th>Time taken</th><th>Grade</th>`;
 
         this.results.forEach(function (person) {
             table += 
@@ -21,7 +21,9 @@ class ResultTestsView {
                     <td>${person.email}</td>                                                                          
                     <td>${person.state}</td>
                     <td>${person.startedOn}</td>
-                    <td>${person.completed}</td>                                                                          
+                    <td>${person.completed}</td>   
+                    <td>${person.timeTaken}</td>
+                    <td>${person.grade}</td> 
                 </tr>`;   
         });
 

@@ -16,24 +16,54 @@ class ResultController {
 	}
 
     generatePeopleInfo (listOfPeople) {
-        let arrayOfPeople = listOfPeople.match(/[^\n]+/g),
-            people = [];
-            
-        arrayOfPeople.forEach((user) => {
-            let arrayOfPerson = user.split(' '),
-                personOfObj = {};
+        // Papa parses
+        let peopleList = Papa.parse(listOfPeople),
+            personInfo = {},
+            personList = [],
+            person = {},
+            result = [];
 
+        peopleList.data.forEach((user) => {
+            personList = user;
             //check validation using reg exp
-            personOfObj.name = (this.checkNameOrSurname(arrayOfPerson[0]))? arrayOfPerson[0] : 'no valid';
-            personOfObj.surname = (this.checkNameOrSurname(arrayOfPerson[1]))? arrayOfPerson[1] : 'no valid';
-            personOfObj.email = (this.checkEmail(arrayOfPerson[2]))? arrayOfPerson[2] : 'no valid';
-       
-            let person = new Person(personOfObj.name, personOfObj.surname, personOfObj.email);
+            personInfo.name = (this.checkNameOrSurname(personList[0])) ? personList[0] : 'no valid';
+            personInfo.surname = (this.checkNameOrSurname(personList[1])) ? personList[1] : 'no valid';
+            personInfo.email = (this.checkEmail(personList[2])) ? personList[2] : 'no valid';
 
-            people.push(person);
+            person = new Person(personInfo.name, personInfo.surname, personInfo.email);
+
+            result.push(person);
+
+            this.showResultPeople(result);
+        });
+    }
+
+    generateTestsInfo (info) {
+        // Papa parses
+        let peopleList = Papa.parse(info),
+            personInfo = {},
+            personList = [],
+            result = [];
+        
+        peopleList.data.forEach((user) => {
+            personList = user;
+            personInfo = {};
+
+            personInfo.surname = personList[0];
+            personInfo.name = personList[1];
+            personInfo.institution = personList[2];
+            personInfo.department = personList[3];
+            personInfo.email = personList[4];
+            personInfo.state = personList[5];
+            personInfo.startedOn = personList[6];
+            personInfo.completed = personList[7];
+            personInfo.timeTaken = personList[8];
+            personInfo.grade = personList[9];
+
+            result.push(personInfo);
         });
 
-        this.showResultPeople(people);
+        this.showTestsResult(result);
     }
 
     checkNameOrSurname (name) {
@@ -50,30 +80,6 @@ class ResultController {
 
     showResultPeople (people) {
         let resultPeopleView = new ResultPeopleView(people); 
-    }
-
-    generateTestsInfo (info) {
-        let arrayOfPeople = info.match(/[^\n]+/g),
-            people = [];
-
-            
-        arrayOfPeople.forEach((user) => {
-            let arrayOfPerson = user.split(' '),
-                personOfObj = {};
-
-            personOfObj.surname = arrayOfPerson[0];
-            personOfObj.name = arrayOfPerson[1];
-            personOfObj.institution = arrayOfPerson[2];
-            personOfObj.department = arrayOfPerson[3];
-            personOfObj.email = arrayOfPerson[4];
-            personOfObj.state = arrayOfPerson[5];
-            personOfObj.startedOn = arrayOfPerson[6];
-            personOfObj.completed = arrayOfPerson[7];
-       
-            people.push(personOfObj);
-        });
-
-        this.showTestsResult(people);
     }
 
     showTestsResult (people) {
