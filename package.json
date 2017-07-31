@@ -1,0 +1,32 @@
+{
+  "name": "ITA.tool.kit.ty",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "bootstrap": "^3.3.7",
+    "eslint": "^4.2.0",
+    "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^1.0.0",
+    "image-webpack-loader": "^3.3.1",
+    "jasmine": "^2.6.0",
+    "jasmine-core": "^2.6.4",
+    "karma": "^1.7.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-webpack": "^2.0.4",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.4.1"
+  },
+  "dependencies": {
+    "imagemin-optipng": "^5.2.1"
+  }
+}
