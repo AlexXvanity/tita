@@ -13,41 +13,52 @@ class ResultController {
 	activate () {
         mediator.sub('assignPeople:saved', this.generatePeopleInfo.bind(this));
         mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
+        mediator.sub('group:selected', this.setGroup.bind(this));
+        mediator.sub('testModal:open', this.setTestTitle.bind(this));
 	}
+    
+    setTestTitle (title) {
+        this.testTitle = title;
+    }
+    setGroup (group) {
+        this.group = group;
+        this.group.people = [];
+        console.log(this.group);
+    }
 
     generatePeopleInfo (listOfPeople) {
-        // Papa parses
         let peopleList = Papa.parse(listOfPeople),
-            personInfo = {},
-            personList = [],
-            person = {},
             result = [];
 
         peopleList.data.forEach((user) => {
-            personList = user;
-            //check validation using reg exp
+            let personList = user,
+                personInfo = {},
+                person = {};
+
             personInfo.name = (this.checkNameOrSurname(personList[0])) ? personList[0] : 'no valid';
             personInfo.surname = (this.checkNameOrSurname(personList[1])) ? personList[1] : 'no valid';
             personInfo.email = (this.checkEmail(personList[2])) ? personList[2] : 'no valid';
 
-            person = new Person(personInfo.name, personInfo.surname, personInfo.email);
+            person = this.createPerson(personInfo);
+
+            this.addPersonTestList(person);
+
+            this.addPerson(person);
 
             result.push(person);
-
-            this.showResultPeople(result);
         });
+
+        this.showResultPeople(result);
     }
 
     generateTestsInfo (info) {
-        // Papa parses
+        debugger;
         let peopleList = Papa.parse(info),
-            personInfo = {},
-            personList = [],
             result = [];
-        
+
         peopleList.data.forEach((user) => {
-            personList = user;
-            personInfo = {};
+            let personList = user,
+                personInfo = {};
 
             personInfo.name = personList[0];
             personInfo.surname = personList[1];
@@ -57,7 +68,35 @@ class ResultController {
             result.push(personInfo);
         });
 
+        this.addPersonResults(result, this.testTitle);
         this.showTestsResult(result);
+    }
+
+    addPersonResults (result, testTitle) {
+        this.group.people.forEach((person) => {
+            console.log(person);
+        });
+    }
+
+    createPerson (personInfo) {
+        let person = new Person(personInfo.name, personInfo.surname, personInfo.email);
+
+        return person;
+    }
+
+    addPersonTestList (person) {
+        person.testList = this.group.testList;
+    }
+
+    addPerson (person) {
+        this.group.people.push(person);
+    }
+
+    addPersonTests (person, group) {
+        let testList = group.testList;
+
+        person.testList = testList;
+
     }
 
     checkNameOrSurname (name) {

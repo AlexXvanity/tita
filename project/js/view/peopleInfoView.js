@@ -31,23 +31,20 @@ class PeopleInfoView {
 	}
 
 	subscribe () {
-		this.view.querySelector('.button-save-people').addEventListener('click',
-			this.saveData.bind(this));
-		this.view.querySelector('.button-close-people').addEventListener('click',
-			this.delete.bind(this));
+		this.view.querySelector('.button-save-people').addEventListener('click', this.saveData.bind(this));
+		this.view.querySelector('.button-close-people').addEventListener('click', this.delete.bind(this));
 	}
 
 	unsubscribe () {
-		this.view.querySelector('.button-save-people').removeEventListener('click',
-			this.saveData.bind(this));
-		this.view.querySelector('.button-close-people').removeEventListener('click',
-			this.delete.bind(this));
+		this.view.querySelector('.button-save-people').removeEventListener('click', this.saveData.bind(this));
+		this.view.querySelector('.button-close-people').removeEventListener('click', this.delete.bind(this));
 	}
 
 	saveData () {
 		let listOfPeople = this.view.querySelector('.people-input-area').value;
 
 		mediator.pub('assignPeople:saved', listOfPeople);
+
 		this.activateAddTest();
 		this.delete();
 	}
@@ -59,8 +56,12 @@ class PeopleInfoView {
         this.buttonsOpen.forEach(function (buttonOpen) {
         	buttonOpen.querySelector('.panel-body').innerHTML = '<a class="btn btn-primary btn-xs add-test-button">Add test</a>';
 
-        	buttonOpen.querySelector('.panel-body').addEventListener('click', () => {
-            	mediator.pub('testModal:open');
+        	buttonOpen.querySelector('.panel-body').addEventListener('click', (e) => {
+				let testTitle = '';
+
+				testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
+
+            	mediator.pub('testModal:open', testTitle);
         	});
         });
     }

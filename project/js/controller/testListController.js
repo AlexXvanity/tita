@@ -20,7 +20,6 @@ class TestListController {
         this.testListView.renderTest(group);
     }
 
-
     createModalTest () {
         let modalTestView = new ModalTestView();
         
