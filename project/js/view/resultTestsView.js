@@ -8,23 +8,16 @@ class ResultTestsView {
     }
 
     createTable () {
-        let table = `<table><tr><th>Surname</th><th>First Name</th><th>Institution</th><th>Department</th>
-            <th>Email</th><th>State</th><th>Started on</th><th>Completed</th><th>Time taken</th><th>Grade</th>`;
+        let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th><th>Grade</th>`;
 
         this.results.forEach(function (person) {
-            table += 
+            table +=
                 `<tr>
-                    <td>${person.surname}</td>                                                                          
-                    <td>${person.name}</td>
-                    <td>${person.institution}</td>
-                    <td>${person.department}</td>
+                    <td>${person.name}</td>                                                                          
+                    <td>${person.surname}</td>
                     <td>${person.email}</td>                                                                          
-                    <td>${person.state}</td>
-                    <td>${person.startedOn}</td>
-                    <td>${person.completed}</td>   
-                    <td>${person.timeTaken}</td>
                     <td>${person.grade}</td> 
-                </tr>`;   
+                </tr>`;
         });
 
         table += '</table>';

@@ -49,16 +49,10 @@ class ResultController {
             personList = user;
             personInfo = {};
 
-            personInfo.surname = personList[0];
-            personInfo.name = personList[1];
-            personInfo.institution = personList[2];
-            personInfo.department = personList[3];
-            personInfo.email = personList[4];
-            personInfo.state = personList[5];
-            personInfo.startedOn = personList[6];
-            personInfo.completed = personList[7];
-            personInfo.timeTaken = personList[8];
-            personInfo.grade = personList[9];
+            personInfo.name = personList[0];
+            personInfo.surname = personList[1];
+            personInfo.email = personList[2];
+            personInfo.grade = personList[3];
 
             result.push(personInfo);
         });
