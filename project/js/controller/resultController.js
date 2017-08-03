@@ -8,6 +8,7 @@ let Person = require('../model/Person.js'),
 class ResultController {
 	constructor () {
         this.activate();
+        this.resultPeopleView = new ResultPeopleView();
 	}
 
 	activate () {
@@ -20,10 +21,10 @@ class ResultController {
     setTestTitle (title) {
         this.testTitle = title;
     }
+    
     setGroup (group) {
         this.group = group;
         this.group.people = [];
-        console.log(this.group);
     }
 
     generatePeopleInfo (listOfPeople) {
@@ -43,16 +44,41 @@ class ResultController {
 
             this.addPersonTestList(person);
 
-            this.addPerson(person);
-
             result.push(person);
         });
 
-        this.showResultPeople(result);
+        if (!this.isUserExist(this.group, result)) {
+            this.addPersonToGroup(result);
+            this.resultPeopleView.showResult(result, 'showAddedPeople');
+        } else {
+            this.resultPeopleView.showResult(result, 'errorExistPeople');
+        }
+    }
+
+    isUserExist (group, newPeopleList) {
+        let peopleGroupList = group.people,
+            peopleList = newPeopleList,
+            existPersonList = [],
+            result = false;
+
+        peopleGroupList.forEach((groupPerson) => {
+            peopleList.forEach((addedPerson) => {
+                if (addedPerson.email === groupPerson.email) {
+                    existPersonList.push(addedPerson.email);
+                }
+            });
+        });
+
+        if (existPersonList.length) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        return result;
     }
 
     generateTestsInfo (info) {
-        debugger;
         let peopleList = Papa.parse(info),
             result = [];
 
@@ -72,12 +98,6 @@ class ResultController {
         this.showTestsResult(result);
     }
 
-    addPersonResults (result, testTitle) {
-        this.group.people.forEach((person) => {
-            console.log(person);
-        });
-    }
-
     createPerson (personInfo) {
         let person = new Person(personInfo.name, personInfo.surname, personInfo.email);
 
@@ -88,8 +108,8 @@ class ResultController {
         person.testList = this.group.testList;
     }
 
-    addPerson (person) {
-        this.group.people.push(person);
+    addPersonToGroup (personList) {
+        personList.forEach((person) => this.group.people.push(person));
     }
 
     addPersonTests (person, group) {
@@ -109,10 +129,6 @@ class ResultController {
         let validationEmail = /\S+@\S+\.\S+/;
 
         return validationEmail.test(email);
-    }
-
-    showResultPeople (people) {
-        let resultPeopleView = new ResultPeopleView(people); 
     }
 
     showTestsResult (people) {
