@@ -18,7 +18,7 @@ class TestItemView {
 
         let template = `<div class="test-item col-xs-2 panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title">${this.test.name} </h3>
+                                <h3 class="panel-title">${this.test.name}</h3>
                             </div>
                             <div class="panel-body">
                             </div>

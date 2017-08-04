@@ -3,7 +3,8 @@
 let Person = require('../model/Person.js'),
     ResultPeopleView = require('../view/resultPeopleView.js'),
     ResultTestsView = require('../view/resultTestsView.js'),
-    mediator = require('../Mediator.js');
+    mediator = require('../Mediator.js'),
+    Test = require('../model/Test.js');
 
 class ResultController {
 	constructor () {
@@ -12,19 +13,20 @@ class ResultController {
 	}
 
 	activate () {
-        mediator.sub('assignPeople:saved', this.generatePeopleInfo.bind(this));
-        mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
         mediator.sub('group:selected', this.setGroup.bind(this));
-        mediator.sub('testModal:open', this.setTestTitle.bind(this));
+        mediator.sub('assignPeople:saved', this.generatePeopleInfo.bind(this));
+        mediator.sub('testModal:open', this.setTestName.bind(this));
+        mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
 	}
-    
-    setTestTitle (title) {
-        this.testTitle = title;
+
+    setTestName (testName) {
+        this.testName = testName;
     }
     
     setGroup (group) {
         this.group = group;
         this.group.people = [];
+        console.log(group);
     }
 
     generatePeopleInfo (listOfPeople) {
@@ -42,7 +44,7 @@ class ResultController {
 
             person = this.createPerson(personInfo);
 
-            this.addPersonTestList(person);
+            this.createPersonTestList(this.group, person);
 
             result.push(person);
         });
@@ -53,6 +55,49 @@ class ResultController {
         } else {
             this.resultPeopleView.showResult(result, 'errorExistPeople');
         }
+        console.log(this.group);
+    }
+
+    generateTestsInfo (info) {
+        let peopleList = Papa.parse(info),
+            result = [];
+
+        peopleList.data.forEach((user) => {
+            let personList = user,
+                personInfo = {};
+
+            personInfo.name = personList[0];
+            personInfo.surname = personList[1];
+            personInfo.email = personList[2];
+            personInfo.grade = personList[3];
+
+            result.push(personInfo);
+        });
+        if (this.isUserExist(this.group, result)) {
+            this.addTestResult(this.group, result, this.testName);
+        } else {
+            // иначе мы формируем массив людей которые не вошли в список и  выдаем ошибку
+            // эти люди не заносятся в объект группы
+        }
+        this.showTestsResult(result);
+    }
+
+    addTestResult (group, result, testTitle) {
+        let peopleGroupList = group.people,
+            peopleResultList = result,
+            testName = testTitle;
+
+        peopleGroupList.forEach((person) => {
+            peopleResultList.forEach((personResult) => {
+                if (person.email === personResult.email) {
+                    person.testList.forEach((test) => {
+                        if (test.name === testName) {
+                            test.maxGrade = parseInt(personResult.grade);
+                        }
+                    });
+                }
+            });
+        });
     }
 
     isUserExist (group, newPeopleList) {
@@ -77,35 +122,24 @@ class ResultController {
 
         return result;
     }
-
-    generateTestsInfo (info) {
-        let peopleList = Papa.parse(info),
-            result = [];
-
-        peopleList.data.forEach((user) => {
-            let personList = user,
-                personInfo = {};
-
-            personInfo.name = personList[0];
-            personInfo.surname = personList[1];
-            personInfo.email = personList[2];
-            personInfo.grade = personList[3];
-
-            result.push(personInfo);
-        });
-
-        this.addPersonResults(result, this.testTitle);
-        this.showTestsResult(result);
-    }
-
+    
     createPerson (personInfo) {
         let person = new Person(personInfo.name, personInfo.surname, personInfo.email);
 
         return person;
     }
 
-    addPersonTestList (person) {
-        person.testList = this.group.testList;
+    createPersonTestList (group, person) {
+        let groupTestList = group.testList,
+            personTestList = [];
+
+        groupTestList.forEach((groupTest) => {
+            let test = new Test(groupTest.name);
+
+            personTestList.push(test);
+        });
+
+        person.testList = personTestList;
     }
 
     addPersonToGroup (personList) {
@@ -132,7 +166,7 @@ class ResultController {
     }
 
     showTestsResult (people) {
-        let resultTestsView = new ResultTestsView(people); 
+        let resultTestsView = new ResultTestsView(people);
     }
 }
 
