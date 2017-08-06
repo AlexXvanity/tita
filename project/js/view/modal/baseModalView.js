@@ -1,4 +1,4 @@
-'use srtict';
+'use strict';
 
 class BaseModalView {
     constructor (model, template) {

@@ -1,52 +1,67 @@
 'use strict';
 
-let mediator = require('../Mediator.js');
+let mediator = require('../Mediator.js'),
+    tpl = require('./tpl/tplModalSettings.js');
 
 class DayItemView {
-    constructor(day) {
-        this.day = day;
-        this.container = document.querySelector(this.selectors.daySection);
-        this.tplConteiner = '<div class="group-item col-xs-2 panel panel-primary">';
+    constructor (day) {
+        this.container = document.querySelector(this.selectors.testDay);
+        this.template = tpl.dayListView;
+        this.selectDay = day;
     }
 
     get selectors () {
         return {
-            daySection: '.test-days'
+            testDay: '.test-days',
+            addDayBtn: '#add-day',
+            dayItem: '.day-item',
+            timeSlot: '.add-time-slot',
+            addPeople: '.add-people'
         };
     }
 
-    renderDay () {
-        let template = this.tplConteiner + `<div class="panel-heading"><h3 class="panel-title">${this.day.date}</h3></div>`;
+    renderDay (day) {
+        this.container.insertAdjacentHTML('afterbegin',this.template);
 
-        this.container.insertAdjacentHTML('afterBegin', template);
-    }
+        let dayItemTemplate = this.container.querySelector(this.selectors.dayItem),
+            year = day.date.slice(2,4),
+            month = day.date.slice(5,7),
+            dayT = day.date.slice(8),
 
-    renderTimeSlot () {
-        let btn = '<i id="add-day" class="add-button fa fa-plus-circle" aria-hidden="true"></i>',
-            slotContainer = this.container.querySelector('.group-item');
+            date = `${month}/${dayT}/${year}`;
 
-        if(this.day.time) {
-            this.day.time.forEach ((timeSlot)=> {
-                let template = `<div class="panel-body"><div class="time-slot">${timeSlot}</div></div>`;
+        dayItemTemplate.innerHTML = tpl.dayItem.replace ('{date}', date);
 
-                slotContainer.insertAdjacentHTML ('beforeend', template);
+        if (day.time) {
+            day.time.forEach((time) => {
+                dayItemTemplate.insertAdjacentHTML ('beforeend', tpl.timeSlotItem.replace ('{timeSlot}', time));
             });
         }
 
-        slotContainer.insertAdjacentHTML ('afterend', btn);
+        dayItemTemplate.insertAdjacentHTML ('beforeend', tpl.btnAddTimeSlot);
 
-        this.activate();
+        if ( !document.querySelector (this.selectors.addDayBtn) ){
+            this.container.insertAdjacentHTML ('beforeend', tpl.addBtn);
+            let addDayBtn = document.querySelector (this.selectors.addDayBtn);
+            addDayBtn.addEventListener ('click', () => {mediator.pub('day:add');});
+        }
+
+        this.activate (dayItemTemplate);
     }
 
-    activate () {
-        let buttonOpen = this.container.querySelector('.time-slot');
-        buttonOpen.addEventListener('click', () => {
-            mediator.pub('assignPeople:open');
-        });
-    }
+    activate (tpl) {
+        let timeSlot = tpl.querySelector (this.selectors.timeSlot),
+            dayItem = document.querySelector (this.selectors.dayItem),
+            addPeople = tpl.querySelector (this.selectors.addPeople);
+        if (addPeople){
+            addPeople.addEventListener('click', () => {mediator.pub ('assignPeople:open');});
+        }
 
-    selectGroupForDay () {
-        mediator.pub ('group:selected', this.currentGroup);
+        timeSlot.addEventListener ('click', () => {mediator.pub('timeSlot:add', this.selectDay);});
+        dayItem.addEventListener('click', this.selectDayItemHandler.bind(this));
+    }
+    selectDayItemHandler () {
+        mediator.pub('day:selected', this.selectDay);
     }
 }
 

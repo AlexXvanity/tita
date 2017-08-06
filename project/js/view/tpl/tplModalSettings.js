@@ -193,7 +193,7 @@ tpl.modalGroupListViev =
         <div class="config">
           <i id='config' class="config-button fa fa-cog" aria-hidden="true"></i>
         </div>
-        `;;
+        `;
 
 
 tpl.filterSection = `
@@ -256,4 +256,97 @@ tpl.editGroupTestModal = `<div class="modal fade display in edit-group-test-moda
 tpl.testListView = `<div class="titleSection">Test list</div>
                     <div id="test-list" class="clearfix"></div>
                     `;
+tpl.dayListView = `<div class="day-item col-xs-2 panel panel-primary"></div>`;
+tpl.addDay = `
+        <div class="modal fade display in add-group-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Day management</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="usr">Enter date:</label>
+                                <input type="date" class="form-control" id="day-input" required>
+                            </div>
+                            <button type="submit" class="btn btn-default save-day-btn">Save</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default close-day-btn" >Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+`;
+tpl.dayItem = `
+<div class="panel-heading"><h3 class="panel-title">{date}</h3></div>
+`;
+tpl.timeSlotItem = `
+<div class="panel-body"><h3 class="time-slot panel-title">{timeSlot}</h3><i class="fa add-people fa-file-text" aria-hidden="true"></i></div>
+`;
+tpl.btnAddTimeSlot = `
+<a class="btn btn-primary btn-xs add-time-slot"> Add Time Slot</a>
+`;
+tpl.addBtn = `
+<i id="add-day" class="add-button fa fa-plus-circle" aria-hidden="true"></i>
+`;
+tpl.addTimeSlot = `
+        <div class="modal fade display in add-group-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Time slot management</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="usr">Enter time:</label>
+                               <div class="dropdown">
+                                <select id="time-slot-input" class="form-control">
+                                    <option>8:00</option>
+                                    <option>8:30</option>
+                                    <option>9:00</option>
+                                    <option>9:30</option>
+                                    <option>10:00</option>
+                                    <option>10:30</option>
+                                    <option>11:00</option>
+                                    <option>11:30</option>
+                                    <option>12:00</option>
+                                    <option>12:30</option>
+                                    <option>13:00</option>
+                                    <option>13:30</option>
+                                    <option>14:00</option>
+                                    <option>14:30</option>
+                                    <option>15:00</option>
+                                    <option>15:30</option>
+                                    <option>16:00</option>
+                                    <option>16:30</option>
+                                    <option>17:00</option>
+                                    <option>17:30</option>
+                                    <option>18:00</option>
+                                    <option>18:30</option>
+                                </select>
+                            </div>
+                            </div>
+                            <button type="button" class="btn btn-default save-time-slot-btn">Save</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default close-time-slot-btn" >Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+`;
+
+tpl.daySection =`
+                           <div class="title-section">Test Day</div>
+                            <div class="test-days clearfix">
+                                <i id="add-day" class="add-button fa fa-plus-circle" aria-hidden="true"></i>
+                            </div>
+`;
 module.exports = tpl;

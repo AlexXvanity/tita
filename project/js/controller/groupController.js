@@ -15,7 +15,6 @@ class GroupController {
         this.groups = groups;
         this.selectedGroup = null;
         this.activate();
-        console.log(groups);
     }
 
     renderGroupList(groups) {

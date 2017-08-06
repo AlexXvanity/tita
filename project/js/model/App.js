@@ -3,8 +3,9 @@
 let Settings = require('./Settings.js'),
     FilterListView = require('../view/filterListView.js'),
     GroupListView = require('../view/groupListView.js'),
+	DayListView = require('../view/dayListView.js'),
     GroupController = require('../controller/groupController.js'),
-    DayListController = require('../controller/dayListController.js'),
+    DayController = require('../controller/dayController.js'),
     SettingsController = require('../controller/settingsController.js'),
     TestListController = require('../controller/testListController.js'),
     FilterController = require('../controller/filterController.js'),
@@ -24,10 +25,11 @@ class App {
 
     start() {
         let groupListView = new GroupListView(this.settings),
+			dayListView = new DayListView(),
             groupController = new GroupController(this.groupList, this.settings, groupListView),
             filterListView = new FilterListView(),
             filterController = new FilterController(),
-            dayListController = new DayListController(),
+            dayController = new DayController(dayListView),
             testListView = new TestListView(),
             testListController = new TestListController(testListView),
             settingsController = new SettingsController(this.settings),
