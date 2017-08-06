@@ -8,6 +8,7 @@ class Group {
         this.testList = direction.testList;
         this.filterList = direction.filterList;
         this.day = day;
+        this.people = [];
 
         this.testAdded = new Observer(this);
     }

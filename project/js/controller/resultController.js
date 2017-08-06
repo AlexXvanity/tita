@@ -2,7 +2,7 @@
 
 let Person = require('../model/Person.js'),
     ResultPeopleView = require('../view/resultPeopleView.js'),
-    ResultTestsView = require('../view/resultTestsView.js'),
+    // ResultTestsView = require('../view/resultTestsView.js'),
     mediator = require('../Mediator.js'),
     Test = require('../model/Test.js');
 
@@ -25,7 +25,6 @@ class ResultController {
     
     setGroup (group) {
         this.group = group;
-        this.group.people = [];
         console.log(group);
     }
 
@@ -48,14 +47,15 @@ class ResultController {
 
             result.push(person);
         });
+        debugger;
+        let checkResult = this.checkUserExist(this.group, result);
 
-        if (!this.isUserExist(this.group, result)) {
-            this.addPersonToGroup(result);
-            this.resultPeopleView.showResult(result, 'showAddedPeople');
+        if (checkResult.notExistPeople.length) {
+            this.addPersonToGroup(checkResult.notExistPeople);
+            this.resultPeopleView.showResult(result, 'peopleAdded');
         } else {
-            this.resultPeopleView.showResult(result, 'errorExistPeople');
+            this.resultPeopleView.showResult(checkResult.existPeople, 'errorExistPerson');
         }
-        console.log(this.group);
     }
 
     generateTestsInfo (info) {
@@ -73,13 +73,15 @@ class ResultController {
 
             result.push(personInfo);
         });
-        if (this.isUserExist(this.group, result)) {
-            this.addTestResult(this.group, result, this.testName);
+        debugger;
+        let checkResult = this.checkUserExist(this.group, result);
+
+        if (checkResult.notExistPeople.length) {
+            this.resultPeopleView.showResult(checkResult.notExistPeople, 'errorNotExitPerson');
         } else {
-            // иначе мы формируем массив людей которые не вошли в список и  выдаем ошибку
-            // эти люди не заносятся в объект группы
+            this.addTestResult(this.group, checkResult.existPeople, this.testName);
+            this.resultPeopleView.showResult(result, 'testResults');
         }
-        this.showTestsResult(result);
     }
 
     addTestResult (group, result, testTitle) {
@@ -100,24 +102,34 @@ class ResultController {
         });
     }
 
-    isUserExist (group, newPeopleList) {
+    checkUserExist (group, newPeopleList) {
         let peopleGroupList = group.people,
             peopleList = newPeopleList,
+            notExistPersonList = [],
             existPersonList = [],
-            result = false;
+            result = {};
 
-        peopleGroupList.forEach((groupPerson) => {
+        if (peopleGroupList.length) {
             peopleList.forEach((addedPerson) => {
-                if (addedPerson.email === groupPerson.email) {
-                    existPersonList.push(addedPerson.email);
+                peopleGroupList.forEach((groupPerson) => {
+                    if (addedPerson.email === groupPerson.email) {
+                        existPersonList.push(addedPerson);
+                    }
+                });
+                // checking if user is not exist in groupList
+                if (!existPersonList.length) {
+                    notExistPersonList.push(addedPerson);
                 }
             });
-        });
 
-        if (existPersonList.length) {
-            result = true;
+            result.existPeople = existPersonList;
+            result.notExistPeople = notExistPersonList;
         } else {
-            result = false;
+            peopleList.forEach((person) => {
+                notExistPersonList.push(person);
+            });
+
+            result.notExistPeople = notExistPersonList;
         }
 
         return result;
@@ -165,9 +177,9 @@ class ResultController {
         return validationEmail.test(email);
     }
 
-    showTestsResult (people) {
-        let resultTestsView = new ResultTestsView(people);
-    }
+    // showTestsResult (people) {
+    //     let resultTestsView = new ResultTestsView(people);
+    // }
 }
 
 module.exports = ResultController;
