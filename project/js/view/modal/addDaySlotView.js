@@ -24,6 +24,7 @@ class AddDaySlotView extends BaseModalView {
 
 
     saveTimeSlot () {
+        debugger;
         let timeValue = this.getDropDownValue(this.selectors.timeSlotInput);
 
 

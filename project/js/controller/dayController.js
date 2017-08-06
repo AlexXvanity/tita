@@ -30,7 +30,7 @@ class DayController {
     selectDayHandler(day) {
         this.selectedGroup = day;
     }
-    renderDayList(group){
+    renderDayList(group) {
         this.selectGroup = group;
 
         this.dayListView.clearContainer();
@@ -44,7 +44,7 @@ class DayController {
         });
     }
 
-    showAddDay (){
+    showAddDay () {
         this.addDayModal.show();
 
         let date = new Date(),
@@ -58,14 +58,14 @@ class DayController {
         let today = `${year}-${month}-${day}`;
         document.querySelector('#day-input').value = today;
     }
-    addDayHandler(day){
+    addDayHandler(day) {
         this.selectDay = day;
         this.selectGroup.days.push(day);
         this.renderDayList(this.selectGroup);
 
     }
 
-    showAddTime (){
+    showAddTime () {
         this.addTimeModal.show();
     }
 
@@ -79,8 +79,8 @@ class DayController {
         peopleInfoView.show();
     }
 
-    addTimeSlot(time){
-        if ( !this.selectDay.time ){
+    addTimeSlot(time) {
+        if (!this.selectDay.time) {
             this.selectDay.time =[];
         }
         this.selectDay.time.push(time);
