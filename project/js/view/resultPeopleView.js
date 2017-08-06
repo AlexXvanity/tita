@@ -16,7 +16,7 @@ class ResultPeopleView {
             peopleAdded: () => {
                 this.showAddedPerson(results);
             },
-            testResults: () => {
+            testResultsAdded: () => {
                 this.showTestResults(results);
             }
 

@@ -21,7 +21,6 @@ class DayItemView {
     }
 
     renderDay (day) {
-        debugger;
         this.container.insertAdjacentHTML('afterbegin',this.template);
 
         let dayItemTemplate = this.container.querySelector(this.selectors.dayItem),

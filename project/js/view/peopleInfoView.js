@@ -44,27 +44,9 @@ class PeopleInfoView {
 		let listOfPeople = this.view.querySelector('.people-input-area').value;
 
 		mediator.pub('assignPeople:saved', listOfPeople);
-
-		this.activateAddTest();
+        
 		this.delete();
 	}
- 
- 	//create buttons into 'Tests' for adding info
-	activateAddTest () {
-        this.buttonsOpen = this.section.querySelectorAll('.test-item');
-
-        this.buttonsOpen.forEach(function (buttonOpen) {
-        	buttonOpen.querySelector('.panel-body').innerHTML = '<a class="btn btn-primary btn-xs add-test-button">Add test</a>';
-
-        	buttonOpen.querySelector('.panel-body').addEventListener('click', (e) => {
-				let testTitle = '';
-
-				testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
-
-            	mediator.pub('testModal:open', testTitle);
-        	});
-        });
-    }
 
 	delete () {
 		this.view.querySelector('.people-input-area').value = '';
