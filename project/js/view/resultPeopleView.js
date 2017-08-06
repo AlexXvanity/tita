@@ -10,7 +10,7 @@ class ResultPeopleView {
             errorExistPerson: () => {
                 this.showExistPerson(results);
             },
-            errorNotExitPerson () {
+            errorNotExistPerson: () =>  {
                 this.showNotExistPerson(results);
             },
             peopleAdded: () => {
@@ -60,7 +60,7 @@ class ResultPeopleView {
 
         this.section.innerHTML =
             `<h4 style="color: red">ERROR!!!</h4>
-             <h5 style="color: red">THIS PERSON NOT EXIST IN TIME SLOT</h5>
+             <h5 style="color: red">THIS PERSON NOT EXIST IN THE TIME SLOT</h5>
             <div>${table}</div>`;
     }
 

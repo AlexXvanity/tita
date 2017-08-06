@@ -77,7 +77,7 @@ class ResultController {
         let checkResult = this.checkUserExist(this.group, result);
 
         if (checkResult.notExistPeople.length) {
-            this.resultPeopleView.showResult(checkResult.notExistPeople, 'errorNotExitPerson');
+            this.resultPeopleView.showResult(checkResult.notExistPeople, 'errorNotExistPerson');
         } else {
             this.addTestResult(this.group, checkResult.existPeople, this.testName);
             this.resultPeopleView.showResult(result, 'testResults');
