@@ -6,11 +6,7 @@ let SettingsView = require('../view/settingsView.js'),
 
 class SettingsController {
     constructor (settings) {
-
-        // do I need this line?
-      //  this.settings = settings;
         this.view = new SettingsView(settings);
-        
         this.activate();
     }
 

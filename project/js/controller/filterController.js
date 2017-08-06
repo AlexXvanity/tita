@@ -17,6 +17,7 @@ class FilterController {
     }
 
     groupSelectedHandler(group) {
+        debugger;
         this.selectedGroup = group;
         group.filterList.forEach((filter) => {
             let filterItemView = new FilterItemView(filter);
