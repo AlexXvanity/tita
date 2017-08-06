@@ -2,12 +2,12 @@
 let Observer = require('../Event.js');
 
 class Group {
-    constructor (name, direction, day) {
+    constructor (name, direction) {
         this.name = name;
         this.direction = direction.name;
         this.testList = direction.testList;
         this.filterList = direction.filterList;
-        this.day = day;
+        this.days = [];
         this.people = [];
 
         this.testAdded = new Observer(this);

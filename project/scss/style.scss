@@ -111,9 +111,9 @@ footer img {
 }
 
 .group-item {
-    padding: 0px;
-    margin-left: 10px;
-    height: 120px;
+    padding: 0;
+    margin: 5px;
+    min-height: 140px;
     cursor: pointer;
 }
 
@@ -121,8 +121,16 @@ footer img {
     width: 100%;
     height: 30px;
     text-align: center;
-    //font-size: 15px;
+    line-height: 28px;
 }
+.add-time-slot{
+    width: 75%;
+    height: 30px;
+    text-align: center;
+    margin: 15px;
+    line-height: 28px;
+}
+
 
 #group-section .group-item:hover {
     background-color: lightgray;
@@ -131,7 +139,7 @@ footer img {
 .test-item {
     padding: 0;
     margin-left: 10px;
-    height: 120px;
+    min-height: 140px;
 }
 
 .modalwin {
@@ -431,4 +439,38 @@ th, td {
     margin-top: 10px;
     vertical-align: top;
 }
+
+::-webkit-inner-spin-button,
+::-webkit-clear-button{
+    display: none;
+}
+input::-webkit-calendar-picker-indicator {
+    background-image:url(http://beyondsuiterama8.com/images/ic-calendar.png);
+    background-repeat: no-repeat;
+    font-size: 21px;
+    opacity: 1;
+    color: rgba(0,0,0,0);
+}
+
+input::-webkit-calendar-picker-indicator:hover {
+    background-color:  rgba(0,0,0,0);
+}
+
+input#day-input {
+        background-image: url(http://beyondsuiterama8.com/images/ic-calendar.png);
+        background-repeat: no-repeat;
+        background-position: 97% 62%;
+        cursor: pointer;
+}
+
+.day-item{
+    padding: 0;
+    margin: 5px;
+    min-height: 140px;
+}
+.add-people {
+    cursor: pointer;
+}
+
+
 
