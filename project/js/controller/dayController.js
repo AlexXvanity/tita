@@ -30,7 +30,7 @@ class DayController {
     }
 
     selectDayHandler (day) {
-        this.selectedGroup = day;
+        this.selectDay = day;
     }
 
     renderDayList (group) {
