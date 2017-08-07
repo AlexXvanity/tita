@@ -52,12 +52,19 @@ class DayItemView {
     activate (tpl) {
         let timeSlot = tpl.querySelector (this.selectors.timeSlot),
             dayItem = document.querySelector (this.selectors.dayItem),
-            addPeople = tpl.querySelector (this.selectors.addPeople);
-        if (addPeople){
-            addPeople.addEventListener('click', () => {mediator.pub ('assignPeople:open');});
+            addPeople = tpl.querySelectorAll(this.selectors.addPeople);
+        if (addPeople) {
+            addPeople.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    mediator.pub ('assignPeople:open');
+                });
+            });
         }
 
-        timeSlot.addEventListener ('click', () => {mediator.pub('timeSlot:add', this.selectDay);});
+        timeSlot.addEventListener ('click', () => {
+            mediator.pub('timeSlot:add', this.selectDay);
+        });
+        
         dayItem.addEventListener('click', this.selectDayItemHandler.bind(this));
     }
     selectDayItemHandler () {

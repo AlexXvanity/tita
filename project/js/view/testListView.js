@@ -32,6 +32,23 @@ class TestListView {
         this.activate();
     }
 
+    // create buttons into 'Tests' for adding info
+    renderTestButtons () {
+        this.buttonsOpen = this.container.querySelectorAll('.test-item');
+
+        this.buttonsOpen.forEach(function (buttonOpen) {
+        	buttonOpen.querySelector('.panel-body').innerHTML = '<a class="btn btn-primary btn-xs add-test-button">Add test</a>';
+
+        	buttonOpen.querySelector('.panel-body').addEventListener('click', (e) => {
+    		let testTitle = '';
+
+    		testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
+
+            	mediator.pub('testModal:open', testTitle);
+        	});
+        });
+    }
+
     activate () {
         if (this.selectedGroup && !this.selectedGroup.testAdded.isAttached(this.addNewExamHandler.bind(this))) {
             this.selectedGroup.testAdded.attach(this.addNewExamHandler.bind(this));

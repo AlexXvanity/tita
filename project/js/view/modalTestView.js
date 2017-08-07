@@ -44,6 +44,7 @@ class ModalTestView {
 
 	saveTests () {
 		let listOfPeople = this.view.querySelector('.test-input-area').value;
+		
 		mediator.pub('assignTests:saved', listOfPeople);
 
 		this.delete();
