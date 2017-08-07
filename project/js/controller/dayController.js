@@ -28,7 +28,7 @@ class DayController {
 
     }
     selectDayHandler(day) {
-        this.selectedGroup = day;
+        this.selectDay = day;
     }
     renderDayList(group){
         this.selectGroup = group;
