@@ -40,11 +40,11 @@ class TestListView {
         	buttonOpen.querySelector('.panel-body').innerHTML = '<a class="btn btn-primary btn-xs add-test-button">Add test</a>';
 
         	buttonOpen.querySelector('.panel-body').addEventListener('click', (e) => {
-    		let testTitle = '';
+                let testTitle = '';
 
-    		testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
+                testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
 
-            	mediator.pub('testModal:open', testTitle);
+                mediator.pub('testModal:open', testTitle);
         	});
         });
     }

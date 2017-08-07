@@ -12,27 +12,24 @@ class TestListController {
     }
 
     activate () {
-        mediator.sub('assignPeople:saved', this.addTestButtons.bind(this));
+        mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
         mediator.sub('group:selected', this.groupSelectedHandler.bind(this));
         mediator.sub('testModal:open', this.createModalTest.bind(this));
         mediator.sub('testModal:open', this.setTestName.bind(this));
-        mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
+
     }
 
     groupSelectedHandler (group) {
         this.testListView.renderTest(group);
+        this.testListView.renderTestButtons();
         this.setGroup(group);
+
     }
 
     createModalTest () {
-        debugger;
         let modalTestView = new ModalTestView();
 
         modalTestView.show();
-    }
-
-    addTestButtons () {
-        this.testListView.renderTestButtons();
     }
 
     generateTestsInfo (info) {

@@ -18,6 +18,7 @@ class ResultController {
         mediator.sub('peopleInTimeSlotWere:added', this.renderExistPeople.bind(this));
         mediator.sub('testResult:added', this.renderTestResult.bind(this));
         mediator.sub('error:addedPerson', this.renderTestError.bind(this));
+        mediator.sub('timeSlotPeople:formed', this.renderTimeSlotPeople.bind(this));
 	}
 
     renderPeopleWithMarks (group) {
@@ -40,6 +41,10 @@ class ResultController {
 
     renderTestError (people) {
         this.resultPeopleView.showResult(people, 'errorNotExistPerson');
+    }
+
+    renderTimeSlotPeople (people) {
+        this.resultPeopleView.showResult(people, 'peopleAdded');
     }
 
 }

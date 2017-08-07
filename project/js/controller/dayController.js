@@ -20,13 +20,14 @@ class DayController {
 
     activate () {
         mediator.sub('group:selected', this.renderDayList.bind(this));
-        mediator.sub('day:selected', this.selectDayHandler.bind(this,));
+        mediator.sub('day:selected', this.selectDayHandler.bind(this));
         mediator.sub('assignPeople:open', this.openPeopleInfo.bind(this));
         mediator.sub('assignPeople:saved', this.generatePeopleInfo.bind(this));
         mediator.sub('day:add', this.showAddDay.bind(this));
         mediator.sub('day:added', this.addDayHandler.bind(this));
         mediator.sub('timeSlot:add', this.showAddTime.bind(this));
         mediator.sub('timeSlot:added', this.addTimeSlot.bind(this));
+        mediator.sub('timeSlot:clicked', this.getTimeSlotPeople.bind(this));
     }
 
     selectDayHandler (day) {
@@ -35,7 +36,6 @@ class DayController {
 
     renderDayList (group) {
         this.selectGroup = group;
-         console.log(this.selectGroup);
 
         this.dayListView.clearContainer();
 
@@ -46,7 +46,6 @@ class DayController {
 
             dayItemView.renderDay(day);
         });
-        console.log(this.selectGroup);
     }
 
     showAddDay () {
@@ -118,7 +117,6 @@ class DayController {
 
         if (checkResult.notExistPeople.length) {
             this.addPersonToGroup(checkResult.notExistPeople);
-            console.log(this.selectGroup);
             mediator.pub('peopleInTimeSlot:added', checkResult.notExistPeople);
         } else {
             mediator.pub('peopleInTimeSlotWere:added', checkResult.existPeople);
@@ -156,6 +154,27 @@ class DayController {
         }
 
         return result;
+    }
+
+    getTimeSlotPeople (day) {
+        let people = this.selectGroup.people,
+            timeSlotPeople = [],
+            dayDate = day.date,
+            dayTime = day.time;
+
+        console.log(day);
+        console.log(people);
+
+        people.forEach((person) => {
+            let personDate = person.testDay.date,
+                personTime = person.testDay.time[person.testDay.time.length - 1];
+
+            if (personDate === dayDate && personTime === dayTime) {
+                timeSlotPeople.push(person);
+            }
+        });
+
+        mediator.pub('timeSlotPeople:formed', timeSlotPeople);
     }
 
     addPersonToGroup (personList) {
