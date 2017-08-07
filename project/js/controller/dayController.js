@@ -46,6 +46,7 @@ class DayController {
 
             dayItemView.renderDay(day);
         });
+        console.log(this.selectGroup);
     }
 
     showAddDay () {
