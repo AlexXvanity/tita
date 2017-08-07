@@ -44,7 +44,7 @@ class TestListView {
 
     		testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
 
-            	mediator.pub('testModal:open', testTitle);
+            	// mediator.pub('testModal:open', testTitle);
         	});
         });
     }

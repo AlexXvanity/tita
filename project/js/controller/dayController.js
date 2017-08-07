@@ -35,6 +35,7 @@ class DayController {
 
     renderDayList (group) {
         this.selectGroup = group;
+         console.log(this.selectGroup);
 
         this.dayListView.clearContainer();
 
@@ -116,6 +117,7 @@ class DayController {
 
         if (checkResult.notExistPeople.length) {
             this.addPersonToGroup(checkResult.notExistPeople);
+            console.log(this.selectGroup);
             mediator.pub('peopleInTimeSlot:added', checkResult.notExistPeople);
         } else {
             mediator.pub('peopleInTimeSlotWere:added', checkResult.existPeople);

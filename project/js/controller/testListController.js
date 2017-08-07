@@ -25,6 +25,7 @@ class TestListController {
     }
 
     createModalTest () {
+        debugger;
         let modalTestView = new ModalTestView();
 
         modalTestView.show();
@@ -35,7 +36,6 @@ class TestListController {
     }
 
     generateTestsInfo (info) {
-        debugger;
         let peopleList = Papa.parse(info),
             result = [];
 
@@ -95,7 +95,6 @@ class TestListController {
     }
 
     addTestResult (group, result, testTitle) {
-        debugger;
         let peopleGroupList = group.people,
             peopleResultList = result,
             testName = testTitle;
