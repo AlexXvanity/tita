@@ -18,10 +18,17 @@ class ResultPeopleView {
             },
             testResultsAdded: () => {
                 this.showTestResults(results);
+            },
+            peopleWithMarks: () => {
+                this.renderPeopleWithMarks(results);
             }
 
         };
         return obj[renderStatus]();
+    }
+
+    renderPeopleWithMarks (results) {
+        this.showAddedPerson(results);
     }
 
     showExistPerson (results) {

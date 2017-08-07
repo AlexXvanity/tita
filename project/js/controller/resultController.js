@@ -13,12 +13,18 @@ class ResultController {
 	}
 
 	activate () {
-        mediator.sub('group:selected', this.setGroup.bind(this));
+        mediator.sub('group:selected', this.renderPeopleWithMarks.bind(this));
         mediator.sub('peopleInTimeSlot:added', this.renderAddedPeople.bind(this));
         mediator.sub('peopleInTimeSlotWere:added', this.renderExistPeople.bind(this));
         mediator.sub('testResult:added', this.renderTestResult.bind(this));
         mediator.sub('error:addedPerson', this.renderTestError.bind(this));
 	}
+
+    renderPeopleWithMarks (group) {
+        let people = group.people;
+
+        this.resultPeopleView.showResult(people, 'peopleWithMarks');
+    }
 
     renderAddedPeople (people) {
         this.resultPeopleView.showResult(people, 'peopleAdded');
@@ -36,9 +42,6 @@ class ResultController {
         this.resultPeopleView.showResult(people, 'errorNotExistPerson');
     }
 
-    setGroup (group) {
-        this.group = group;
-    }
 }
 
 module.exports = ResultController;
