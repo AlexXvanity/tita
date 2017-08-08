@@ -8,6 +8,7 @@ class FilterController {
     constructor() {
         this.selectedGroup = null;
         this.activate();
+        this.filteredGroup = {};
     }
 
     activate() {
@@ -38,7 +39,7 @@ class FilterController {
 
     filterPeople(filter) {
 
-        console.log(this.selectedGroup.people);
+        // console.log(this.selectedGroup.people);
 
         let resultTest = [];
         this.selectedGroup.people.map((person) => {
@@ -109,7 +110,11 @@ class FilterController {
             }
 
         });
-        return console.log(filteredPerson);
+        this.filteredGroup.people = filteredPerson;
+        (() => {mediator.pub ('filter:on', this.filteredGroup);})();
+        return filteredPerson;
+
+
     }
 
 

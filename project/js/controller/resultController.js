@@ -14,6 +14,7 @@ class ResultController {
 
 	activate () {
         mediator.sub('group:selected', this.renderPeopleWithMarks.bind(this));
+        mediator.sub('filter:on', this.renderPeopleWithMarks.bind(this));
         mediator.sub('peopleInTimeSlot:added', this.renderAddedPeople.bind(this));
         mediator.sub('peopleInTimeSlotWere:added', this.renderExistPeople.bind(this));
         mediator.sub('testResult:added', this.renderTestResult.bind(this));
