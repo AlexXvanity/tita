@@ -59,7 +59,7 @@ class ResultPeopleView {
 
         this.section.innerHTML =
             `<h4>Test results</h4>
-            <div>${table}</div>`;
+            <div class="result-wrap">${table}</div>`;
     }
 
     showExistPerson (results) {

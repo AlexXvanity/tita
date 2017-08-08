@@ -24,29 +24,16 @@ class TestListView {
     renderTest (group) {
         this.selectedGroup = group;
 
-        this.selectedGroup.testList.forEach((currentTest) => {
-            let examView = new TestItemView(currentTest);
-            examView.render();
+        let tests = this.selectedGroup.testList;
+
+        tests.forEach((test) => {
+            let view = new TestItemView(test);
+
+            view.render();
+            view.activate();
         });
 
         this.activate();
-    }
-
-    // create buttons into 'Tests' for adding info
-    renderTestButtons () {
-        this.buttonsOpen = this.container.querySelectorAll('.test-item');
-
-        this.buttonsOpen.forEach(function (buttonOpen) {
-        	buttonOpen.querySelector('.panel-body').innerHTML = '<a class="btn btn-primary btn-xs add-test-button">Add test</a>';
-
-        	buttonOpen.querySelector('.panel-body').addEventListener('click', (e) => {
-                let testTitle = '';
-
-                testTitle = e.currentTarget.parentElement.querySelector('.panel-title').innerHTML;
-
-                mediator.pub('testModal:open', testTitle);
-        	});
-        });
     }
 
     activate () {
@@ -59,10 +46,12 @@ class TestListView {
         this.container.innerHTML = this.template;
     }
 
-    addNewExamHandler (group, tests) {
+    addNewExamHandler (tests) {
         tests.forEach((test) => {
             let view = new TestItemView(test);
+
             view.render();
+            view.activate();
         });
     }
 
