@@ -4,9 +4,10 @@ let mediator = require('../Mediator.js'),
 	template = require('./tpl/tplModalUsers.js');
 
 class PeopleInfoView {
-	constructor () {
+	constructor (time) {
 		this.section = document.querySelector('#test-section');
 		this.view = '';
+		this.time = time;
 	}
 
 	show () {
@@ -41,9 +42,14 @@ class PeopleInfoView {
 	}
 
 	saveData () {
-		let listOfPeople = this.view.querySelector('.people-input-area').value;
+		debugger;
+		let listOfPeople = this.view.querySelector('.people-input-area').value,
+			peopleInfo = {};
 
-		mediator.pub('assignPeople:saved', listOfPeople);
+		peopleInfo.listOfPeople = listOfPeople;
+		peopleInfo.time = this.time;
+
+		mediator.pub('assignPeople:saved', peopleInfo);
         
 		this.delete();
 	}
