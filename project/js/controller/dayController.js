@@ -40,14 +40,20 @@ class DayController {
         this.selectGroup = group;
 
         this.dayListView.clearContainer();
+        if(this.selectGroup.days.length){
+            this.selectGroup.days.forEach((day) => {
+                this.selectedDay = day;
 
-        this.selectGroup.days.forEach((day) => {
-            this.selectedDay = day;
+                let dayItemView = new DayItemView (day);
 
-            let dayItemView = new DayItemView (day);
+                dayItemView.renderDay(day);
+            });
+        } else {
+            let dayItemView = new DayItemView ();
 
-            dayItemView.renderDay(day);
-        });
+            dayItemView.renderDay();
+        }
+
         console.log(this.selectGroup);
     }
 
