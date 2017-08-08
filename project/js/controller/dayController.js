@@ -79,8 +79,8 @@ class DayController {
         this.selectDay = day;
     }
 
-    openPeopleInfo () {
-        let peopleInfoView = new PeopleInfoView();
+    openPeopleInfo (time) {
+        let peopleInfoView = new PeopleInfoView(time);
 
         peopleInfoView.show();
     }
@@ -93,8 +93,8 @@ class DayController {
         this.renderDayList(this.selectGroup);
     }
 
-    generatePeopleInfo (listOfPeople) {
-        let peopleList = Papa.parse(listOfPeople),
+    generatePeopleInfo (peopleInfo) {
+        let peopleList = Papa.parse(peopleInfo.listOfPeople),
             result = [];
 
         peopleList.data.forEach((user) => {
@@ -105,7 +105,9 @@ class DayController {
             personInfo.name = (this.checkNameOrSurname(personList[0])) ? personList[0] : 'no valid';
             personInfo.surname = (this.checkNameOrSurname(personList[1])) ? personList[1] : 'no valid';
             personInfo.email = (this.checkEmail(personList[2])) ? personList[2] : 'no valid';
-            personInfo.selectDay = this.selectDay;
+            personInfo.selectDay = {};
+            personInfo.selectDay.date = this.selectDay.date;
+            personInfo.selectDay.time = peopleInfo.time;
 
             person = this.createPerson(personInfo);
 
@@ -168,7 +170,7 @@ class DayController {
 
         people.forEach((person) => {
             let personDate = person.testDay.date,
-                personTime = person.testDay.time[person.testDay.time.length - 1];
+                personTime = person.testDay.time;
 
             if (personDate === dayDate && personTime === dayTime) {
                 timeSlotPeople.push(person);

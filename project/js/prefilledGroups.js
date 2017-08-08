@@ -47,7 +47,7 @@ testPeople.push( {
 });
 prefilledGroups[0].people.push( new Person('Igor', 'Pavlenko', 'mail@mail.com', {
     date: '2017/08/02',
-    time: ['12:30']
+    time: '12:30'
 }));
 prefilledGroups[0].people[0].testList = testPeople;
 module.exports = prefilledGroups;

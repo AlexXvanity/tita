@@ -22,7 +22,6 @@ class ResultController {
 	}
 
     renderPeopleWithMarks (group) {
-        debugger;
         let people = group.people;
 
         this.resultPeopleView.showResult(people, 'peopleWithMarks');
