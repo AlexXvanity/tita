@@ -18,10 +18,44 @@ class ResultPeopleView {
             },
             testResultsAdded: () => {
                 this.showTestResults(results);
+            },
+            peopleWithMarks: () => {
+                this.renderPeopleWithMarks(results);
             }
 
         };
         return obj[renderStatus]();
+    }
+
+    renderPeopleWithMarks (results) {
+        let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
+            testListGradeTpl = ``,
+            testListNameTpl = ``;
+
+        results.forEach((person) => {
+            person.testList.forEach((test) => {
+                testListNameTpl += `<th>${test.name}</th>`;
+                testListGradeTpl += `<td>${test.grade}</td>`;
+            });
+        });
+
+        table += testListNameTpl;
+
+        results.forEach(function (person) {
+            table +=
+                `<tr>
+                    <td>${person.name}</td>                                                                          
+                    <td>${person.surname}</td>
+                    <td>${person.email}</td> 
+                        ${testListGradeTpl}
+                </tr>`;
+        });
+
+        table += '</table>';
+
+        this.section.innerHTML =
+            `<h4>Test results</h4>
+            <div>${table}</div>`;
     }
 
     showExistPerson (results) {
@@ -79,8 +113,7 @@ class ResultPeopleView {
         table += '</table>';
 
         this.section.innerHTML =
-            `<h4>People</h4>
-            <div>${table}</div>`;
+            `<div>${table}</div>`;
     }
     
     showTestResults (results) {

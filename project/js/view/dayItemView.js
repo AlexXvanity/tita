@@ -50,9 +50,13 @@ class DayItemView {
     }
 
     activate (tpl) {
-        let timeSlot = tpl.querySelector (this.selectors.timeSlot),
+        let addTimeSlotBtn = tpl.querySelector(this.selectors.timeSlot),
             dayItem = document.querySelector (this.selectors.dayItem),
-            addPeople = tpl.querySelectorAll(this.selectors.addPeople);
+            addPeople = tpl.querySelectorAll(this.selectors.addPeople),
+            timeSlotBtn = dayItem.querySelectorAll('.time-slot');
+
+        addTimeSlotBtn.addEventListener('click', () => {mediator.pub('timeSlot:add', this.selectDay);});
+
         if (addPeople) {
             addPeople.forEach((btn) => {
                 btn.addEventListener('click', () => {
@@ -61,11 +65,20 @@ class DayItemView {
             });
         }
 
-        timeSlot.addEventListener ('click', () => {
-            mediator.pub('timeSlot:add', this.selectDay);
-        });
-        
         dayItem.addEventListener('click', this.selectDayItemHandler.bind(this));
+
+        timeSlotBtn.forEach((btn) => {
+            btn.addEventListener('click', (e)=> {
+                debugger;
+                let data = {},
+                    time = e.target.innerHTML;
+
+                data.date = this.selectDay.date;
+                data.time = time;
+
+                mediator.pub('timeSlot:clicked', data);
+            });
+        });
     }
     selectDayItemHandler () {
         mediator.pub('day:selected', this.selectDay);

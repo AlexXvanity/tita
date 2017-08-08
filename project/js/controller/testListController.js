@@ -12,16 +12,18 @@ class TestListController {
     }
 
     activate () {
-        mediator.sub('assignPeople:saved', this.addTestButtons.bind(this));
+        mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
         mediator.sub('group:selected', this.groupSelectedHandler.bind(this));
         mediator.sub('testModal:open', this.createModalTest.bind(this));
         mediator.sub('testModal:open', this.setTestName.bind(this));
-        mediator.sub('assignTests:saved', this.generateTestsInfo.bind(this));
+
     }
 
     groupSelectedHandler (group) {
         this.testListView.renderTest(group);
+        this.testListView.renderTestButtons();
         this.setGroup(group);
+
     }
 
     createModalTest () {
@@ -30,12 +32,7 @@ class TestListController {
         modalTestView.show();
     }
 
-    addTestButtons () {
-        this.testListView.renderTestButtons();
-    }
-
     generateTestsInfo (info) {
-        debugger;
         let peopleList = Papa.parse(info),
             result = [];
 
@@ -52,11 +49,11 @@ class TestListController {
         });
         
         let checkResult = this.checkUserExist(this.selectGroup, result);
-
         if (checkResult.notExistPeople.length) {
             mediator.pub('error:addedPerson', checkResult.notExistPeople);
         } else {
             this.addTestResult(this.selectGroup, checkResult.existPeople, this.testName);
+            console.log(this.selectGroup);
             mediator.pub('testResult:added', checkResult.existPeople);
         }
     }
@@ -95,7 +92,6 @@ class TestListController {
     }
 
     addTestResult (group, result, testTitle) {
-        debugger;
         let peopleGroupList = group.people,
             peopleResultList = result,
             testName = testTitle;
@@ -105,7 +101,7 @@ class TestListController {
                 if (person.email === personResult.email) {
                     person.testList.forEach((test) => {
                         if (test.name === testName) {
-                            test.maxGrade = parseInt(personResult.grade);
+                            test.grade = parseInt(personResult.grade);
                         }
                     });
                 }

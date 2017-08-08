@@ -45,11 +45,11 @@ class FilterController {
             filter.tests.forEach((test) => {
                 person.testList.forEach((personTest) => {
                     if (test.name === personTest.name) {
-                        personTest.percent = personTest.maxGrade / test.maxGrade * 100;
+                        personTest.percent = personTest.grade / test.maxGrade * 100;
 
                         resultTest.push({
                             name: personTest.name,
-                            maxGrade: personTest.maxGrade,
+                            grade: personTest.grade,
                             percent: personTest.percent
                         });
 

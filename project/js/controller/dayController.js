@@ -5,7 +5,7 @@ let DayItemView = require('../view/dayItemView.js'),
     AddDayView = require('../view/modal/addDayView.js'),
     AddTimeView = require('../view/modal/addDaySlotView.js'),
     Person = require('../model/Person.js'),
-    Test = require('../model/Test.js'),
+    UserTest = require('../model/UserTest.js'),
     mediator = require('../Mediator.js');
 
 class DayController {
@@ -21,13 +21,14 @@ class DayController {
 
     activate () {
         mediator.sub('group:selected', this.renderDayList.bind(this));
-        mediator.sub('day:selected', this.selectDayHandler.bind(this,));
+        mediator.sub('day:selected', this.selectDayHandler.bind(this));
         mediator.sub('assignPeople:open', this.openPeopleInfo.bind(this));
         mediator.sub('assignPeople:saved', this.generatePeopleInfo.bind(this));
         mediator.sub('day:add', this.showAddDay.bind(this));
         mediator.sub('day:added', this.addDayHandler.bind(this));
         mediator.sub('timeSlot:add', this.showAddTime.bind(this));
         mediator.sub('timeSlot:added', this.addTimeSlot.bind(this));
+        mediator.sub('timeSlot:clicked', this.getTimeSlotPeople.bind(this));
     }
 
     selectDayHandler (day) {
@@ -158,6 +159,27 @@ class DayController {
         return result;
     }
 
+    getTimeSlotPeople (day) {
+        let people = this.selectGroup.people,
+            timeSlotPeople = [],
+            dayDate = day.date,
+            dayTime = day.time;
+
+        console.log(day);
+        console.log(people);
+
+        people.forEach((person) => {
+            let personDate = person.testDay.date,
+                personTime = person.testDay.time[person.testDay.time.length - 1];
+
+            if (personDate === dayDate && personTime === dayTime) {
+                timeSlotPeople.push(person);
+            }
+        });
+
+        mediator.pub('timeSlotPeople:formed', timeSlotPeople);
+    }
+
     addPersonToGroup (personList) {
         personList.forEach((person) => this.selectGroup.people.push(person));
     }
@@ -185,7 +207,7 @@ class DayController {
             personTestList = [];
 
         groupTestList.forEach((groupTest) => {
-            let test = new Test(groupTest.name);
+            let test = new UserTest(groupTest.name);
 
             personTestList.push(test);
         });

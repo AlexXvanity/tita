@@ -24,10 +24,8 @@ class AddDaySlotView extends BaseModalView {
 
 
     saveTimeSlot () {
-        debugger;
         let timeValue = this.getDropDownValue(this.selectors.timeSlotInput);
-
-
+        
         mediator.pub('timeSlot:added', timeValue);
 
         this.hide();
