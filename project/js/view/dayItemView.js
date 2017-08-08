@@ -4,7 +4,7 @@ let mediator = require('../Mediator.js'),
     tpl = require('./tpl/tplModalSettings.js');
 
 class DayItemView {
-    constructor (day) {debugger;
+    constructor (day) {
         this.container = document.querySelector(this.selectors.testDay);
         this.template = tpl.dayListView;
         this.selectDay = day;
@@ -50,7 +50,6 @@ class DayItemView {
     }
 
     activate (tpl) {
-        debugger;
         let addTimeSlotBtn = tpl.querySelector(this.selectors.timeSlot),
             dayItem = document.querySelector (this.selectors.dayItem),
             addPeople = tpl.querySelectorAll(this.selectors.addPeople),
@@ -70,6 +69,7 @@ class DayItemView {
 
         timeSlotBtn.forEach((btn) => {
             btn.addEventListener('click', (e)=> {
+                debugger;
                 let data = {},
                     time = e.target.innerHTML;
 

@@ -5,7 +5,7 @@ let DayItemView = require('../view/dayItemView.js'),
     AddDayView = require('../view/modal/addDayView.js'),
     AddTimeView = require('../view/modal/addDaySlotView.js'),
     Person = require('../model/Person.js'),
-    Test = require('../model/Test.js'),
+    UserTest = require('../model/UserTest.js'),
     mediator = require('../Mediator.js');
 
 class DayController {
@@ -46,6 +46,7 @@ class DayController {
 
             dayItemView.renderDay(day);
         });
+        console.log(this.selectGroup);
     }
 
     showAddDay () {
@@ -204,7 +205,7 @@ class DayController {
             personTestList = [];
 
         groupTestList.forEach((groupTest) => {
-            let test = new Test(groupTest.name);
+            let test = new UserTest(groupTest.name);
 
             personTestList.push(test);
         });

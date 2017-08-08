@@ -1,7 +1,7 @@
 'use strict';
 
 let Group = require('./model/Group.js'),
-    Test = require('./model/Test.js'),
+    UserTest = require('./model/UserTest.js'),
     Day = require('./model/Day.js'),
     Person = require('./model/Person.js'),
     prefilledDirection = require('./prefilledDirection.js');
@@ -23,27 +23,27 @@ prefilledGroups[2].days.push( new Day('2017/11/22', ['14:30']));
 let testPeople = [];
 testPeople.push( {
     name: 'English 1',
-    maxGrade: 84,
+    grade: 84,
 });
 testPeople.push( {
     name: 'English 2',
-    maxGrade: 45,
+    grade: 45,
 });
 testPeople.push( {
     name: 'English 3',
-    maxGrade: 128,
+    grade: 128,
 });
 testPeople.push( {
     name: 'English 4',
-    maxGrade: 167,
+    grade: 167,
 });
 testPeople.push( {
     name: 'Tech UI',
-    maxGrade: 234,
+    grade: 234,
 });
 testPeople.push( {
     name: 'Essay JS',
-    maxGrade: 178,
+    grade: 178,
 });
 prefilledGroups[0].people.push( new Person('Igor', 'Pavlenko', 'mail@mail.com', {
     date: '2017/08/02',

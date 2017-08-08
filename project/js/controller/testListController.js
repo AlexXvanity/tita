@@ -49,11 +49,11 @@ class TestListController {
         });
         
         let checkResult = this.checkUserExist(this.selectGroup, result);
-
         if (checkResult.notExistPeople.length) {
             mediator.pub('error:addedPerson', checkResult.notExistPeople);
         } else {
             this.addTestResult(this.selectGroup, checkResult.existPeople, this.testName);
+            console.log(this.selectGroup);
             mediator.pub('testResult:added', checkResult.existPeople);
         }
     }
@@ -101,7 +101,7 @@ class TestListController {
                 if (person.email === personResult.email) {
                     person.testList.forEach((test) => {
                         if (test.name === testName) {
-                            test.maxGrade = parseInt(personResult.grade);
+                            test.grade = parseInt(personResult.grade);
                         }
                     });
                 }

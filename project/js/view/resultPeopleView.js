@@ -35,7 +35,7 @@ class ResultPeopleView {
         results.forEach((person) => {
             person.testList.forEach((test) => {
                 testListNameTpl += `<th>${test.name}</th>`;
-                testListGradeTpl += `<td>${test.maxGrade}</td>`;
+                testListGradeTpl += `<td>${test.grade}</td>`;
             });
         });
 
