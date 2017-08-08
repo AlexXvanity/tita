@@ -29,26 +29,30 @@ class ResultPeopleView {
 
     renderPeopleWithMarks (results) {
         let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
-            testListGradeTpl = ``,
             testListNameTpl = ``;
 
-        results.forEach((person) => {
-            person.testList.forEach((test) => {
-                testListNameTpl += `<th>${test.name}</th>`;
-                testListGradeTpl += `<td>${test.grade}</td>`;
-            });
+        let testList = results[0].testList;
+
+        testList.forEach((test) => {
+            testListNameTpl += `<th>${test.name}</th>`;
         });
 
         table += testListNameTpl;
 
-        results.forEach(function (person) {
+        results.forEach((person) => {
+            let testListGradeTpl = ``;
+
+            person.testList.forEach((test) => {
+                testListGradeTpl += `<td>${test.grade}</td>`;
+            });
+
             table +=
-                `<tr>
-                    <td>${person.name}</td>                                                                          
-                    <td>${person.surname}</td>
-                    <td>${person.email}</td> 
-                        ${testListGradeTpl}
-                </tr>`;
+                    `<tr>
+                        <td>${person.name}</td>
+                        <td>${person.surname}</td>
+                        <td>${person.email}</td>
+                            ${testListGradeTpl}
+                    </tr>`;
         });
 
         table += '</table>';
