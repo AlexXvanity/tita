@@ -32,6 +32,7 @@ class FilterItemView {
 
         activeBtn.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
+            this.selectFilterItemHandler();
         });
 
         rejectedBtn.addEventListener('click', () => {
@@ -47,6 +48,9 @@ class FilterItemView {
             button.classList.toggle('btn-primary');
             button.classList.toggle('btn-default');
         });
+    }
+    selectFilterItemHandler () {
+        mediator.pub('filter:selected', this.filter);
     }
 }
 

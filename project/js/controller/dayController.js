@@ -16,6 +16,7 @@ class DayController {
         this.activate();
         this.addDayModal = new AddDayView;
         this.addTimeModal = new AddTimeView;
+
     }
 
     activate () {
@@ -35,6 +36,7 @@ class DayController {
     }
 
     renderDayList (group) {
+
         this.selectGroup = group;
 
         this.dayListView.clearContainer();

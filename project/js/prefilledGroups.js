@@ -8,9 +8,6 @@ let Group = require('./model/Group.js'),
 
 let prefilledGroups;
 
-
-
-
 prefilledGroups = [
     new Group('Dp-120', prefilledDirection[0]),
     new Group('Dp-112', prefilledDirection[1]),
@@ -31,18 +28,18 @@ testPeople.push( {
 });
 testPeople.push( {
     name: 'English 3',
-    grade: 128,
+    grade: 38,
 });
 testPeople.push( {
     name: 'English 4',
-    grade: 167,
+    grade: 87,
 });
 testPeople.push( {
-    name: 'Tech UI',
-    grade: 234,
+    name: 'Tech PHP',
+    grade: 214,
 });
 testPeople.push( {
-    name: 'Essay JS',
+    name: 'Essay PHP',
     grade: 178,
 });
 prefilledGroups[0].people.push( new Person('Igor', 'Pavlenko', 'mail@mail.com', {
@@ -50,4 +47,36 @@ prefilledGroups[0].people.push( new Person('Igor', 'Pavlenko', 'mail@mail.com', 
     time: '12:30'
 }));
 prefilledGroups[0].people[0].testList = testPeople;
+
+let testPeople1 = [];
+testPeople1.push( {
+    name: 'English 1',
+    grade: 22,
+});
+testPeople1.push( {
+    name: 'English 2',
+    grade: 45,
+});
+testPeople1.push( {
+    name: 'English 3',
+    grade: 59,
+});
+testPeople1.push( {
+    name: 'English 4',
+    grade: 65,
+});
+testPeople1.push( {
+    name: 'Tech PHP',
+    grade: 390,
+});
+testPeople1.push( {
+    name: 'Essay PHP',
+    grade: 178,
+});
+prefilledGroups[0].people.push( new Person('Alex', 'Korzh', 'alex@mail.com', {
+    date: '2017/08/02',
+    time: '12:30'
+}));
+prefilledGroups[0].people[1].testList = testPeople1;
+
 module.exports = prefilledGroups;
