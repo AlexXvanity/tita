@@ -21,32 +21,40 @@ class DayItemView {
     }
 
     renderDay (day) {
-        this.container.insertAdjacentHTML('afterbegin',this.template);
 
-        let dayItemTemplate = this.container.querySelector(this.selectors.dayItem),
-            year = day.date.slice(2,4),
-            month = day.date.slice(5,7),
-            dayT = day.date.slice(8),
+        if(day){
+            this.container.insertAdjacentHTML('afterbegin',this.template);
+            let dayItemTemplate = this.container.querySelector(this.selectors.dayItem),
+                year = day.date.slice(2,4),
+                month = day.date.slice(5,7),
+                dayT = day.date.slice(8),
 
-            date = `${month}/${dayT}/${year}`;
+                date = `${month}/${dayT}/${year}`;
 
-        dayItemTemplate.innerHTML = tpl.dayItem.replace ('{date}', date);
+            dayItemTemplate.innerHTML = tpl.dayItem.replace ('{date}', date);
 
-        if (day.time) {
-            day.time.forEach((time) => {
-                dayItemTemplate.insertAdjacentHTML ('beforeend', tpl.timeSlotItem.replace ('{timeSlot}', time));
-            });
+            if (day.time) {
+                day.time.forEach((time) => {
+                    dayItemTemplate.insertAdjacentHTML ('beforeend', tpl.timeSlotItem.replace ('{timeSlot}', time));
+                });
+            }
+
+            dayItemTemplate.insertAdjacentHTML ('beforeend', tpl.btnAddTimeSlot);
+
+            if ( !document.querySelector (this.selectors.addDayBtn) ){
+                this.container.insertAdjacentHTML ('beforeend', tpl.addBtn);
+                let addDayBtn = document.querySelector (this.selectors.addDayBtn);
+                addDayBtn.addEventListener ('click', () => {mediator.pub('day:add');});
+            }
+
+            this.activate (dayItemTemplate);
         }
-
-        dayItemTemplate.insertAdjacentHTML ('beforeend', tpl.btnAddTimeSlot);
 
         if ( !document.querySelector (this.selectors.addDayBtn) ){
             this.container.insertAdjacentHTML ('beforeend', tpl.addBtn);
             let addDayBtn = document.querySelector (this.selectors.addDayBtn);
             addDayBtn.addEventListener ('click', () => {mediator.pub('day:add');});
         }
-
-        this.activate (dayItemTemplate);
     }
 
     activate (tpl) {
