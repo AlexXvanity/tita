@@ -219,15 +219,15 @@ tpl.filterItem = `
                                    
                                       <div class="btn-group btn-toggle active"> 
                                         <div>Active</div>
-                                        <button class="btn btn-default">ON</button>
-                                        <button class="btn btn-primary">OFF</button>
+                                        <button class="apply btn btn-default">ON</button>
+                                        <button class="un-apply btn btn-primary">OFF</button>
                                     </div>
 
                                     
                                       <div class="btn-group btn-toggle rejected"> 
                                       <div>Rejected</div>
-                                        <button class="btn btn-default">ON</button>
-                                        <button class="btn btn-primary">OFF</button>
+                                        <button class="reject btn btn-default">ON</button>
+                                        <button class="un-reject btn btn-primary">OFF</button>
                                     </div>
                                     </div>
 `;

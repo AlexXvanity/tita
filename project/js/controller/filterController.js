@@ -16,6 +16,11 @@ class FilterController {
         mediator.sub('addFilterView:render', this.renderAddFilterViewHandler.bind(this));
         mediator.sub('filter:added', this.addFilterHandler.bind(this));
         mediator.sub('filter:selected', this.filterPeople.bind(this));
+        mediator.sub('filter:unSelected', this.unFilterPeople.bind(this));
+    }
+
+    unFilterPeople(){
+        (() => {mediator.pub ('filter:on', this.selectedGroup);})();
     }
 
     groupSelectedHandler(group) {
@@ -38,11 +43,13 @@ class FilterController {
     }
 
     filterPeople(filter) {
-
-        this.addTestResluts(filter);
+        let tmp = Object.assign({},this.selectedGroup);
+        let people = tmp.people;
+        this.addTestResluts(filter, people);
 
         let filteredPerson =[];
-        this.selectedGroup.people.map((person) => {
+
+        people.map((person) => {
             let actionResult = this.doAction(filter.action, person);
             let result = this.filteredByCondition(filter, filter.condition, actionResult, person);
 
@@ -58,9 +65,24 @@ class FilterController {
         return filteredPerson;
     }
 
-    addTestResluts (filter) {
+    doAction (act, person) {
+        let actions = {
+            'SUM': person.testList.reduce((sum, current) => {
+                return sum + current.percent;
+
+
+            }, 0),
+            'AVG': person.testList.reduce((sum, current) => {
+                return (sum + current.percent);
+            }, 0) / person.testList.length
+
+        };
+
+        return actions[act];
+    }
+    addTestResluts (filter, people) {
         let resultTest = [];
-        this.selectedGroup.people.map((person) => {
+        people.map((person) => {
             filter.tests.forEach((test) => {
                 person.testList.forEach((personTest) => {
                     if (test.name === personTest.name) {
@@ -83,21 +105,7 @@ class FilterController {
         });
     }
 
-    doAction (act, person) {
-        let actions = {
-            'SUM': person.testList.reduce((sum, current) => {
-                return sum + current.percent;
 
-
-            }, 0),
-            'AVG': person.testList.reduce((sum, current) => {
-                return (sum + current.percent);
-            }, 0) / person.testList.length
-
-        };
-
-        return actions[act];
-    }
 
     filteredByCondition (filter, cond, actRez, person) {
         let condition = {
