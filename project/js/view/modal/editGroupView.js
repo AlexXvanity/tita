@@ -3,32 +3,34 @@ let mediator = require('../../Mediator.js'),
     tpl = require('../../view/tpl/tplModalSettings.js');
 
 class EditGroupView {
-    constructor (settings) {
+    constructor (settings, model) {
         this.body = document.body;
         this.settings = settings;
+        this.model = model;
     }
 
     get selectors () {
         return {
             directionDropDown: '.add-group-modal .direction-dropdown',
-            closeButton: '.edit-group-modal .close-group-btn',
-            save: '.edit-group-modal .save-group-btn',
+            closeButton: '.add-group-modal .close-group-btn',
+            save: '.add-group-modal .save-group-btn',
             modalBackdrop: '.modal-backdrop',
             groupNameInput: '#group-name',
-            modal: '.edit-group-modal'
+            modal: '.add-group-modal'
         };
     }
 
     collectSelectors () {
-        this.modal = document.querySelector(this.selectors.modal);
-        this.save = document.querySelector(this.selectors.save);
-        this.closeButton = document.querySelector(this.selectors.closeButton);
+        this.modal = this.body.querySelector(this.selectors.modal);
+        this.save = this.body.querySelector(this.selectors.save);
+        this.closeButton = this.body.querySelector(this.selectors.closeButton);
     }
 
     show () {
         this.addLayover();
         this.body.insertAdjacentHTML('beforeEnd', tpl.addGroupModal);
         this.fillDirectionDropDown();
+        this.collectSelectors();
         this.activate();
     }
 
@@ -38,13 +40,16 @@ class EditGroupView {
         let directionDropDown = document.querySelector(this.selectors.directionDropDown),
             directionValue = directionDropDown.options[directionDropDown.selectedIndex].text,
             groupNameValue = document.querySelector(this.selectors.groupNameInput).value,
+            currentGroupName = this.model.name,
             selectedDirection = this.settings.directionList.find((value) => {
                 return value.name === directionValue;
             });
 
-        mediator.pub('group:saved', {
-            groupdName: groupNameValue,
-            direction: selectedDirection
+
+        this.model.editGroupInfo({
+            groupName: groupNameValue,
+            direction: selectedDirection,
+            clickedGroupName: currentGroupName
         });
 
         this.hide();
@@ -81,6 +86,7 @@ class EditGroupView {
         this.settings.directionList.forEach((direction) => {
             options += `<option>${direction.name}</option>`;
         });
+
         directionDropDown.innerHTML = options;
     }
 }

@@ -68,8 +68,8 @@ class GroupController {
         contextMenuView.show();
     }
 
-    showEditGroupHadnler(group) {
-        let editGroupView = new EditGroupView(group);
+    showEditGroupHadnler(model) {
+        let editGroupView = new EditGroupView(this.settings, model);
         editGroupView.show();
     }
 

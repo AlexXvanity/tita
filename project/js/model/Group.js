@@ -11,11 +11,20 @@ class Group {
         this.people = [];
 
         this.testAdded = new Observer(this);
+        this.editGroup = new Observer(this);
     }
 
-    addTests(tests){
+    addTests(tests) {
     	this.testList = this.testList.concat(tests);
     	this.testAdded.notify(tests);
+    }
+
+    editGroupInfo (groupInfo) {
+        this.name = groupInfo.groupName;
+        this.direction = groupInfo.direction.name;
+        this.testList = groupInfo.direction.testList;
+        this.filterList = groupInfo.direction.filterList;
+        this.editGroup.notify(groupInfo.clickedGroupName);
     }
 }
 
