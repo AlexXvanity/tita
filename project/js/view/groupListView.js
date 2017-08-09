@@ -47,7 +47,7 @@ class GroupListView {
 
         if (groupItems.length > 0) {
             groupItems.forEach((item) => {
-                item.parentElement.remove();
+                item.remove();
             });
         }
     }

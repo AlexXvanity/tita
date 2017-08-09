@@ -17,7 +17,7 @@ class GroupController {
         this.activate();
     }
 
-    renderGroupList(groups) {
+    renderGroupList() {
         this.groupListView.clearContainer();
         this.groups.forEach((group) => {
             let view = new GroupItemView(group);
@@ -42,11 +42,11 @@ class GroupController {
         mediator.sub('testModal:added', this.addTestHandler.bind(this));
     }
 
-    deleteGroupHandler(group) {
+    deleteGroupHandler(group) {debugger;
         let index = this.groups.indexOf(group);
         if (index !== -1) {
             this.groups.splice(index, 1);
-            this.renderGroupList(this.groups);
+            this.renderGroupList();
         }
     }
 
