@@ -53,8 +53,6 @@ class DayController {
 
             dayItemView.renderDay();
         }
-
-        console.log(this.selectGroup);
     }
 
     showAddDay () {
@@ -172,9 +170,6 @@ class DayController {
             timeSlotPeople = [],
             dayDate = day.date,
             dayTime = day.time;
-
-        console.log(day);
-        console.log(people);
 
         people.forEach((person) => {
             let personDate = person.testDay.date,

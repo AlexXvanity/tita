@@ -39,6 +39,26 @@ class FilterController {
 
     filterPeople(filter) {
 
+        this.addTestResluts(filter);
+
+        let filteredPerson =[];
+        this.selectedGroup.people.map((person) => {
+            let actionResult = this.doAction(filter.action, person);
+            let result = this.filteredByCondition(filter, filter.condition, actionResult, person);
+
+            if(typeof (result) === 'object'){
+                return filteredPerson.push(result);
+            }
+
+        });
+        this.filteredGroup.people = filteredPerson;
+
+        (() => {mediator.pub ('filter:on', this.filteredGroup);})();
+
+        return filteredPerson;
+    }
+
+    addTestResluts (filter) {
         let resultTest = [];
         this.selectedGroup.people.map((person) => {
             filter.tests.forEach((test) => {
@@ -61,61 +81,45 @@ class FilterController {
             person.testList = resultTest;
             resultTest = [];
         });
-        let filteredPerson =[];
-        this.selectedGroup.people.map((person) => {
-            let actionResult = doAction(filter.action, person);
-            let result = filteredByCondition(filter.condition, actionResult, person);
-
-            function doAction(act) {
-                let actions = {
-                    'SUM': person.testList.reduce((sum, current) => {
-                        return sum + current.percent;
-
-
-                    }, 0),
-                    'AVG': person.testList.reduce((sum, current) => {
-                        return (sum + current.percent);
-                    }, 0) / person.testList.length
-
-                };
-
-                return actions[act];
-            }
-            function filteredByCondition(cond, actRez) {
-                let condition = {
-                    '>': ()=>{
-                        if(actRez>filter.grade){
-                            return person;
-                        }
-                    },
-                    '<': ()=>{
-                        if(actRez<filter.grade){
-                            return person;
-                        }
-                    },
-                    '=': ()=>{
-                        if(actRez === filter.grade){
-                            return person;
-                        }
-                    }
-                };
-
-                return condition[cond]();
-
-            }
-            if(typeof (result) === 'object'){
-                return filteredPerson.push(result);
-            }
-
-        });
-        this.filteredGroup.people = filteredPerson;
-        (() => {mediator.pub ('filter:on', this.filteredGroup);})();
-        return filteredPerson;
-
-
     }
 
+    doAction (act, person) {
+        let actions = {
+            'SUM': person.testList.reduce((sum, current) => {
+                return sum + current.percent;
 
+
+            }, 0),
+            'AVG': person.testList.reduce((sum, current) => {
+                return (sum + current.percent);
+            }, 0) / person.testList.length
+
+        };
+
+        return actions[act];
+    }
+
+    filteredByCondition (filter, cond, actRez, person) {
+        let condition = {
+            '>': ()=> {
+                if(actRez > filter.grade) {
+                    return person;
+                }
+            },
+            '<': ()=> {
+                if(actRez < filter.grade) {
+                    return person;
+                }
+            },
+            '=': ()=> {
+                if(actRez === filter.grade) {
+                    return person;
+                }
+            }
+        };
+
+        return condition[cond]();
+    }
 }
 
 module.exports = FilterController;
