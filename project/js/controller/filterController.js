@@ -9,6 +9,7 @@ class FilterController {
         this.selectedGroup = null;
         this.activate();
         this.filteredGroup = {};
+        this.isFiltered = false;
     }
 
     activate() {
@@ -17,9 +18,12 @@ class FilterController {
         mediator.sub('filter:added', this.addFilterHandler.bind(this));
         mediator.sub('filter:selected', this.filterPeople.bind(this));
         mediator.sub('filter:unSelected', this.unFilterPeople.bind(this));
+        mediator.sub('filter:reject', this.reject.bind(this));
+        mediator.sub('filter:unReject', this.unReject.bind(this));
     }
 
     unFilterPeople(){
+        this.isFiltered = false;
         (() => {mediator.pub ('filter:on', this.selectedGroup);})();
     }
 
@@ -41,12 +45,21 @@ class FilterController {
         let filterItemView = new FilterItemView(filter);
         filterItemView.render();
     }
+    filterPeople(filter){
 
-    filterPeople(filter) {
+        if(this.isFiltered){
+            this.filtering(filter,this.filteredGroup.people);
+        }else{
+            this.filtering(filter,this.selectedGroup.people);
+            this.isFiltered = true;
+        }
 
-        let people = JSON.parse(JSON.stringify(this.selectedGroup.people));
+    }
+    filtering(filter, peopleList) {
 
-        this.addTestResluts(filter, people);
+        let people = JSON.parse(JSON.stringify(peopleList));
+
+        this.addTestResults(filter, people);
 
         let filteredPerson =[];
 
@@ -80,7 +93,7 @@ class FilterController {
 
         return actions[act];
     }
-    addTestResluts (filter, people) {
+    addTestResults (filter, people) {
         let resultTest = [];
         people.map((person) => {
             filter.tests.forEach((test) => {

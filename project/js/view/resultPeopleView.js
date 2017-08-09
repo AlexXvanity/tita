@@ -28,38 +28,46 @@ class ResultPeopleView {
     }
 
     renderPeopleWithMarks (results) {
-        let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
-            testListNameTpl = ``;
+        if (!results.length) {
+            this.showNoPerson();
+        } else {
+            let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
+                testListNameTpl = ``;
 
-        let testList = results[0].testList;
+            let testList = results[0].testList;
 
-        testList.forEach((test) => {
-            testListNameTpl += `<th>${test.name}</th>`;
-        });
-
-        table += testListNameTpl;
-
-        results.forEach((person) => {
-            let testListGradeTpl = ``;
-
-            person.testList.forEach((test) => {
-                testListGradeTpl += `<td>${test.grade}</td>`;
+            testList.forEach((test) => {
+                testListNameTpl += `<th>${test.name}</th>`;
             });
 
-            table +=
+            table += testListNameTpl;
+
+            results.forEach((person) => {
+                let testListGradeTpl = ``;
+
+                person.testList.forEach((test) => {
+                    testListGradeTpl += `<td>${test.grade}</td>`;
+                });
+
+                table +=
                     `<tr>
                         <td>${person.name}</td>
                         <td>${person.surname}</td>
                         <td>${person.email}</td>
                             ${testListGradeTpl}
                     </tr>`;
-        });
+            });
 
-        table += '</table>';
+            table += '</table>';
 
-        this.section.innerHTML =
-            `<h4>Test results</h4>
+            this.section.innerHTML =
+                `<h4>Test results</h4>
             <div class="result-wrap">${table}</div>`;
+        }
+    }
+
+    showNoPerson () {
+        this.section.innerHTML = `<h5 style="color: red; font-size: 40px; text-transform: uppercase; text-align: center">All users were rejected</h5>`;
     }
 
     showExistPerson (results) {
