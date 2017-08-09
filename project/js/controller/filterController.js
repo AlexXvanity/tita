@@ -43,8 +43,9 @@ class FilterController {
     }
 
     filterPeople(filter) {
-        let tmp = Object.assign({},this.selectedGroup);
-        let people = tmp.people;
+
+        let people = JSON.parse(JSON.stringify(this.selectedGroup.people));
+
         this.addTestResluts(filter, people);
 
         let filteredPerson =[];
@@ -62,7 +63,6 @@ class FilterController {
 
         (() => {mediator.pub ('filter:on', this.filteredGroup);})();
 
-        return filteredPerson;
     }
 
     doAction (act, person) {
