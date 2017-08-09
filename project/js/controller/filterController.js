@@ -39,8 +39,6 @@ class FilterController {
 
     filterPeople(filter) {
 
-        // console.log(this.selectedGroup.people);
-
         let resultTest = [];
         this.selectedGroup.people.map((person) => {
             filter.tests.forEach((test) => {
