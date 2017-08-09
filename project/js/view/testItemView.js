@@ -32,10 +32,10 @@ class TestItemView {
     activate () {
         let addTestBtn = this.container.querySelector(this.selectors.addTestBtn);
 
-        addTestBtn.addEventListener('click', () => {
+        addTestBtn.addEventListener('click', (e) => {
             let testTitle = '';
 
-            testTitle = this.container.querySelector('.panel-title').innerHTML;
+            testTitle = e.target.parentElement.parentElement.querySelector('.panel-title').innerHTML;
 
             mediator.pub('testModal:open', testTitle);
         });
