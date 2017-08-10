@@ -10,6 +10,7 @@ class FilterController {
         this.activate();
         this.filteredGroup = {};
         this.isFiltered = false;
+        this.selectedFilter = null;
     }
 
     activate() {
@@ -20,6 +21,41 @@ class FilterController {
         mediator.sub('filter:unSelected', this.unFilterPeople.bind(this));
         mediator.sub('filter:reject', this.reject.bind(this));
         mediator.sub('filter:unReject', this.unReject.bind(this));
+    }
+
+    reject(){
+        if(this.selectedFilter.condition === '>'){
+            this.selectedFilter.condition = '<';
+        } else
+
+        if(this.selectedFilter.condition === '<'){
+            this.selectedFilter.condition = '>';
+        } else
+
+        if(this.selectedFilter.condition === '='){
+            this.selectedFilter.condition = '!=';
+        }
+
+        this.filtering(this.selectedFilter, this.selectedGroup.people);
+        document.querySelector('.rejected .un-reject').addEventListener('click', ()=>{
+            mediator.pub ('filter:unReject', this.filteredGroup.people);
+        });
+    }
+
+    unReject(){
+        if(this.selectedFilter.condition === '>'){
+            this.selectedFilter.condition = '<';
+        } else
+
+        if (this.selectedFilter.condition === '<'){
+            this.selectedFilter.condition = '>';
+        } else
+
+        if(this.selectedFilter.condition === '='){
+            this.selectedFilter.condition = '!=';
+        }
+
+        this.filtering(this.selectedFilter, this.selectedGroup.people);
     }
 
     unFilterPeople(){
@@ -45,14 +81,19 @@ class FilterController {
         let filterItemView = new FilterItemView(filter);
         filterItemView.render();
     }
-    filterPeople(filter){
 
+    filterPeople(filter){
+        this.selectedFilter = filter;
         if(this.isFiltered){
             this.filtering(filter,this.filteredGroup.people);
         }else{
             this.filtering(filter,this.selectedGroup.people);
             this.isFiltered = true;
+
         }
+        document.querySelector('.rejected .reject').addEventListener('click', ()=>{
+            mediator.pub ('filter:reject', this.filteredGroup);
+        });
 
     }
     filtering(filter, peopleList) {
@@ -134,6 +175,12 @@ class FilterController {
             },
             '=': ()=> {
                 if(actRez === filter.grade) {
+                    return person;
+                }
+            },
+
+            '!=': ()=> {
+                if(actRez !== filter.grade) {
                     return person;
                 }
             }
