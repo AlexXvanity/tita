@@ -68,7 +68,6 @@ class DayItemView {
         if (addPeople) {
             addPeople.forEach((btn) => {
                 btn.addEventListener('click', (e) => {
-                    debugger;
                     let time = e.target.parentElement.querySelector('.time-slot').innerHTML;
 
                     mediator.pub ('assignPeople:open', time);

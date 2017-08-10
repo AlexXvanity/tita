@@ -42,7 +42,7 @@ class GroupController {
         mediator.sub('testModal:added', this.addTestHandler.bind(this));
     }
 
-    deleteGroupHandler(group) {debugger;
+    deleteGroupHandler(group) {
         let index = this.groups.indexOf(group);
         if (index !== -1) {
             this.groups.splice(index, 1);

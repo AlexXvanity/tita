@@ -27,14 +27,14 @@ class ResultPeopleView {
         return obj[renderStatus]();
     }
 
-    renderPeopleWithMarks (results) {
+    renderPeopleWithMarks (results) {debugger;
         if (!results.length) {
             this.showNoPerson();
         } else {
             let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
                 testListNameTpl = ``;
 
-            let testList = results[0].testList;
+            let testList = results[results.length - 1].testList;
 
             testList.forEach((test) => {
                 testListNameTpl += `<th>${test.name}</th>`;

@@ -27,10 +27,10 @@ class TestListView {
         let tests = this.selectedGroup.testList;
 
         tests.forEach((test) => {
-            let view = new TestItemView(test);
+            let testItemView = new TestItemView();
 
-            view.render();
-            view.activate();
+            testItemView.render(test);
+            testItemView.activate();
         });
 
         this.activate();
@@ -46,13 +46,13 @@ class TestListView {
         this.container.innerHTML = this.template;
     }
 
-    addNewExamHandler (tests) {
-        tests.forEach((test) => {
-            let view = new TestItemView(test);
+    addNewExamHandler (group) {
+        console.log(group);
+        let addedTest = group.testList[group.testList.length - 1],
+            testItemView = new TestItemView();
 
-            view.render();
-            view.activate();
-        });
+        testItemView.render(addedTest);
+        testItemView.activate();
     }
 
 }

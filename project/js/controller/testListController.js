@@ -19,7 +19,7 @@ class TestListController {
 
     }
 
-    groupSelectedHandler (group) {
+    groupSelectedHandler (group) {debugger;
         this.testListView.renderTest(group);
         this.setGroup(group);
 
@@ -31,7 +31,7 @@ class TestListController {
         modalTestView.show();
     }
 
-    generateTestsInfo (info) {
+    generateTestsInfo (info) {debugger;
         let peopleList = Papa.parse(info),
             result = [];
 

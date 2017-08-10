@@ -60,15 +60,26 @@ class AddExamModalView extends BaseModalView {
         return testListOption;
     }
 
-    addNewExamHandler () {
+    addNewExamHandler () {debugger;
         let testInputValue = document.querySelector(this.selectors.examInput).value,
-            testInput = document.querySelector(this.selectors.examInput),
-            testInputArea = `<li class ="list-group-item">${testInputValue}</li>`,
-            newTest = new Test(testInputValue);
-        testInput.value = '';
+            testInput = document.querySelector(this.selectors.examInput);
 
-        this.addedExams.push(newTest);
-        this.examsContainer.insertAdjacentHTML('beforeEnd', testInputArea);
+            if (testInputValue === '') {
+                this.renderError();
+            } else {
+                let testInputArea = `<li class ="list-group-item">${testInputValue}</li>`,
+                    newTest = new Test(testInputValue);
+
+                testInput.value = '';
+                this.addedExams.push(newTest);
+                this.examsContainer.insertAdjacentHTML('beforeEnd', testInputArea);
+            }
+    }
+
+    renderError () {
+        let input = this.body.querySelector('.add-test-input');
+
+        input.placeholder = 'Enter TestName';
     }
 
     saveNewExamHandler () {

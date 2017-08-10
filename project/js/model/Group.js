@@ -9,7 +9,7 @@ class Group {
         this.filterList = direction.filterList;
         this.days = [];
         this.people = [];
-
+        
         this.testAdded = new Observer(this);
         this.editGroup = new Observer(this);
     }

@@ -42,7 +42,6 @@ class PeopleInfoView {
 	}
 
 	saveData () {
-		debugger;
 		let listOfPeople = this.view.querySelector('.people-input-area').value,
 			peopleInfo = {};
 
