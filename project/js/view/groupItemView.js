@@ -22,9 +22,9 @@ class GroupItemView {
         };
     }
 
-    activate (template) {
-        let groupItem = template.querySelector(this.selectors.groupItem),
-            groupEditExams = template.querySelector(this.selectors.groupEditExams);
+    activate () {
+        let groupItem = this.container.querySelector(this.selectors.groupItem),
+            groupEditExams = this.container.querySelector(this.selectors.groupEditExams);
 
         groupItem.addEventListener('click', this.selectGroupItemHandler.bind(this));
         groupItem.addEventListener('contextmenu', this.editGroupViewHandler.bind(this));
@@ -32,11 +32,21 @@ class GroupItemView {
     }
 
     render () {
-        let groupItemTemplate = document.createElement('div');
-        groupItemTemplate.innerHTML = tpl.groupItem.replace('{groupName}', this.currentGroup.name);
+        let groupItemTemplate = tpl.groupItem.replace('{groupName}', this.currentGroup.name);
 
-        this.container.insertBefore(groupItemTemplate, this.container.firstChild);
-        this.activate(groupItemTemplate);
+        this.container.insertAdjacentHTML('afterbegin', groupItemTemplate);
+        this.activate();
+        this.subscribe();
+    }
+
+    renderEditGroup (group, clickedGroupName) {
+        let groupTitles = this.container.querySelectorAll('.panel-title');
+
+        groupTitles.forEach((title) => {
+            if (clickedGroupName === title.innerHTML) {
+                title.innerHTML = group.name;
+            }
+        });
     }
 
     selectGroupItemHandler (event) {
@@ -54,9 +64,16 @@ class GroupItemView {
         event.preventDefault();
         mediator.pub('groupContextMenu:show', this.currentGroup);
     }
-    	    selectGroupForDay (event) {
+    
+    selectGroupForDay (event) {
         document.querySelector(this.selectors.daySection).innerHTML = '';
         mediator.pub('group:selected', this.currentGroup);
+    }
+    
+    subscribe () {
+        if (this.currentGroup && !this.currentGroup.editGroup.isAttached(this.renderEditGroup.bind(this))) {
+            this.currentGroup.editGroup.attach(this.renderEditGroup.bind(this));
+        }
     }
 }
 

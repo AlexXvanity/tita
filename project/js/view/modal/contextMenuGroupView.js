@@ -38,7 +38,7 @@ class ContextMenuGroupView extends BaseModalView {
         this.hide();
     }
 
-    editGroupHandler () {
+    editGroupHandler () {debugger;
         mediator.pub('editGroup:show', this.model);
         this.hide();
     }

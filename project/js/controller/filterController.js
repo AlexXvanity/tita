@@ -19,8 +19,8 @@ class FilterController {
         mediator.sub('filter:added', this.addFilterHandler.bind(this));
         mediator.sub('filter:selected', this.filterPeople.bind(this));
         mediator.sub('filter:unSelected', this.unFilterPeople.bind(this));
-        mediator.sub('filter:reject', this.reject.bind(this));
-        mediator.sub('filter:unReject', this.unReject.bind(this));
+        // mediator.sub('filter:reject', this.reject.bind(this));
+        // mediator.sub('filter:unReject', this.unReject.bind(this));
     }
 
     reject(){
