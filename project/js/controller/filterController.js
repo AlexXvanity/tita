@@ -10,6 +10,7 @@ class FilterController {
         this.activate();
         this.filteredGroup = {};
         this.isFiltered = false;
+        this.selectedFilter = null;
     }
 
     activate() {
@@ -18,12 +19,32 @@ class FilterController {
         mediator.sub('filter:added', this.addFilterHandler.bind(this));
         mediator.sub('filter:selected', this.filterPeople.bind(this));
         mediator.sub('filter:unSelected', this.unFilterPeople.bind(this));
-        // mediator.sub('filter:reject', this.reject.bind(this));
-        // mediator.sub('filter:unReject', this.unReject.bind(this));
+        mediator.sub('filter:reject', this.reject.bind(this));
+    }
+
+    reject(){
+        if(this.selectedFilter.condition === '>'){
+            this.selectedFilter.condition = '<';
+        } else
+
+        if(this.selectedFilter.condition === '<'){
+            this.selectedFilter.condition = '>';
+        } else
+
+        if(this.selectedFilter.condition === '='){
+            this.selectedFilter.condition = '!=';
+        }
+
+        this.filtering(this.selectedFilter, this.selectedGroup.people);
     }
 
     unFilterPeople(){
         this.isFiltered = false;
+
+        let rejects = document.querySelectorAll('.rejected .reject');
+        rejects.forEach((btn)=> {
+            btn.removeEventListener('click', this.subReject  );
+        });
         (() => {mediator.pub ('filter:on', this.selectedGroup);})();
     }
 
@@ -45,16 +66,27 @@ class FilterController {
         let filterItemView = new FilterItemView(filter);
         filterItemView.render();
     }
-    filterPeople(filter){
 
+    filterPeople(filter){
+        this.selectedFilter = filter;
         if(this.isFiltered){
             this.filtering(filter,this.filteredGroup.people);
         }else{
             this.filtering(filter,this.selectedGroup.people);
             this.isFiltered = true;
+
         }
+        let rejects = document.querySelectorAll('.rejected .reject');
+        rejects.forEach((btn)=> {
+            btn.addEventListener('click', this.subReject  );
+        });
 
     }
+
+    subReject(){
+        mediator.pub ('filter:reject', this.filteredGroup);
+    }
+
     filtering(filter, peopleList) {
 
         let people = JSON.parse(JSON.stringify(peopleList));
@@ -134,6 +166,12 @@ class FilterController {
             },
             '=': ()=> {
                 if(actRez === filter.grade) {
+                    return person;
+                }
+            },
+
+            '!=': ()=> {
+                if(actRez !== filter.grade) {
                     return person;
                 }
             }

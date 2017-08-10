@@ -154,7 +154,7 @@ tpl.addFilterModal =
                                 </div>
                                 <div class="dropdown">
                                     <label for="usr">Select test:</label>
-                                    <select multiple class="form-control test-dropdown"></select>
+                                    <select multiple class="form-control test-dropdown " multiple></select>
                                 </div>
 
                                 <div class="dropdown">
@@ -225,10 +225,7 @@ tpl.filterItem = `
 
                                     
                                       <div class="btn-group btn-toggle rejected"> 
-                                      <div>Rejected</div>
-                                        <button class="reject btn btn-default">ON</button>
-                                        <button class="un-reject btn btn-primary">OFF</button>
-                                    </div>
+                                        <button class="reject btn btn-default">Rejected</button>      
                                     </div>
 `;
 
@@ -328,6 +325,9 @@ tpl.addTimeSlot = `
                                     <option>17:30</option>
                                     <option>18:00</option>
                                     <option>18:30</option>
+                                    <option>19:00</option>
+                                    <option>19:30</option>
+                                    <option>20:00</option>
                                 </select>
                             </div>
                             </div>
