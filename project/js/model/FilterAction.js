@@ -1,4 +1,5 @@
 const FilterAction = {
-    AVARAGE: 'AVARAGE'
+    AVARAGE: 'AVR',
+    SUM: 'SUM'
 };
 module.exports = FilterAction;
