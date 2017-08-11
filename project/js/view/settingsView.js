@@ -77,17 +77,17 @@ class SettingsView {
         let listContainer = this.modalContainer.querySelector('.tests-filters-container'),
             testNameInput,
             buttonSaveTest,
-            direction;
+            currentDirection;
 
-        direction = this.settings.directionList.find((direction) => directionName === direction.name);
-        listContainer.innerHTML = tplSettings.Tests(direction.testList);  
+        currentDirection = this.settings.directionList.find((direction) => directionName === direction.name);
+        listContainer.innerHTML = tplSettings.Tests(currentDirection.testList);
 
         buttonSaveTest = this.modalContainer.querySelector('.save-new-test');
         testNameInput = this.modalContainer.querySelector('.new-test-name');
         
         testNameInput.addEventListener('focus', () => buttonSaveTest.disabled = false);
         buttonSaveTest.addEventListener('click', () => {
-            direction.addTest(testNameInput.value);
+            currentDirection.addTest(testNameInput.value);
             mediator.pub('test:created', directionName);
         }, false);
     }
