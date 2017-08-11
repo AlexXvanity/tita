@@ -77,6 +77,7 @@ class SettingsView {
         let listContainer = this.modalContainer.querySelector('.tests-filters-container'),
             testNameInput,
             buttonSaveTest,
+            testGradeInput,
             currentDirection;
 
         currentDirection = this.settings.directionList.find((direction) => directionName === direction.name);
@@ -84,10 +85,11 @@ class SettingsView {
 
         buttonSaveTest = this.modalContainer.querySelector('.save-new-test');
         testNameInput = this.modalContainer.querySelector('.new-test-name');
-        
+        testGradeInput = this.modalContainer.querySelector('.new-test-grade');
+
         testNameInput.addEventListener('focus', () => buttonSaveTest.disabled = false);
         buttonSaveTest.addEventListener('click', () => {
-            currentDirection.addTest(testNameInput.value);
+            currentDirection.addTest(testNameInput.value, Number(testGradeInput.value));
             mediator.pub('test:created', directionName);
         }, false);
     }

@@ -11,7 +11,8 @@ let settingsTests = (testList) => {
                 ${tpl}
             </ul>
             <div class="new-test-input"> </div>
-            <input type="text" class="new-test-name" placeholder="New test" size="8">
+            <input type="text" class="new-test-name" placeholder="test name" size="8">
+            <input type="text" class="new-test-grade" placeholder="test grade" size="8">
             <button disabled class="save-new-test">Add</button>
         </div>
     `; 
