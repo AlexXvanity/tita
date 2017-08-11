@@ -1,7 +1,8 @@
 'use strict';
 
 let TestItemView = require('../view/testItemView.js'),
-    ModalTestView = require('../view/modalTestView.js'), 
+    ModalTestView = require('../view/modalTestView.js'),
+    UserTest = require('../model/UserTest.js'),
     mediator = require('../Mediator.js');
 
 class TestListController {
@@ -16,13 +17,12 @@ class TestListController {
         mediator.sub('group:selected', this.groupSelectedHandler.bind(this));
         mediator.sub('testModal:open', this.createModalTest.bind(this));
         mediator.sub('testModal:open', this.setTestName.bind(this));
-
+        mediator.sub('test:added', this.addNewTest.bind(this));
     }
 
-    groupSelectedHandler (group) {debugger;
+    groupSelectedHandler (group) {
         this.testListView.renderTest(group);
         this.setGroup(group);
-
     }
 
     createModalTest () {
@@ -31,7 +31,7 @@ class TestListController {
         modalTestView.show();
     }
 
-    generateTestsInfo (info) {debugger;
+    generateTestsInfo (info) {
         let peopleList = Papa.parse(info),
             result = [];
 
@@ -105,6 +105,15 @@ class TestListController {
                     });
                 }
             });
+        });
+    }
+
+    addNewTest (test) {
+        let people = this.selectGroup.people,
+            userTest = new UserTest(test.name);
+
+        people.forEach((person) => {
+            person.testList.push(userTest);
         });
     }
 

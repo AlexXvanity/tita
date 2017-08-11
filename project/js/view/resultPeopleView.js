@@ -27,7 +27,7 @@ class ResultPeopleView {
         return obj[renderStatus]();
     }
 
-    renderPeopleWithMarks (results) {debugger;
+    renderPeopleWithMarks (results) {
         if (!results.length) {
             this.showNoPerson();
         } else {

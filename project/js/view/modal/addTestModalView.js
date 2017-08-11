@@ -60,7 +60,7 @@ class AddExamModalView extends BaseModalView {
         return testListOption;
     }
 
-    addNewExamHandler () {debugger;
+    addNewExamHandler () {
         let testInputValue = document.querySelector(this.selectors.examInput).value,
             testInput = document.querySelector(this.selectors.examInput);
 
@@ -71,8 +71,11 @@ class AddExamModalView extends BaseModalView {
                     newTest = new Test(testInputValue);
 
                 testInput.value = '';
+
                 this.addedExams.push(newTest);
                 this.examsContainer.insertAdjacentHTML('beforeEnd', testInputArea);
+
+                mediator.pub('test:added', newTest);
             }
     }
 
