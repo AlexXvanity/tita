@@ -17,7 +17,7 @@ class TestListController {
         mediator.sub('group:selected', this.groupSelectedHandler.bind(this));
         mediator.sub('testModal:open', this.createModalTest.bind(this));
         mediator.sub('testModal:open', this.setTestName.bind(this));
-        mediator.sub('test:added', this.addNewTest.bind(this));
+        mediator.sub('test:added', this.addNewTests.bind(this));
     }
 
     groupSelectedHandler (group) {
@@ -108,12 +108,14 @@ class TestListController {
         });
     }
 
-    addNewTest (test) {
-        let people = this.selectGroup.people,
-            userTest = new UserTest(test.name);
-
+    addNewTests (testList) {debugger;
+        console.log(this.selectGroup);
+        let people = this.selectGroup.people;
+        
         people.forEach((person) => {
-            person.testList.push(userTest);
+            testList.forEach((test) => {
+                person.testList.push(new UserTest(test.name));
+            });
         });
     }
 

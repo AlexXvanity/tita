@@ -60,8 +60,7 @@ class AddExamModalView extends BaseModalView {
 
         return testListOption;
     }
-    addNewExamHandler() {
-        debugger;
+    addNewExamHandler() {debugger;
         let testInputValue = document.querySelector(this.selectors.examInput).value,
             testInput = document.querySelector(this.selectors.examInput),
             testInputGrade = document.querySelector(this.selectors.examInputGrade),
@@ -88,6 +87,7 @@ class AddExamModalView extends BaseModalView {
 
     saveNewExamHandler() {
         mediator.pub('testModal:added', {group: this.model, addedTests: this.addedExams});
+        mediator.pub('test:added', this.addedExams);
         this.addedExams = [];
         this.hide();
     }
