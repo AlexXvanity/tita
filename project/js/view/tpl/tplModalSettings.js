@@ -237,7 +237,8 @@ tpl.editGroupTestModal = `<div class="modal fade display in edit-group-test-moda
                         {test-list}
                         </div>
                         <div class="input-group">
-                            <input type="text" class="form-control add-test-input">
+                            <input type="text" class="form-control test-input add-test-input" placeholder="Test name">
+                            <input type="text" class="form-control test-input add-test-input-grade" placeholder="Max grade">
                             <i id="add-group" class="add-button fa fa-plus-circle add-exam-btn" aria-hidden="true"></i>
                             </div>
                         </div> 

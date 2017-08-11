@@ -6,41 +6,42 @@ let mediator = require('../../Mediator.js'),
     Test = require('../../model/Test.js');
 
 class AddExamModalView extends BaseModalView {
-    constructor (group) {
+    constructor(group) {
         super(group, tpl.editGroupTestModal);
         this.body = document.body;
         this.addedExams = [];
     }
 
-    get selectors () {
+    get selectors() {
         return {
             examsContainer: '.test-list .list-group',
             saveExamsBtn: '.save-new-exams-btn',
             modalBackdrop: '.modal-backdrop',
             closeBtn: '.close-edit-test-btn',
-            examInput: '.form-control',
+            examInput: '.add-test-input',
+            examInputGrade: '.add-test-input-grade',
             addBtn: '.add-exam-btn'
         };
     }
 
-    activate () {
+    activate() {
         this.addBtn.addEventListener('click', this.addNewExamHandler.bind(this));
         this.closeBtn.addEventListener('click', this.hide.bind(this));
         this.saveExamsBtn.addEventListener('click', this.saveNewExamHandler.bind(this));
     }
 
-    diactivate () {
+    diactivate() {
         this.addBtn.removeEventListener('click', this.addNewExamHandler);
         this.closeBtn.removeEventListener('click', this.hide);
         this.saveExamsBtn.removeEventListener('click', this.saveNewExamHandler);
     }
 
-    mapTemplate (template) {
+    mapTemplate(template) {
         let testList = this.getTestList();
         return template.replace('{test-list}', testList);
     }
 
-    collectSelectors () {
+    collectSelectors() {
         this.container = this.modalContainer.querySelector(this.selectors.container);
         this.addBtn = this.modalContainer.querySelector(this.selectors.addBtn);
         this.closeBtn = this.modalContainer.querySelector(this.selectors.closeBtn);
@@ -48,11 +49,11 @@ class AddExamModalView extends BaseModalView {
         this.saveExamsBtn = this.modalContainer.querySelector(this.selectors.saveExamsBtn);
     }
 
-    getTestList () {
+    getTestList() {
         let testListOption = '<ul class="list-group">';
 
         this.model.testList.forEach((test) => {
-            testListOption += `<li class ="list-group-item">${test.name}</li>`;
+            testListOption += `<li class ="list-group-item">${test.name} ( ${test.maxGrade} )</li>`;
         });
 
         testListOption += '</ul>';
@@ -60,6 +61,7 @@ class AddExamModalView extends BaseModalView {
         return testListOption;
     }
 
+<<<<<<< HEAD
     addNewExamHandler () {
         let testInputValue = document.querySelector(this.selectors.examInput).value,
             testInput = document.querySelector(this.selectors.examInput);
@@ -77,16 +79,36 @@ class AddExamModalView extends BaseModalView {
 
                 mediator.pub('test:added', newTest);
             }
+=======
+    addNewExamHandler() {
+        debugger;
+        let testInputValue = document.querySelector(this.selectors.examInput).value,
+            testInput = document.querySelector(this.selectors.examInput),
+            testInputGrade = document.querySelector(this.selectors.examInputGrade),
+            testInputGradeValue = document.querySelector(this.selectors.examInputGrade).value;
+
+        if (testInputValue === '') {
+            this.renderError();
+        } else {
+            let testInputArea = `<li class ="list-group-item">${testInputValue} ( ${testInputGradeValue} )</li>`,
+                newTest = new Test(testInputValue, testInputGradeValue);
+
+            testInput.value = '';
+            testInputGrade.value = '';
+            this.addedExams.push(newTest);
+            this.examsContainer.insertAdjacentHTML('beforeEnd', testInputArea);
+        }
+>>>>>>> f610182f027abf74be623cd952d727713b306976
     }
 
-    renderError () {
+    renderError() {
         let input = this.body.querySelector('.add-test-input');
 
         input.placeholder = 'Enter TestName';
     }
 
-    saveNewExamHandler () {
-        mediator.pub('testModal:added', { group: this.model, addedTests: this.addedExams });
+    saveNewExamHandler() {
+        mediator.pub('testModal:added', {group: this.model, addedTests: this.addedExams});
         this.addedExams = [];
         this.hide();
     }
