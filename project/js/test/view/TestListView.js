@@ -1,8 +1,7 @@
 'use strict';
 
-let tpl = require('./tpl/tplModalSettings.js'),
-    mediator = require('../Mediator.js'),
-    TestItemView = require('../view/testItemView.js');
+let tpl = require('../../general/tplModalSettings.js'),
+    TestItemView = require('./TestItemView.js');
 
 class TestListView {
     constructor () {

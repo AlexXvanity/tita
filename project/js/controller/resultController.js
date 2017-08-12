@@ -1,6 +1,6 @@
 'use strict';
 
-let Person = require('../model/Person.js'),
+let Person = require('../app/Person.js'),
     ResultPeopleView = require('../view/resultPeopleView.js'),
     // ResultTestsView = require('../view/resultTestsView.js'),
     mediator = require('../Mediator.js'),

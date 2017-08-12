@@ -1,11 +1,11 @@
 'use strict';
 
-let DayItemView = require('../view/dayItemView.js'),
-    PeopleInfoView = require('../view/peopleInfoView.js'),
-    AddDayView = require('../view/modal/addDayView.js'),
-    AddTimeView = require('../view/modal/addDaySlotView.js'),
-    Person = require('../model/Person.js'),
-    UserTest = require('../model/UserTest.js'),
+let DayItemView = require('./view/DayItemView.js'),
+    PeopleInfoView = require('./view/PeopleInfoView.js'),
+    AddDayView = require('./view/modal/AddDayView.js'),
+    AddTimeView = require('./view/modal/AddDaySlotView.js'),
+    Person = require('../app/Person.js'),
+    UserTest = require('../test/model/UserTest.js'),
     mediator = require('../Mediator.js');
 
 class DayController {

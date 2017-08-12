@@ -1,8 +1,8 @@
 'use strict';
 
 let mediator = require('../../../Mediator.js'),
-    tpl = require('../tpl/tplModalSettings.js'),
-    BaseModalView = require('./BaseModalView.js');
+    tpl = require('../../../general/tplModalSettings.js'),
+    BaseModalView = require('../../../general/BaseModalView.js');
 
 class ContextMenuGroupView extends BaseModalView {
     constructor (group) {

@@ -1,8 +1,7 @@
 'use strict';
 
-let TestItemView = require('../view/testItemView.js'),
-    ModalTestView = require('../view/modalTestView.js'),
-    UserTest = require('../model/UserTest.js'),
+let ModalTestView = require('./view/modal/ModalTestView.js'),
+    UserTest = require('./model/UserTest.js'),
     mediator = require('../Mediator.js');
 
 class TestListController {
@@ -46,7 +45,7 @@ class TestListController {
 
             result.push(personInfo);
         });
-        
+
         let checkResult = this.checkUserExist(this.selectGroup, result);
         if (checkResult.notExistPeople.length) {
             mediator.pub('error:addedPerson', checkResult.notExistPeople);
@@ -111,7 +110,7 @@ class TestListController {
     addNewTests (testList) {debugger;
         console.log(this.selectGroup);
         let people = this.selectGroup.people;
-        
+
         people.forEach((person) => {
             testList.forEach((test) => {
                 person.testList.push(new UserTest(test.name));

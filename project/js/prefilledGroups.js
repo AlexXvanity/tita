@@ -1,9 +1,9 @@
 'use strict';
 
 let Group = require('./groups/model/Group.js'),
-    UserTest = require('./model/UserTest.js'),
-    Day = require('./model/Day.js'),
-    Person = require('./model/Person.js'),
+    UserTest = require('./test/model/UserTest.js'),
+    Day = require('./days/model/Day.js'),
+    Person = require('./app/Person.js'),
     prefilledDirection = require('./prefilledDirection.js');
 
 let prefilledGroups;

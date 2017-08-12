@@ -1,7 +1,7 @@
 'use strict';
 
-let App = require('../project/js/model/App.js'),
-    Direction = require('../project/js/model/Direction.js');
+let App = require('../project/js/app/App.js'),
+    Direction = require('../project/js/app/Direction.js');
 
 describe('direction', function () {
     let app = new App();

@@ -1,6 +1,6 @@
 'use strict';
 
-let mediator = require('../Mediator.js');
+let mediator = require('../../Mediator.js');
 
 class TestItemView {
     constructor () {

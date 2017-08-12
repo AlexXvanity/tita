@@ -1,7 +1,7 @@
 'use strict';
 
 let mediator = require('../../Mediator.js'),
-    tpl = require('./tpl/tplModalSettings.js');
+    tpl = require('../../general/tplModalSettings.js');
 
 
 class GroupItemView {

@@ -1,8 +1,8 @@
 'use strict';
 
-let FilterItemView = require('../view/filterItemView.js'),
+let FilterItemView = require('./view/FilterItemView.js'),
     mediator = require('../Mediator.js'),
-    AddFilterView = require('../view/modal/addFilterView.js');
+    AddFilterView = require('./view/modal/AddFilterView.js');
 
 class FilterController {
     constructor() {

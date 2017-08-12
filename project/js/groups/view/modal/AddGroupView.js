@@ -1,9 +1,9 @@
 'use srtict';
 let mediator = require('../../../Mediator.js'),
-    tpl = require('../tpl/tplModalSettings.js'),
+    tpl = require('../../../general/tplModalSettings.js'),
     Direction = require('../../../settings/model/Direction.js'),
     Group = require('../../model/Group.js'),
-    BaseModalView = require('./BaseModalView.js');
+    BaseModalView = require('../../../general/BaseModalView.js');
 
 class AddGroupView extends BaseModalView {
     constructor (settings) {

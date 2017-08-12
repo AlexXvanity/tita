@@ -1,6 +1,6 @@
 'use strict';
 
-let tplTests =  
+let tplTests =
     `<div class="modal fade display in add-test-modal">
         <div class="modal-dialog">
             <div class="modal-content">

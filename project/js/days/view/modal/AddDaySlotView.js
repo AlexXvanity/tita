@@ -1,8 +1,8 @@
 'use strict';
-let mediator = require('../../Mediator.js'),
-    tpl = require('../../view/tpl/tplModalSettings.js'),
+let mediator = require('../../../Mediator.js'),
+    tpl = require('../../../general/tplModalSettings.js'),
     Day = require('../../model/Day.js'),
-    BaseModalView = require('../../view/modal/baseModalView.js');
+    BaseModalView = require('../../../general/BaseModalView.js');
 
 class AddDaySlotView extends BaseModalView {
     constructor () {

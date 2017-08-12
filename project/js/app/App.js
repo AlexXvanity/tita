@@ -1,31 +1,31 @@
 'use strict';
 
 let Settings = require('../settings/model/Settings.js'),
-    FilterListView = require('../view/filterListView.js'),
-    DayListView = require('../view/dayListView.js'),
+    FilterListView = require('../filter/view/filterListView.js'),
+    DayListView = require('../days/view/DayListView.js'),
 
     GroupListView = require('../groups/view/GroupListView.js'),
     GroupController = require('../groups/GroupController.js'),
     SettingsController = require('../settings/SettingsController.js'),
 
-    DayController = require('../controller/dayController.js'),
-    TestListController = require('../controller/testListController.js'),
-    FilterController = require('../controller/filterController.js'),
-    TestListView = require('../view/testListView.js'),
+    DayController = require('../days/DayController.js'),
+    TestListController = require('../test/TestListController.js'),
+    FilterController = require('../filter/filterController.js'),
+    TestListView = require('../test/view/TestListView.js'),
     mediator = require('../Mediator.js'),
     ResultController = require('../controller/resultController.js');
 
 class App {
-    constructor() {
+    constructor () {
         this.groupList = [];
         this.settings = new Settings();
     }
 
-    addGroup() {
+    addGroup () {
         this.groupList.push(new Group());
     }
 
-    start() {
+    start () {
         let groupListView = new GroupListView(this.settings),
 			dayListView = new DayListView(),
             groupController = new GroupController(this.groupList, this.settings, groupListView),
@@ -41,7 +41,7 @@ class App {
         this.activate();
     }
 
-    activate() {
+    activate () {
         mediator.sub('addSelectedGroup', (group) => {
             this.groupList.push(group);
         });

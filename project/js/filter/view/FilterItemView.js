@@ -1,7 +1,7 @@
 'use strict';
 
-let mediator = require('../Mediator.js'),
-    tpl = require('./tpl/tplModalSettings.js');
+let mediator = require('../../Mediator.js'),
+    tpl = require('../../general/tplModalSettings.js');
 
 class FilterItemView {
     constructor (filter) {

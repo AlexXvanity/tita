@@ -1,8 +1,8 @@
 'use strict';
 
 let mediator = require('../../../Mediator.js'),
-    tpl = require('../tpl/tplModalSettings.js'),
-    BaseModalView = require('./BaseModalView.js'),
+    tpl = require('../../../general/tplModalSettings.js'),
+    BaseModalView = require('../../../general/BaseModalView.js'),
     Test = require('../../../test/model/Test.js');
 
 class AddTestModalView extends BaseModalView {

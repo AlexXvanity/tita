@@ -1,4 +1,4 @@
-let tpl = require('./tpl/tplModalSettings.js');
+let tpl = require('../../general/tplModalSettings.js');
 
 class DayListView {
     constructor () {

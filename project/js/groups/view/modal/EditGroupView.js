@@ -1,6 +1,6 @@
 'use strict';
 
-let tpl = require('../tpl/tplModalSettings.js');
+let tpl = require('../../../general/tplModalSettings.js');
 
 class EditGroupView {
     constructor (settings, model) {

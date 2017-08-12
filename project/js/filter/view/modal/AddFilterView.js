@@ -1,10 +1,10 @@
 'use srtict';
-let mediator = require('../../Mediator.js'),
-    tpl = require('../../view/tpl/tplModalSettings.js'),
+let mediator = require('../../../Mediator.js'),
+    tpl = require('../../../general/tplModalSettings.js'),
     FilterAction = require('../../model/FilterAction.js'),
     FilterCondition = require('../../model/FilterCondition.js'),
-    Filter = require('../../filter/model/Filter.js'),
-    BaseModalView = require('../../view/modal/baseModalView.js');
+    Filter = require('../../model/Filter.js'),
+    BaseModalView = require('../../../general/BaseModalView.js');
 
 class AddFilterView extends BaseModalView {
     constructor (group) {
