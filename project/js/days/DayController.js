@@ -85,7 +85,7 @@ class DayController {
         this.selectDay = day;
     }
 
-    openPeopleInfo (time) {
+    openPeopleInfo (time) {debugger;
         let peopleInfoView = new PeopleInfoView(time);
 
         peopleInfoView.show();

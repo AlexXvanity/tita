@@ -13,7 +13,7 @@ let Settings = require('../settings/model/Settings.js'),
     FilterController = require('../filter/filterController.js'),
     TestListView = require('../test/view/TestListView.js'),
     mediator = require('../Mediator.js'),
-    ResultController = require('../controller/resultController.js');
+    ResultController = require('../result/resultController.js');
 
 class App {
     constructor () {

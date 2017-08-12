@@ -1,8 +1,7 @@
 'use strict';
 
 let Person = require('../app/Person.js'),
-    ResultPeopleView = require('../view/resultPeopleView.js'),
-    // ResultTestsView = require('../view/resultTestsView.js'),
+    ResultPeopleView = require('./view/resultPeopleView.js'),
     mediator = require('../Mediator.js'),
     Test = require('../test/model/Test.js');
 

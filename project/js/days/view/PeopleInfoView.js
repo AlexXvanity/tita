@@ -1,7 +1,7 @@
 'use strict';
 
 let mediator = require('../../Mediator.js'),
-	template = require('../../general/tplModalSettings.js');
+	template = require('./tpl/modalUsersTpl.js');
 
 class PeopleInfoView {
 	constructor (time) {
