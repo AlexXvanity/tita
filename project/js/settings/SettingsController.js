@@ -1,7 +1,7 @@
 'use strict';
 
-let SettingsView = require('../view/settingsView.js'),
-    SettingsAddFilterView = require('../view/SettingsAddFilterView.js'),
+let SettingsView = require('./view/SettingsView.js'),
+    SettingsAddFilterView = require('./view/SettingsAddFtilterView.js'),
     mediator = require('../Mediator.js');
 
 class SettingsController {
@@ -32,7 +32,6 @@ class SettingsController {
     }
 
     showAddFilterModal (direction) {
-        console.log(direction);
         let viewAddFilter = new SettingsAddFilterView(direction);
     }
 }

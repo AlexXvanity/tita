@@ -2,9 +2,9 @@
 
 let settingsTests = (testList) => {
     let tpl = '';
-   
+
     testList.forEach((test) => tpl += `<li><a>${test.name}</a></li>`);
-    
+
     return `
         <div class="wrapper-list" >Tests
             <ul class="t-f-list">
@@ -15,7 +15,7 @@ let settingsTests = (testList) => {
             <input type="text" class="new-test-grade" placeholder="test grade" size="8">
             <button disabled class="save-new-test">Add</button>
         </div>
-    `; 
+    `;
 };
 
 module.exports = settingsTests;

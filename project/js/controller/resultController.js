@@ -4,7 +4,7 @@ let Person = require('../model/Person.js'),
     ResultPeopleView = require('../view/resultPeopleView.js'),
     // ResultTestsView = require('../view/resultTestsView.js'),
     mediator = require('../Mediator.js'),
-    Test = require('../model/Test.js');
+    Test = require('../test/model/Test.js');
 
 class ResultController {
 	constructor () {

@@ -15,7 +15,7 @@ let settingsDropDown = (directionList) => {
             <select class="settings-directions-select direction"> 
                 ${optionList}
             </select>
-    `; 
+    `;
 };
 
 module.exports = settingsDropDown;

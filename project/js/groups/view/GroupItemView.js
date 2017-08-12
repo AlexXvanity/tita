@@ -1,6 +1,6 @@
 'use strict';
 
-let mediator = require('../Mediator.js'),
+let mediator = require('../../Mediator.js'),
     tpl = require('./tpl/tplModalSettings.js');
 
 
@@ -64,12 +64,12 @@ class GroupItemView {
         event.preventDefault();
         mediator.pub('groupContextMenu:show', this.currentGroup);
     }
-    
+
     selectGroupForDay (event) {
         document.querySelector(this.selectors.daySection).innerHTML = '';
         mediator.pub('group:selected', this.currentGroup);
     }
-    
+
     subscribe () {
         if (this.currentGroup && !this.currentGroup.editGroup.isAttached(this.renderEditGroup.bind(this))) {
             this.currentGroup.editGroup.attach(this.renderEditGroup.bind(this));

@@ -1,7 +1,7 @@
 'use strict';
 
-let tplSettings = require('./tpl/tpl.settings.js'),
-    mediator = require('../Mediator.js');
+let tplSettings = require('./tpl/settingsTpl.js'),
+    mediator = require('../../Mediator.js');
 
 class SettingsAddFilterView {
     constructor (direction) {
@@ -29,7 +29,7 @@ class SettingsAddFilterView {
         conditionSelect = this.modalContainer.querySelector('.filter-condition');
         actionSelect = this.modalContainer.querySelector('.filter-action');
         gradeInput = this.modalContainer.querySelector('.filter-grade');
-        
+
         testListContainer.addEventListener('click', (event) => {
             let testName = event.target.innerHTML,
                 test = direction.testList.find((test) => testName === test.name);
@@ -42,7 +42,7 @@ class SettingsAddFilterView {
 
         saveFilterButton.addEventListener('click', () => {
             let filterName, action, condition, grade;
-                //options = {};
+            //options = {};
 
             filterName = filterNameInput.value;
             action = actionSelect.options[actionSelect.selectedIndex].value;

@@ -1,7 +1,6 @@
 'use strict';
 
-let tplSettings = require('./tpl.settings.js'),
-    settingsTestsForFilter = require('./settingsTestsForFilter.tpl.js');
+let settingsTestsForFilter = require('./settingsTestsForFilterTpl.js');
 
 
 let settingsAddFilter = (direction) => {

@@ -1,6 +1,6 @@
 'use strict';
 
-let Direction = require('./model/Direction.js');
+let Direction = require('./settings/model/Direction.js');
 
 let prefilledDirections,
     testsForFilter1PHP,

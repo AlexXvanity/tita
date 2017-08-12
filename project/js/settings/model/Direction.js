@@ -1,10 +1,10 @@
 'use strict';
 
-let Test = require('./Test.js'),
-    Filter = require('./Filter.js');
+let Test = require('../../test/model/Test.js'),
+    Filter = require('../../filter/model/Filter.js');
 
 class Direction {
-    constructor (name) { 
+    constructor (name) {
         this.name = name;
         this.testList = [];
         this.filterList = [];

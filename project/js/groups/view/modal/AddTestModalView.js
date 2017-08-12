@@ -1,11 +1,11 @@
 'use strict';
 
-let mediator = require('../../Mediator.js'),
-    tpl = require('../../view/tpl/tplModalSettings.js'),
-    BaseModalView = require('../../view/modal/baseModalView.js'),
-    Test = require('../../model/Test.js');
+let mediator = require('../../../Mediator.js'),
+    tpl = require('../tpl/tplModalSettings.js'),
+    BaseModalView = require('./BaseModalView.js'),
+    Test = require('../../../test/model/Test.js');
 
-class AddExamModalView extends BaseModalView {
+class AddTestModalView extends BaseModalView {
     constructor(group) {
         super(group, tpl.editGroupTestModal);
         this.body = document.body;
@@ -60,7 +60,7 @@ class AddExamModalView extends BaseModalView {
 
         return testListOption;
     }
-    addNewExamHandler() {debugger;
+    addNewExamHandler() {
         let testInputValue = document.querySelector(this.selectors.examInput).value,
             testInput = document.querySelector(this.selectors.examInput),
             testInputGrade = document.querySelector(this.selectors.examInputGrade),
@@ -93,4 +93,4 @@ class AddExamModalView extends BaseModalView {
     }
 }
 
-module.exports = AddExamModalView;
+module.exports = AddTestModalView;

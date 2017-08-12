@@ -1,5 +1,5 @@
 'use strict';
-let Observer = require('../Event.js');
+let Observer = require('../../Event.js');
 
 class Group {
     constructor (name, direction) {
@@ -9,14 +9,14 @@ class Group {
         this.filterList = direction.filterList;
         this.days = [];
         this.people = [];
-        
+
         this.testAdded = new Observer(this);
         this.editGroup = new Observer(this);
     }
 
     addTests(tests) {
-    	this.testList = this.testList.concat(tests);
-    	this.testAdded.notify(tests);
+        this.testList = this.testList.concat(tests);
+        this.testAdded.notify(tests);
     }
 
     editGroupInfo (groupInfo) {

@@ -1,12 +1,14 @@
 'use strict';
 
-let Settings = require('./Settings.js'),
+let Settings = require('../settings/model/Settings.js'),
     FilterListView = require('../view/filterListView.js'),
-    GroupListView = require('../view/groupListView.js'),
-	DayListView = require('../view/dayListView.js'),
-    GroupController = require('../controller/groupController.js'),
+    DayListView = require('../view/dayListView.js'),
+
+    GroupListView = require('../groups/view/GroupListView.js'),
+    GroupController = require('../groups/GroupController.js'),
+    SettingsController = require('../settings/SettingsController.js'),
+
     DayController = require('../controller/dayController.js'),
-    SettingsController = require('../controller/settingsController.js'),
     TestListController = require('../controller/testListController.js'),
     FilterController = require('../controller/filterController.js'),
     TestListView = require('../view/testListView.js'),

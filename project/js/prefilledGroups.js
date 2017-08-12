@@ -1,6 +1,6 @@
 'use strict';
 
-let Group = require('./model/Group.js'),
+let Group = require('./groups/model/Group.js'),
     UserTest = require('./model/UserTest.js'),
     Day = require('./model/Day.js'),
     Person = require('./model/Person.js'),

@@ -3,7 +3,7 @@ let mediator = require('../../Mediator.js'),
     tpl = require('../../view/tpl/tplModalSettings.js'),
     FilterAction = require('../../model/FilterAction.js'),
     FilterCondition = require('../../model/FilterCondition.js'),
-    Filter = require('../../model/Filter.js'),
+    Filter = require('../../filter/model/Filter.js'),
     BaseModalView = require('../../view/modal/baseModalView.js');
 
 class AddFilterView extends BaseModalView {

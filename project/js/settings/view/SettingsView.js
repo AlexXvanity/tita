@@ -1,16 +1,12 @@
 'use strict';
 
-let tplSettings = require('./tpl/tpl.settings.js'),
-    mediator = require('../Mediator.js');
+let tplSettings = require('./tpl/settingsTpl.js'),
+    mediator = require('../../Mediator.js');
 
 class SettingsView {
     constructor (settings) {
         this.settings = settings;
         this.modalContainer = document.querySelector('.modal-container');
-
-     /*   this.showSettingsWindow();
-        this.renderDirectionNames();
-        this.activate();*/
     }
 
     showSettingsWindow () {
@@ -21,8 +17,8 @@ class SettingsView {
 
         darkLayer.classList.add('shadow');
         document.body.appendChild(darkLayer);
-        this.modalContainer.innerHTML = tplSettings.Modal; 
-        this.modalContainer.style.display = 'block'; 
+        this.modalContainer.innerHTML = tplSettings.Modal;
+        this.modalContainer.style.display = 'block';
         buttonClose = this.modalContainer.querySelector('.close-button');
         buttonAddDirection = this.modalContainer.querySelector('.add-direction');
 
@@ -30,7 +26,7 @@ class SettingsView {
             darkLayer.parentNode.removeChild(darkLayer);
             this.modalContainer.style.display = 'none';
         };
-        
+
         darkLayer.addEventListener('click', closeSettings, false);
         buttonClose.addEventListener('click', closeSettings, false);
         buttonAddDirection.addEventListener('click', () => {
@@ -62,7 +58,7 @@ class SettingsView {
 
         buttonTests.addEventListener('click', () => {
             let selectedDirectionName = elSelect.options[elSelect.selectedIndex].value;
-            
+
             this.renderTests(selectedDirectionName);
         }, false);
 
@@ -100,7 +96,7 @@ class SettingsView {
             direction;
 
         direction = this.settings.directionList.find((direction) => directionName === direction.name);
-        listContainer.innerHTML = tplSettings.Filters(direction.filterList);  
+        listContainer.innerHTML = tplSettings.Filters(direction.filterList);
         buttonAddFilter = this.modalContainer.querySelector('.add-filter');
 
         buttonAddFilter.addEventListener('click', () => {

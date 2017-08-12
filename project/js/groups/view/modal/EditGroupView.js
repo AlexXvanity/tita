@@ -1,6 +1,6 @@
-'use srtict';
-let mediator = require('../../Mediator.js'),
-    tpl = require('../../view/tpl/tplModalSettings.js');
+'use strict';
+
+let tpl = require('../tpl/tplModalSettings.js');
 
 class EditGroupView {
     constructor (settings, model) {

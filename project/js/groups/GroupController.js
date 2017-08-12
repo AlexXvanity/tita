@@ -1,12 +1,12 @@
 'use strict';
 
-let GroupItemView = require('../view/groupItemView.js'),
-    EditGroupView = require('../view/modal/editGroupView.js'),
-    AddGroupView = require('../view/modal/addGroupView.js'),
-    GroupContextMenuView = require('../view/modal/contextMenuGroupView.js'),
-    Group = require('../model/Group.js'),
+let GroupItemView = require('./view/GroupItemView.js'),
+    EditGroupView = require('./view/modal/EditGroupView.js'),
+    AddGroupView = require('./view/modal/AddGroupView.js'),
+    GroupContextMenuView = require('./view/modal/ContextMenuGroupView.js'),
+    Group = require('./model/Group.js'),
     mediator = require('../Mediator.js'),
-    AddExamModalView = require('../view/modal/addTestModalView.js');
+    AddTestModalView = require('./view/modal/AddTestModalView.js');
 
 class GroupController {
     constructor(groups, settings, groupListView) {
@@ -74,8 +74,8 @@ class GroupController {
     }
 
     showEditExamModalHandler(group) {
-        let examsModalView = new AddExamModalView(group);
-        examsModalView.show();
+        let addTestModalView = new AddTestModalView(group);
+        addTestModalView.show();
     }
 
     addTestHandler(data) {
