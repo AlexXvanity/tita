@@ -23,7 +23,6 @@ class TestListController {
     groupSelectedHandler (group) {
         this.testListView.renderTest(group);
         this.setGroup(group);
-        console.log(group);
     }
 
     createModalTest () {
@@ -140,8 +139,6 @@ class TestListController {
     setTestName (testName) {
         this.testName = testName;
     }
-
-
 }
 
 module.exports = TestListController;
