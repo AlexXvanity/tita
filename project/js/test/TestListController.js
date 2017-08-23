@@ -30,7 +30,7 @@ class TestListController {
         modalTestView.show();
     }
 
-    generateTestsInfo (info) {
+    generateTestsInfo (info) {debugger;
         let peopleList = Papa.parse(info),
             result = [];
 
@@ -47,16 +47,22 @@ class TestListController {
         });
 
         let checkResult = this.checkUserExist(this.selectGroup, result);
+
         if (checkResult.notExistPeople.length) {
             mediator.pub('error:addedPerson', checkResult.notExistPeople);
+            if (checkResult.existPeople.length) {
+                this.addTestResult(this.selectGroup, checkResult.existPeople, this.testName);
+            }
         } else {
             this.addTestResult(this.selectGroup, checkResult.existPeople, this.testName);
-            console.log(this.selectGroup);
+
             mediator.pub('testResult:added', checkResult.existPeople);
         }
+
+        console.log(this.selectGroup);
     }
 
-    checkUserExist (group, newPeopleList) {
+    checkUserExist (group, newPeopleList) {debugger;
         let peopleGroupList = group.people,
             peopleList = newPeopleList,
             notExistPersonList = [],

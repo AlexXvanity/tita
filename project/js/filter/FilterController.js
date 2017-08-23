@@ -22,23 +22,23 @@ class FilterController {
         mediator.sub('filter:reject', this.reject.bind(this));
     }
 
-    reject(){
-        if(this.selectedFilter.condition === '>'){
+    reject() {
+        if(this.selectedFilter.condition === '>') {
             this.selectedFilter.condition = '<';
         } else
 
-        if(this.selectedFilter.condition === '<'){
+        if(this.selectedFilter.condition === '<') {
             this.selectedFilter.condition = '>';
         } else
 
-        if(this.selectedFilter.condition === '='){
+        if(this.selectedFilter.condition === '=') {
             this.selectedFilter.condition = '!=';
         }
 
         this.filtering(this.selectedFilter, this.selectedGroup.people);
     }
 
-    unFilterPeople(){
+    unFilterPeople() {
         this.isFiltered = false;
 
         let rejects = document.querySelectorAll('.rejected .reject');
@@ -67,7 +67,7 @@ class FilterController {
         filterItemView.render();
     }
 
-    filterPeople(filter){
+    filterPeople(filter) {
         this.selectedFilter = filter;
         if(this.isFiltered){
             this.filtering(filter,this.filteredGroup.people);

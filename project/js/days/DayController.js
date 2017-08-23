@@ -85,7 +85,7 @@ class DayController {
         this.selectDay = day;
     }
 
-    openPeopleInfo (time) {debugger;
+    openPeopleInfo (time) {
         let peopleInfoView = new PeopleInfoView(time);
 
         peopleInfoView.show();
@@ -99,7 +99,7 @@ class DayController {
         this.renderDayList(this.selectGroup);
     }
 
-    generatePeopleInfo (peopleInfo) {
+    generatePeopleInfo (peopleInfo) {debugger;
         let peopleList = Papa.parse(peopleInfo.listOfPeople),
             result = [];
 

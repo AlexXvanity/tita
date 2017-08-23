@@ -67,7 +67,7 @@ class ResultPeopleView {
     }
 
     showNoPerson () {
-        this.section.innerHTML = `<h5 style="color: red; font-size: 40px; text-transform: uppercase; text-align: center">All users were rejected</h5>`;
+        this.section.innerHTML = `<h5 class="error-message">Empty Student List</h5>`;
     }
 
     showExistPerson (results) {
@@ -106,7 +106,7 @@ class ResultPeopleView {
 
         this.section.innerHTML =
             `<h4 style="color: red">ERROR!!!</h4>
-             <h5 style="color: red">THIS PERSON NOT EXIST IN THE TIME SLOT</h5>
+             <h5 style="color: red">THIS PERSON IS NOT EXIST IN THE TIME SLOT</h5>
             <div>${table}</div>`;
     }
 
