@@ -5,7 +5,7 @@ let settingsDropDown = (directionList) => {
 
     directionList.forEach((direction, i) => {
         optionList += `
-            <option ${(i = 0) ? 'selected' : ''} value="${direction.name}">
+            <option ${(i === directionList.length - 1) ? 'selected' : ''} value="${direction.name}">
                 ${direction.name}
             </option>
         `;

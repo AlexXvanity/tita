@@ -33,15 +33,17 @@ class SettingsView {
             let inputNewDirection = this.modalContainer.querySelector('.input-new-direction');
 
             this.settings.addDirection(inputNewDirection.value);
-            inputNewDirection.value = '';
+
             mediator.pub('direction:created');
+
+            inputNewDirection.value = '';
         }, false);
     }
 
-    renderDirectionNames () {
+    renderDirectionNames (selectedDirection) {
         let directionSelect = this.modalContainer.querySelector('.direction-select');
 
-        directionSelect.innerHTML = tplSettings.DropDown(this.settings.directionList);
+        directionSelect.innerHTML = tplSettings.DropDown(this.settings.directionList, selectedDirection);
     }
 
     activate () {
