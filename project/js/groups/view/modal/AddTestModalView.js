@@ -66,23 +66,25 @@ class AddTestModalView extends BaseModalView {
             testInputGrade = document.querySelector(this.selectors.examInputGrade),
             testInputGradeValue = document.querySelector(this.selectors.examInputGrade).value;
 
-        if (testInputValue === '') {
-            this.renderError();
+        if (testInputValue === '' || testInputGradeValue === '') {
+            this.renderError(testInput, testInputGrade);
         } else {
             let testInputArea = `<li class ="list-group-item">${testInputValue} ( ${testInputGradeValue} )</li>`,
                 newTest = new Test(testInputValue, testInputGradeValue);
 
             testInput.value = '';
             testInputGrade.value = '';
+            testInput.style.borderColor = '';
+            testInputGrade.style.borderColor = '';
+
             this.addedExams.push(newTest);
             this.examsContainer.insertAdjacentHTML('beforeEnd', testInputArea);
         }
     }
 
-    renderError() {
-        let input = this.body.querySelector('.add-test-input');
-
-        input.placeholder = 'Enter TestName';
+    renderError (testInput, gradeInput) {
+        testInput.style.borderColor = 'red';
+        gradeInput.style.borderColor = 'red';
     }
 
     saveNewExamHandler() {
