@@ -23,15 +23,11 @@ class FilterController {
     }
 
     reject() {
-        if(this.selectedFilter.condition === '>') {
+        if (this.selectedFilter.condition === '>') {
             this.selectedFilter.condition = '<';
-        } else
-
-        if(this.selectedFilter.condition === '<') {
+        } else if (this.selectedFilter.condition === '<') {
             this.selectedFilter.condition = '>';
-        } else
-
-        if(this.selectedFilter.condition === '=') {
+        } else if (this.selectedFilter.condition === '=') {
             this.selectedFilter.condition = '!=';
         }
 
@@ -42,10 +38,12 @@ class FilterController {
         this.isFiltered = false;
 
         let rejects = document.querySelectorAll('.rejected .reject');
-        rejects.forEach((btn)=> {
-            btn.removeEventListener('click', this.subReject  );
+        rejects.forEach((btn) => {
+            btn.removeEventListener('click', this.subReject);
         });
-        (() => {mediator.pub ('filter:on', this.selectedGroup);})();
+        (() => {
+            mediator.pub('filter:on', this.selectedGroup);
+        })();
     }
 
     groupSelectedHandler(group) {
@@ -69,53 +67,52 @@ class FilterController {
 
     filterPeople(filter) {
         this.selectedFilter = filter;
-        if(this.isFiltered){
-            this.filtering(filter,this.filteredGroup.people);
-        }else{
-            this.filtering(filter,this.selectedGroup.people);
+        if (this.isFiltered) {
+            this.filtering(filter, this.filteredGroup.people);
+        } else {
+            this.filtering(filter, this.selectedGroup.people);
             this.isFiltered = true;
-
         }
         let rejects = document.querySelectorAll('.rejected .reject');
-        rejects.forEach((btn)=> {
-            btn.addEventListener('click', this.subReject  );
+        rejects.forEach((btn) => {
+            btn.addEventListener('click', this.subReject);
         });
 
     }
 
-    subReject(){
-        mediator.pub ('filter:reject', this.filteredGroup);
+    subReject() {
+        mediator.pub('filter:reject', this.filteredGroup);
     }
 
     filtering(filter, peopleList) {
 
-        let people = JSON.parse(JSON.stringify(peopleList));
+        let people = JSON.parse(JSON.stringify(peopleList)),
+            students = peopleList;
 
         this.addTestResults(filter, people);
 
-        let filteredPerson =[];
+        let filteredPerson = [];
 
         people.map((person) => {
             let actionResult = this.doAction(filter.action, person);
-            let result = this.filteredByCondition(filter, filter.condition, actionResult, person);
+            let result = this.filteredByCondition(filter, filter.condition, actionResult, person, students);
 
-            if(typeof (result) === 'object'){
+            if (typeof (result) === 'object') {
                 return filteredPerson.push(result);
             }
-
         });
         this.filteredGroup.people = filteredPerson;
 
-        (() => {mediator.pub ('filter:on', this.filteredGroup);})();
+        (() => {
+            mediator.pub('filter:on', this.filteredGroup);
+        })();
 
     }
 
-    doAction (act, person) {
+    doAction(act, person) {
         let actions = {
             'SUM': person.testList.reduce((sum, current) => {
                 return sum + current.percent;
-
-
             }, 0),
             'AVG': person.testList.reduce((sum, current) => {
                 return (sum + current.percent);
@@ -125,7 +122,8 @@ class FilterController {
 
         return actions[act];
     }
-    addTestResults (filter, people) {
+
+    addTestResults(filter, people) {
         let resultTest = [];
         people.map((person) => {
             filter.tests.forEach((test) => {
@@ -138,12 +136,8 @@ class FilterController {
                             grade: personTest.grade,
                             percent: personTest.percent
                         });
-
-
                     }
-
                 });
-
             });
             person.testList = resultTest;
             resultTest = [];
@@ -151,27 +145,40 @@ class FilterController {
     }
 
 
-
-    filteredByCondition (filter, cond, actRez, person) {
+    filteredByCondition(filter, cond, actRez, person, students) {
         let condition = {
-            '>': ()=> {
-                if(actRez > filter.grade) {
+            '>': () => {
+                if (actRez > filter.grade) {
+                    let student;
+                    students.forEach((currentPeople) => {
+                        if (currentPeople.email === person.email){
+                            student = currentPeople;
+                        }
+                    });
+                    return student;
+                }else{
+                    let student;
+                    students.forEach((currentPeople) => {
+                        if (currentPeople.email === person.email){
+                            student = currentPeople;
+                        }
+                    });
+                    return student;
+                }
+            },
+            '<': () => {
+                if (actRez < filter.grade) {
                     return person;
                 }
             },
-            '<': ()=> {
-                if(actRez < filter.grade) {
-                    return person;
-                }
-            },
-            '=': ()=> {
-                if(actRez === filter.grade) {
+            '=': () => {
+                if (actRez === filter.grade) {
                     return person;
                 }
             },
 
-            '!=': ()=> {
-                if(actRez !== filter.grade) {
+            '!=': () => {
+                if (actRez !== filter.grade) {
                     return person;
                 }
             }
