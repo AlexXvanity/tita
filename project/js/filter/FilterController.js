@@ -11,6 +11,7 @@ class FilterController {
         this.filteredGroup = {};
         this.isFiltered = false;
         this.selectedFilter = null;
+        this.filters = [];
     }
 
     activate() {
@@ -85,7 +86,11 @@ class FilterController {
     }
 
     filtering(filter, peopleList) {
-
+        this.filters.push({
+            name: filter.name,
+            pastedFilter: [],
+            rejectedFilter: []
+        });
         let people = JSON.parse(JSON.stringify(peopleList)),
             students = peopleList;
 
@@ -148,23 +153,28 @@ class FilterController {
     filteredByCondition(filter, cond, actRez, person, students) {
         let condition = {
             '>': () => {
+                let rejected;
+                let pasted;
                 if (actRez > filter.grade) {
-                    let student;
                     students.forEach((currentPeople) => {
-                        if (currentPeople.email === person.email){
-                            student = currentPeople;
+                        if (currentPeople.email === person.email) {
+                            pasted = currentPeople;
                         }
                     });
-                    return student;
-                }else{
-                    let student;
+                    this.filters[this.filters.length-1].pastedFilter.push(pasted);
+                    return pasted;
+                } else {
                     students.forEach((currentPeople) => {
-                        if (currentPeople.email === person.email){
-                            student = currentPeople;
+                        if (currentPeople.email === person.email) {
+                            rejected = currentPeople;
                         }
+                        if(typeof rejected !== 'undefined'){
+                            this.filters[this.filters.length-1].rejectedFilter.push(rejected);
+                        }
+
                     });
-                    return student;
                 }
+                console.log(this.filters);
             },
             '<': () => {
                 if (actRez < filter.grade) {
