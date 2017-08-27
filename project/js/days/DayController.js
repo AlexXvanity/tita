@@ -39,7 +39,6 @@ class DayController {
     }
 
     renderDayList (group) {
-
         this.selectGroup = group;
 
         this.dayListView.clearContainer();
@@ -73,11 +72,24 @@ class DayController {
         document.querySelector('#day-input').value = today;
     }
 
-    addDayHandler(day) {
-        this.selectDay = day;
-        this.selectGroup.days.push(day);
-        this.renderDayList(this.selectGroup);
+    addDayHandler (day) {
+        if (!this.checkDaysExist(day)) {
+            this.selectDay = day;
+            this.selectGroup.days.push(day);
+            this.renderDayList(this.selectGroup);
+        }
+    }
 
+    checkDaysExist (day) {
+        let result = '';
+
+        this.selectGroup.days.forEach((groupDay) => {
+           if (groupDay.date === day.date) {
+               result = true;
+           }
+        });
+
+        return result;
     }
 
     showAddTime () {

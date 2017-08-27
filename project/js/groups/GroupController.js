@@ -44,6 +44,7 @@ class GroupController {
 
     deleteGroupHandler(group) {
         let index = this.groups.indexOf(group);
+
         if (index !== -1) {
             this.groups.splice(index, 1);
             this.renderGroupList();
