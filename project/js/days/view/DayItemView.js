@@ -4,10 +4,11 @@ let mediator = require('../../Mediator.js'),
     tpl = require('../../general/tplModalSettings.js');
 
 class DayItemView {
-    constructor (day) {
+    constructor (day, group) {
         this.container = document.querySelector(this.selectors.testDay);
         this.template = tpl.dayListView;
         this.selectDay = day;
+        this.currentGroup = group;
     }
 
     get selectors () {
@@ -22,7 +23,7 @@ class DayItemView {
 
     renderDay (day) {
 
-        if(day){
+        if (day) {
             this.container.insertAdjacentHTML('afterbegin',this.template);
             let dayItemTemplate = this.container.querySelector(this.selectors.dayItem),
                 year = day.date.slice(2,4),
@@ -76,6 +77,7 @@ class DayItemView {
         }
 
         dayItem.addEventListener('click', this.selectDayItemHandler.bind(this));
+        dayItem.addEventListener('contextmenu', this.editDayHandler.bind(this));
 
         timeSlotBtn.forEach((btn) => {
             btn.addEventListener('click', (e)=> {
@@ -89,6 +91,12 @@ class DayItemView {
             });
         });
     }
+
+    editDayHandler (event) {debugger;
+        event.preventDefault();
+        mediator.pub('dayContextMenu:show', this.selectDay);
+    }
+
     selectDayItemHandler () {
         mediator.pub('day:selected', this.selectDay);
     }

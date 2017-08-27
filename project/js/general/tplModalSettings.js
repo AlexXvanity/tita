@@ -116,6 +116,19 @@ tpl.editGroupModal =
         </div>
     `;
 
+tpl.contextMenu = ` <div class="modal fade display in">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="btn btn-primary btn-lg delete-btn">Delete this item</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default close-context-menu">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
 tpl.groupContextMenu = ` <div class="modal fade display in context-menu-group-modal">
             <div class="modal-dialog">
 

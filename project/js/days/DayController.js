@@ -2,6 +2,7 @@
 
 let DayItemView = require('./view/DayItemView.js'),
     PeopleInfoView = require('./view/PeopleInfoView.js'),
+    ContextMenuView = require('.././general/ContextMenuView.js'),
     AddDayView = require('./view/modal/AddDayView.js'),
     AddTimeView = require('./view/modal/AddDaySlotView.js'),
     Person = require('../app/Person.js'),
@@ -29,6 +30,8 @@ class DayController {
         mediator.sub('timeSlot:add', this.showAddTime.bind(this));
         mediator.sub('timeSlot:added', this.addTimeSlot.bind(this));
         mediator.sub('timeSlot:clicked', this.getTimeSlotPeople.bind(this));
+        mediator.sub('dayContextMenu:show', this.contextMenuHandler.bind(this));
+        mediator.sub('day:deleted', this.deleteDayHandler.bind(this));
     }
 
     selectDayHandler (day) {
@@ -44,7 +47,7 @@ class DayController {
             this.selectGroup.days.forEach((day) => {
                 this.selectedDay = day;
 
-                let dayItemView = new DayItemView (day);
+                let dayItemView = new DayItemView (day, this.selectGroup);
 
                 dayItemView.renderDay(day);
             });
@@ -217,6 +220,23 @@ class DayController {
 
         person.testList = personTestList;
     }
+
+    contextMenuHandler (day) {debugger;
+        let contextMenuView = new ContextMenuView(day);
+        contextMenuView.show();
+    }
+
+    deleteDayHandler(day) {debugger;
+
+    console.log(this.selectGroup);
+
+        let index = this.selectGroup.days.indexOf(day);
+
+        if (index !== -1) {
+            this.selectGroup.days.splice(index, 1);
+        }
+    }
+
 }
 
 module.exports = DayController;
