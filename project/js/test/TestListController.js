@@ -30,7 +30,7 @@ class TestListController {
         modalTestView.show();
     }
 
-    generateTestsInfo (info) {debugger;
+    generateTestsInfo (info) {
         let peopleList = Papa.parse(info),
             result = [];
 
@@ -62,7 +62,7 @@ class TestListController {
         console.log(this.selectGroup);
     }
 
-    checkUserExist (group, newPeopleList) {debugger;
+    checkUserExist (group, newPeopleList) {
         let peopleGroupList = group.people,
             peopleList = newPeopleList,
             notExistPersonList = [],
@@ -113,7 +113,7 @@ class TestListController {
         });
     }
 
-    addNewTests (testList) {debugger;
+    addNewTests (testList) {
         console.log(this.selectGroup);
         let people = this.selectGroup.people;
 

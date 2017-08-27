@@ -92,7 +92,7 @@ class DayItemView {
         });
     }
 
-    editDayHandler (event) {debugger;
+    editDayHandler (event) {
         event.preventDefault();
         mediator.pub('dayContextMenu:show', this.selectDay);
     }
