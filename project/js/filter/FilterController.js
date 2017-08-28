@@ -37,7 +37,7 @@ class FilterController {
 
     unFilterPeople() {
         this.isFiltered = false;
-
+        this.filters = [];
         let rejects = document.querySelectorAll('.rejected .reject');
         rejects.forEach((btn) => {
             btn.removeEventListener('click', this.subReject);
@@ -96,21 +96,30 @@ class FilterController {
 
         this.addTestResults(filter, people);
 
-        let filteredPerson = [];
+        // let filteredPerson = [];
 
         people.map((person) => {
             let actionResult = this.doAction(filter.action, person);
             let result = this.filteredByCondition(filter, filter.condition, actionResult, person, students);
 
-            if (typeof (result) === 'object') {
-                return filteredPerson.push(result);
-            }
+            // if (typeof (this.filters[this.filters.length-1].pastedFilter) === 'object') {
+            //     return filteredPerson.push(result);
+            // }
         });
-        this.filteredGroup.people = filteredPerson;
+
+        this.filteredGroup.people = this.filters[this.filters.length-1].pastedFilter;
 
         (() => {
             mediator.pub('filter:on', this.filteredGroup);
         })();
+
+        this.filteredGroup.people = this.filters[this.filters.length-1].rejectedFilter;
+
+        (() => {
+            mediator.pub('filter-rejected:on', this.filteredGroup);
+        })();
+
+        console.log(this.filters);
 
     }
 
@@ -162,7 +171,6 @@ class FilterController {
                         }
                     });
                     this.filters[this.filters.length-1].pastedFilter.push(pasted);
-                    return pasted;
                 } else {
                     students.forEach((currentPeople) => {
                         if (currentPeople.email === person.email) {
@@ -174,7 +182,6 @@ class FilterController {
 
                     });
                 }
-                console.log(this.filters);
             },
             '<': () => {
                 if (actRez < filter.grade) {

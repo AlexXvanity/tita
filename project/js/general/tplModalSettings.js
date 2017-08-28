@@ -40,7 +40,6 @@ tpl.editGroupExamModal =
                         <button type="button" id="close-button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
     `;
@@ -231,12 +230,9 @@ tpl.filterItem = `
                                   <div class ="toogle-controls col-xs-4">
                                    
                                       <div class="btn-group btn-toggle active"> 
-                                        <div>Active</div>
-                                        <button class="apply btn btn-default">ON</button>
-                                        <button class="un-apply btn btn-primary">OFF</button>
+                                        <button class="btn btn-default apply">ON</button>
+                                        <button class="btn btn-primary un-apply">OF</button>
                                     </div>
-
-                                    
                                       <div class="btn-group btn-toggle rejected"> 
                                         <button class="reject btn btn-default">Rejected</button>      
                                     </div>
