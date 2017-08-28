@@ -235,6 +235,7 @@ tpl.filterItem = `
                                     </div>
                                       <div class="btn-group btn-toggle rejected"> 
                                         <button class="reject btn btn-default">Rejected</button>      
+                                        <button class="un-reject btn btn-primary">Un-rejected</button>      
                                     </div>
 `;
 

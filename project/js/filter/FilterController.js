@@ -21,22 +21,27 @@ class FilterController {
         mediator.sub('filter:selected', this.filterPeople.bind(this));
         mediator.sub('filter:unSelected', this.unFilterPeople.bind(this));
         mediator.sub('filter:reject', this.reject.bind(this));
+        mediator.sub('filter:unReject', this.unReject.bind(this));
     }
 
-    reject() {
-        let rejects = document.querySelectorAll('.rejected');
-        rejects.forEach((btn) => {
-            btn.addEventListener('click', this.subReject);
-        });
-
-        this.filters.forEach((filter)=>{
-            if(filter.name === this.selectedFilter){
+    reject(currentFilter) {
+        this.filters.forEach((filter) => {
+            if (filter.name === currentFilter.filterName) {
                 (() => {
-                    mediator.pub('rejectedPeople:on', this.filters.rejectedFilter);
+                    console.log(filter.rejectedFilter);
+                    mediator.pub('rejectedPeople:on', filter.rejectedFilter);
                 })();
             }
         });
     }
+
+    unReject() {
+        (() => {
+            mediator.pub('unRejectedPeople:on',  this.selectedFilter);
+        })();
+
+    }
+
 
     unFilterPeople() {
         this.isFiltered = false;
@@ -44,7 +49,6 @@ class FilterController {
         let rejects = document.querySelectorAll('.rejected');
         rejects.forEach((btn) => {
             btn.removeEventListener('click', this.subReject);
-            btn.classList.add('disable-btn');
         });
         (() => {
             mediator.pub('filter:on', this.selectedGroup);
@@ -86,7 +90,7 @@ class FilterController {
 
     filtering(filter, peopleList) {
         this.filters.push({
-            name: filter.name,
+            name: filter.filterName,
             pastedFilter: [],
             rejectedFilter: []
         });
@@ -102,7 +106,7 @@ class FilterController {
 
 
         (() => {
-            mediator.pub('filteredPeople:on', this.filters[this.filters.length-1]);
+            mediator.pub('filteredPeople:on', this.filters[this.filters.length - 1]);
         })();
 
         console.log(this.filters);
@@ -156,14 +160,14 @@ class FilterController {
                             pasted = currentPeople;
                         }
                     });
-                    this.filters[this.filters.length-1].pastedFilter.push(pasted);
+                    this.filters[this.filters.length - 1].pastedFilter.push(pasted);
                 } else {
                     students.forEach((currentPeople) => {
                         if (currentPeople.email === person.email) {
                             rejected = currentPeople;
                         }
-                        if(typeof rejected !== 'undefined'){
-                            this.filters[this.filters.length-1].rejectedFilter.push(rejected);
+                        if (typeof rejected !== 'undefined') {
+                            this.filters[this.filters.length - 1].rejectedFilter.push(rejected);
                         }
 
                     });
