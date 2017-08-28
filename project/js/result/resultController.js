@@ -24,11 +24,10 @@ class ResultController {
 	}
 
     renderRejectedPeople (people) {debugger;
-	    console.log(people);
+        this.resultPeopleView.showRejectedPeople(people, 'rejectedPeople');
     }
 
     renderFilteredPeople (people) {debugger;
-	    console.log(people);
 	    this.resultPeopleView.showFilteredPeople(people, 'filteredPeople');
     }
 

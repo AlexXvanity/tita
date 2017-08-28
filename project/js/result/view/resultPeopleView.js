@@ -24,10 +24,22 @@ class ResultPeopleView {
             },
             filteredPeople: () => {
                 this.showFilteredPeople(results);
+            },
+            rejectedPeople: () => {
+                this.showRejectedPeople(results);
             }
 
         };
         return obj[renderStatus]();
+    }
+
+    showRejectedPeople (results) {
+        let peopleResult = this.generatePeopleTable(results);
+
+        this.section.innerHTML = `<div class="result-wrap">
+                                    <h3>Rejected People</h3>
+                                    ${peopleResult}
+                                 </div>`;
     }
 
     showFilteredPeople(results) {
