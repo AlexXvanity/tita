@@ -30,7 +30,7 @@ class ContextMenuView extends BaseModalView {
         this.closeButton.removeEventListener('click', this.hide.bind(this));
     }
 
-    deleteHandler (event) {debugger;
+    deleteHandler (event) {
         mediator.pub('day:deleted', this.model);
         this.hide();
     }

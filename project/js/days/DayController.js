@@ -39,20 +39,19 @@ class DayController {
     }
 
     renderDayList (group) {
-
         this.selectGroup = group;
 
         this.dayListView.clearContainer();
-        if(this.selectGroup.days.length){
+        if (this.selectGroup.days.length) {
             this.selectGroup.days.forEach((day) => {
                 this.selectedDay = day;
 
-                let dayItemView = new DayItemView (day, this.selectGroup);
+                let dayItemView = new DayItemView(day, this.selectGroup);
 
                 dayItemView.renderDay(day);
             });
         } else {
-            let dayItemView = new DayItemView ();
+            let dayItemView = new DayItemView();
 
             dayItemView.renderDay();
         }
@@ -73,11 +72,24 @@ class DayController {
         document.querySelector('#day-input').value = today;
     }
 
-    addDayHandler(day) {
-        this.selectDay = day;
-        this.selectGroup.days.push(day);
-        this.renderDayList(this.selectGroup);
+    addDayHandler (day) {
+        if (!this.checkDaysExist(day)) {
+            this.selectDay = day;
+            this.selectGroup.days.push(day);
+            this.renderDayList(this.selectGroup);
+        }
+    }
 
+    checkDaysExist (day) {
+        let result = '';
+
+        this.selectGroup.days.forEach((groupDay) => {
+           if (groupDay.date === day.date) {
+               result = true;
+           }
+        });
+
+        return result;
     }
 
     showAddTime () {
@@ -102,7 +114,7 @@ class DayController {
         this.renderDayList(this.selectGroup);
     }
 
-    generatePeopleInfo (peopleInfo) {debugger;
+    generatePeopleInfo (peopleInfo) {
         let peopleList = Papa.parse(peopleInfo.listOfPeople),
             result = [];
 
@@ -221,20 +233,19 @@ class DayController {
         person.testList = personTestList;
     }
 
-    contextMenuHandler (day) {debugger;
+    contextMenuHandler (day) {
         let contextMenuView = new ContextMenuView(day);
         contextMenuView.show();
     }
 
-    deleteDayHandler(day) {debugger;
-
-    console.log(this.selectGroup);
-
+    deleteDayHandler(day) {
         let index = this.selectGroup.days.indexOf(day);
 
         if (index !== -1) {
             this.selectGroup.days.splice(index, 1);
         }
+
+        this.renderDayList(this.selectGroup);
     }
 
 }
