@@ -13,8 +13,8 @@ class FilterItemView {
         return {
             rejectedBtn: '.btn-toggle.rejected',
             activeBtn: '.btn-toggle.active',
-            unApply: '.btn-toggle.active .un-apply',
-            apply: '.btn-toggle.active .apply',
+            unApply: '.un-apply',
+            apply: '.apply',
             filterList: '.filter-list'
         };
     }
@@ -36,11 +36,16 @@ class FilterItemView {
         apply.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
             this.selectFilterItemHandler();
+            apply.classList.add('disable-btn');
+            unApply.classList.remove('disable-btn');
         });
 
         unApply.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
             this.unSelectFilterItemHandler();
+            unApply.classList.add('disable-btn');
+            apply.classList.remove('disable-btn');
+
         });
 
         rejectedBtn.addEventListener('click', () => {
@@ -52,10 +57,12 @@ class FilterItemView {
         let buttons = template.querySelectorAll(selector + ' .btn');
 
         buttons.forEach((button) => {
-            button.classList.toggle('active');
             button.classList.toggle('btn-primary');
             button.classList.toggle('btn-default');
         });
+    }
+    classRemove(elem,cls){
+
     }
     selectFilterItemHandler () {
         mediator.pub('filter:selected', this.filter);
