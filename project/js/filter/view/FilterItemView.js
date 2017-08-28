@@ -38,6 +38,7 @@ class FilterItemView {
             this.selectFilterItemHandler();
             apply.classList.add('disable-btn');
             unApply.classList.remove('disable-btn');
+            // rejectedBtn.classList.remove('disable-btn');
         });
 
         unApply.addEventListener('click', () => {
@@ -45,6 +46,7 @@ class FilterItemView {
             this.unSelectFilterItemHandler();
             unApply.classList.add('disable-btn');
             apply.classList.remove('disable-btn');
+            // rejectedBtn.classList.add('disable-btn');
 
         });
 

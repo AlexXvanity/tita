@@ -24,23 +24,27 @@ class FilterController {
     }
 
     reject() {
-        if (this.selectedFilter.condition === '>') {
-            this.selectedFilter.condition = '<';
-        } else if (this.selectedFilter.condition === '<') {
-            this.selectedFilter.condition = '>';
-        } else if (this.selectedFilter.condition === '=') {
-            this.selectedFilter.condition = '!=';
-        }
+        let rejects = document.querySelectorAll('.rejected');
+        rejects.forEach((btn) => {
+            btn.addEventListener('click', this.subReject);
+        });
 
-        this.filtering(this.selectedFilter, this.selectedGroup.people);
+        this.filters.forEach((filter)=>{
+            if(filter.name === this.selectedFilter){
+                (() => {
+                    mediator.pub('rejectedPeople:on', this.filters.rejectedFilter);
+                })();
+            }
+        });
     }
 
     unFilterPeople() {
         this.isFiltered = false;
         this.filters = [];
-        let rejects = document.querySelectorAll('.rejected .reject');
+        let rejects = document.querySelectorAll('.rejected');
         rejects.forEach((btn) => {
             btn.removeEventListener('click', this.subReject);
+            btn.classList.add('disable-btn');
         });
         (() => {
             mediator.pub('filter:on', this.selectedGroup);
@@ -74,11 +78,6 @@ class FilterController {
             this.filtering(filter, this.selectedGroup.people);
             this.isFiltered = true;
         }
-        let rejects = document.querySelectorAll('.rejected .reject');
-        rejects.forEach((btn) => {
-            btn.addEventListener('click', this.subReject);
-        });
-
     }
 
     subReject() {
@@ -96,15 +95,9 @@ class FilterController {
 
         this.addTestResults(filter, people);
 
-        // let filteredPerson = [];
-
         people.map((person) => {
             let actionResult = this.doAction(filter.action, person);
             let result = this.filteredByCondition(filter, filter.condition, actionResult, person, students);
-
-            // if (typeof (this.filters[this.filters.length-1].pastedFilter) === 'object') {
-            //     return filteredPerson.push(result);
-            // }
         });
 
 
