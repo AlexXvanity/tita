@@ -19,7 +19,13 @@ class ResultController {
         mediator.sub('testResult:added', this.renderTestResult.bind(this));
         mediator.sub('error:addedPerson', this.renderTestError.bind(this));
         mediator.sub('timeSlotPeople:formed', this.renderTimeSlotPeople.bind(this));
+        mediator.sub('filteredPeople:on', this.renderFilteredPeople.bind(this));
 	}
+
+    renderFilteredPeople (people) {debugger;
+	    console.log(people);
+	    this.resultPeopleView.showFilteredPeople(people, 'filteredPeople');
+    }
 
     renderPeopleWithMarks (group) {
         let people = group.people;
