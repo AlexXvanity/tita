@@ -78,7 +78,6 @@ class DayController {
             this.selectGroup.days.push(day);
             this.renderDayList(this.selectGroup);
         }
-        console.log(this.selectGroup);
     }
 
     checkDaysExist (day) {
