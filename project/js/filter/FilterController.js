@@ -107,16 +107,9 @@ class FilterController {
             // }
         });
 
-        this.filteredGroup.people = this.filters[this.filters.length-1].pastedFilter;
 
         (() => {
-            mediator.pub('filter:on', this.filteredGroup);
-        })();
-
-        this.filteredGroup.people = this.filters[this.filters.length-1].rejectedFilter;
-
-        (() => {
-            mediator.pub('filter-rejected:on', this.filteredGroup);
+            mediator.pub('filteredPeople:on', this.filters[this.filters.length-1]);
         })();
 
         console.log(this.filters);
