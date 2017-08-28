@@ -65,7 +65,7 @@ class ResultPeopleView {
 
         generalTpl = `<div class="result-wrap">
                         <h3>Pasted People</h3>
-                          ${pastedPeopleRes}
+                          ${pastedPeopleRes || `<p style="color: red">No one passed</p>`} 
                         <h3>Rejected People <span>by ${filterName}</span></h3> 
                           ${rejectedPeopleRes}
                       </div>`;
@@ -74,36 +74,40 @@ class ResultPeopleView {
     }
 
     generatePeopleTable (people) {
-        let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
-            testListNameTpl = ``;
+        if (!people.length) {
+            this.showNoPerson();
+        } else {
+            let table = `<table><tr><th>First Name</th><th>Surname</th><th>Email</th>`,
+                testListNameTpl = ``;
 
-        let testList = people[people.length - 1].testList;
+            let testList = people[people.length - 1].testList;
 
-        testList.forEach((test) => {
-            testListNameTpl += `<th>${test.name}</th>`;
-        });
-
-        table += testListNameTpl;
-
-        people.forEach((person) => {
-            let testListGradeTpl = ``;
-
-            person.testList.forEach((test) => {
-                testListGradeTpl += `<td>${test.grade}</td>`;
+            testList.forEach((test) => {
+                testListNameTpl += `<th>${test.name}</th>`;
             });
 
-            table +=
-                `<tr>
+            table += testListNameTpl;
+
+            people.forEach((person) => {
+                let testListGradeTpl = ``;
+
+                person.testList.forEach((test) => {
+                    testListGradeTpl += `<td>${test.grade}</td>`;
+                });
+
+                table +=
+                    `<tr>
                        <td>${person.name}</td>
                        <td>${person.surname}</td>
                        <td>${person.email}</td>
                             ${testListGradeTpl}
                    </tr>`;
-        });
+            });
 
-        table += '</table>';
+            table += '</table>';
 
-        return table;
+            return table;
+        }
     }
 
     showPeopleResult (people, filterName) {

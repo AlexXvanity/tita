@@ -23,11 +23,11 @@ class ResultController {
         mediator.sub('rejectedPeople:on', this.renderRejectedPeople.bind(this));
 	}
 
-    renderRejectedPeople (people) {debugger;
+    renderRejectedPeople (people) {
         this.resultPeopleView.showRejectedPeople(people, 'rejectedPeople');
     }
 
-    renderFilteredPeople (people) {debugger;
+    renderFilteredPeople (people) {
 	    this.resultPeopleView.showFilteredPeople(people, 'filteredPeople');
     }
 
