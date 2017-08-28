@@ -38,23 +38,18 @@ class FilterItemView {
         apply.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
             this.selectFilterItemHandler();
-            // apply.classList.add('disable-btn');
-            // unApply.classList.remove('disable-btn');
-            // rejectedBtn.classList.remove('disable-btn');
         });
 
         unApply.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
             this.unSelectFilterItemHandler();
-            // unApply.classList.add('disable-btn');
-            // apply.classList.remove('disable-btn');
-            // rejectedBtn.classList.add('disable-btn');
-
         });
+
         rejectedBtn.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.rejectedBtn);
             this.rejectedFilterItemHandler();
         });
+
         unRejectedBtn.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.rejectedBtn);
             this.rejectedFilterItemHandler();
@@ -70,9 +65,7 @@ class FilterItemView {
 
         });
     }
-    classRemove(elem,cls){
 
-    }
     selectFilterItemHandler () {
         mediator.pub('filter:selected', this.filter);
     }

@@ -42,6 +42,15 @@ class FilterController {
 
     }
 
+    filterPeople(filter) {
+        this.selectedFilter = filter;
+        if (this.isFiltered) {
+            this.filtering(filter, this.filteredGroup.people);
+        } else {
+            this.filtering(filter, this.selectedGroup.people);
+            this.isFiltered = true;
+        }
+    }
 
     unFilterPeople() {
         this.isFiltered = false;
@@ -53,35 +62,6 @@ class FilterController {
         (() => {
             mediator.pub('filter:on', this.selectedGroup);
         })();
-    }
-
-    groupSelectedHandler(group) {
-        this.selectedGroup = group;
-        group.filterList.forEach((filter) => {
-            let filterItemView = new FilterItemView(filter);
-            filterItemView.render();
-        });
-    }
-
-    renderAddFilterViewHandler() {
-        let addFilterView = new AddFilterView(this.selectedGroup);
-        addFilterView.show();
-    }
-
-    addFilterHandler(filter) {
-        this.selectedGroup.filterList.push(filter);
-        let filterItemView = new FilterItemView(filter);
-        filterItemView.render();
-    }
-
-    filterPeople(filter) {
-        this.selectedFilter = filter;
-        if (this.isFiltered) {
-            this.filtering(filter, this.filteredGroup.people);
-        } else {
-            this.filtering(filter, this.selectedGroup.people);
-            this.isFiltered = true;
-        }
     }
 
     subReject() {
@@ -104,6 +84,7 @@ class FilterController {
             let result = this.filteredByCondition(filter, filter.condition, actionResult, person, students);
         });
 
+        this.filteredGroup.people = this.filters[this.filters.length - 1].pastedFilter;
 
         (() => {
             mediator.pub('filteredPeople:on', this.filters[this.filters.length - 1]);
@@ -148,7 +129,6 @@ class FilterController {
         });
     }
 
-
     filteredByCondition(filter, cond, actRez, person, students) {
         let condition = {
             '>': () => {
@@ -192,6 +172,25 @@ class FilterController {
         };
 
         return condition[cond]();
+    }
+
+    groupSelectedHandler(group) {
+        this.selectedGroup = group;
+        group.filterList.forEach((filter) => {
+            let filterItemView = new FilterItemView(filter);
+            filterItemView.render();
+        });
+    }
+
+    renderAddFilterViewHandler() {
+        let addFilterView = new AddFilterView(this.selectedGroup);
+        addFilterView.show();
+    }
+
+    addFilterHandler(filter) {
+        this.selectedGroup.filterList.push(filter);
+        let filterItemView = new FilterItemView(filter);
+        filterItemView.render();
     }
 }
 
