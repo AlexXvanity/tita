@@ -38,7 +38,7 @@ class ResultPeopleView {
         if (!pastedPeople.length && !rejectedPeople.length) {
             this.showNoPerson();
         } else if (pastedPeople && rejectedPeople) {
-            this.showAllPeople(pastedPeople, rejectedPeople);
+            this.showAllPeople(pastedPeople, rejectedPeople, filterName);
         } else if (rejectedPeople.length && !pastedPeople.length) {
             this.showPeopleResult(rejectedPeople, filterName);
         } else if (pastedPeople.length && !rejectedPeople.length) {
@@ -46,7 +46,7 @@ class ResultPeopleView {
         }
     }
 
-    showAllPeople (pastedPeople, rejectedPeople) {
+    showAllPeople (pastedPeople, rejectedPeople, filterName) {
         let pastedPeopleRes = this.generatePeopleTable(pastedPeople),
             rejectedPeopleRes = this.generatePeopleTable(rejectedPeople),
             generalTpl = ``;
@@ -54,7 +54,7 @@ class ResultPeopleView {
         generalTpl = `<div class="result-wrap">
                         <h3>Pasted People</h3>
                           ${pastedPeopleRes}
-                        <h3>Rejected People</h3>
+                        <h3>Rejected People <span>by ${filterName}</span></h3> 
                           ${rejectedPeopleRes}
                       </div>`;
 

@@ -20,7 +20,12 @@ class ResultController {
         mediator.sub('error:addedPerson', this.renderTestError.bind(this));
         mediator.sub('timeSlotPeople:formed', this.renderTimeSlotPeople.bind(this));
         mediator.sub('filteredPeople:on', this.renderFilteredPeople.bind(this));
+        mediator.sub('rejectedPeople:on', this.renderRejectedPeople.bind(this));
 	}
+
+    renderRejectedPeople (people) {debugger;
+	    console.log(people);
+    }
 
     renderFilteredPeople (people) {debugger;
 	    console.log(people);
