@@ -361,6 +361,10 @@ footer img {
     font-size: 14px;
     font-weight: bold;
 }
+#filter-section .btn-toggle button{
+    width:90px;
+    margin: 2px;
+}
 
 
 /*  filter section end */
@@ -481,6 +485,9 @@ input#day-input {
 }
 .disable-btn{
     pointer-events: none;
+}
+.able-btn{
+    pointer-events: auto;
 }
 
 
