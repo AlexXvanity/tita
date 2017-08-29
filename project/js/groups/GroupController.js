@@ -26,9 +26,18 @@ class GroupController {
     }
 
     addNewGroup(group) {
-        this.groups.push(group);
-        let view = new GroupItemView(group);
-        view.render();
+        let result = 0;
+
+        result = this.groups.find((currentGroup) => {
+            return currentGroup.name === group.name;
+        });
+
+        if (!result) {
+            this.groups.push(group);
+            let view = new GroupItemView(group);
+            view.render();
+        }
+
     }
 
     activate() {

@@ -31,6 +31,7 @@ class DayController {
         mediator.sub('timeSlot:added', this.addTimeSlot.bind(this));
         mediator.sub('timeSlot:clicked', this.getTimeSlotPeople.bind(this));
         mediator.sub('dayContextMenu:show', this.contextMenuHandler.bind(this));
+        mediator.sub('timeSlotContextMenu:show', this.timeSlotDelete.bind(this));
         mediator.sub('day:deleted', this.deleteDayHandler.bind(this));
     }
 
@@ -84,9 +85,9 @@ class DayController {
         let result = '';
 
         this.selectGroup.days.forEach((groupDay) => {
-           if (groupDay.date === day.date) {
-               result = true;
-           }
+            if (groupDay.date === day.date) {
+                result = true;
+            }
         });
 
         return result;
@@ -236,6 +237,10 @@ class DayController {
     contextMenuHandler (day) {
         let contextMenuView = new ContextMenuView(day);
         contextMenuView.show();
+    }
+
+    timeSlotDelete (time) {
+
     }
 
     deleteDayHandler(day) {

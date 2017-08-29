@@ -57,7 +57,7 @@ tpl.addGroupModal =
                         <form>
                             <div class="form-group">
                                 <label for="usr">Select group:</label>
-                                <input type="text" class="form-control" required id="group-name">
+                                <input type="text" maxlength="20" class="form-control" required id="group-name">
                             </div>
                             <div class="dropdown">
                                 <select class="form-control direction-dropdown">
