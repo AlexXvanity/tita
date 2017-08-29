@@ -55,7 +55,11 @@ class FilterController {
     unFilterPeople() {
         this.isFiltered = false;
         this.filters = [];
-        let rejects = document.querySelectorAll('.rejected .reject');
+        let btnOFF = document.querySelectorAll('.un-apply.able-btn'),
+            rejects = document.querySelectorAll('.rejected .reject');
+        btnOFF.forEach((btnOff)=>{
+            $(btnOff).click();
+        });
         rejects.forEach((btn) => {
             btn.removeEventListener('click', this.subReject);
         });
