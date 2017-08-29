@@ -90,6 +90,19 @@ class DayItemView {
                 mediator.pub('timeSlot:clicked', data);
             });
         });
+
+        timeSlotBtn.forEach((btn) => {
+            btn.addEventListener('contextmenu', (e)=> {
+                e.preventDefault();
+                let data = {},
+                    time = e.target.innerHTML,
+                    target = e.target;
+
+                data.time = time;
+
+                mediator.pub('timeSlotContextMenu:show', data.time);
+            });
+        });
     }
 
     editDayHandler (event) {

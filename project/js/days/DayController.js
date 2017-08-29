@@ -85,9 +85,9 @@ class DayController {
         let result = '';
 
         this.selectGroup.days.forEach((groupDay) => {
-           if (groupDay.date === day.date) {
-               result = true;
-           }
+            if (groupDay.date === day.date) {
+                result = true;
+            }
         });
 
         return result;
@@ -239,9 +239,8 @@ class DayController {
         contextMenuView.show();
     }
 
-    timeSlotDelete (day) {
-        let contextMenuView = new ContextMenuView(day);
-        contextMenuView.show();
+    timeSlotDelete (time) {
+
     }
 
     deleteDayHandler(day) {
