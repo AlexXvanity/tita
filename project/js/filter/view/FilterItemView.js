@@ -38,21 +38,23 @@ class FilterItemView {
         apply.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
             this.selectFilterItemHandler();
+            rejectedBtn.classList.remove('disable-btn');
+            unRejectedBtn.classList.remove('disable-btn');
         });
 
         unApply.addEventListener('click', () => {
             this.toogleSwithBtn(template, this.selectors.activeBtn);
             this.unSelectFilterItemHandler();
+            rejectedBtn.classList.add('disable-btn');
+            unRejectedBtn.classList.add('disable-btn');
         });
 
         rejectedBtn.addEventListener('click', () => {
-            this.toogleSwithBtn(template, this.selectors.rejectedBtn);
             this.rejectedFilterItemHandler();
         });
 
         unRejectedBtn.addEventListener('click', () => {
-            this.toogleSwithBtn(template, this.selectors.rejectedBtn);
-            this.rejectedFilterItemHandler();
+            this.unRejectedFilterItemHandler();
         });
     }
 
@@ -62,6 +64,8 @@ class FilterItemView {
         buttons.forEach((button) => {
             button.classList.toggle('btn-primary');
             button.classList.toggle('btn-default');
+            button.classList.toggle('disable-btn');
+            button.classList.toggle('able-btn');
 
         });
     }

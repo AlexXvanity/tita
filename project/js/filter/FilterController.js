@@ -55,7 +55,7 @@ class FilterController {
     unFilterPeople() {
         this.isFiltered = false;
         this.filters = [];
-        let rejects = document.querySelectorAll('.rejected');
+        let rejects = document.querySelectorAll('.rejected .reject');
         rejects.forEach((btn) => {
             btn.removeEventListener('click', this.subReject);
         });
@@ -145,10 +145,11 @@ class FilterController {
                     students.forEach((currentPeople) => {
                         if (currentPeople.email === person.email) {
                             rejected = currentPeople;
+                            if (typeof rejected !== 'undefined') {
+                                this.filters[this.filters.length - 1].rejectedFilter.push(rejected);
+                            }
                         }
-                        if (typeof rejected !== 'undefined') {
-                            this.filters[this.filters.length - 1].rejectedFilter.push(rejected);
-                        }
+
 
                     });
                 }

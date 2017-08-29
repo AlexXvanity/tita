@@ -230,12 +230,12 @@ tpl.filterItem = `
                                   <div class ="toogle-controls col-xs-4">
                                    
                                       <div class="btn-group btn-toggle active"> 
-                                        <button class="btn btn-default apply">ON</button>
-                                        <button class="btn btn-primary un-apply">OF</button>
+                                        <button class="btn btn-default apply able-btn">ON</button>
+                                        <button class="btn btn-primary un-apply disable-btn">OF</button>
                                     </div>
                                       <div class="btn-group btn-toggle rejected"> 
-                                        <button class="reject btn btn-default">Rejected</button>      
-                                        <button class="un-reject btn btn-primary">Un-rejected</button>      
+                                        <button class="reject btn btn-default disable-btn">Rejected</button>      
+                                        <button class="un-reject btn btn-default disable-btn">Un-rejected</button>      
                                     </div>
 `;
 

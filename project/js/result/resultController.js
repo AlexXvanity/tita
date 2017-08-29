@@ -6,12 +6,13 @@ let Person = require('../app/Person.js'),
     Test = require('../test/model/Test.js');
 
 class ResultController {
-	constructor () {
+    constructor() {
         this.activate();
         this.resultPeopleView = new ResultPeopleView();
-	}
+        this.currentList = '';
+    }
 
-	activate () {
+    activate() {
         mediator.sub('group:selected', this.renderPeopleWithMarks.bind(this));
         mediator.sub('filter:on', this.renderPeopleWithMarks.bind(this));
         mediator.sub('peopleInTimeSlot:added', this.renderAddedPeople.bind(this));
@@ -21,39 +22,45 @@ class ResultController {
         mediator.sub('timeSlotPeople:formed', this.renderTimeSlotPeople.bind(this));
         mediator.sub('filteredPeople:on', this.renderFilteredPeople.bind(this));
         mediator.sub('rejectedPeople:on', this.renderRejectedPeople.bind(this));
-	}
+        mediator.sub('unRejectedPeople:on', this.renderUnRejectedPeople.bind(this));
+    }
 
-    renderRejectedPeople (people) {
+    renderRejectedPeople(people) {
+        this.currentList = document.querySelector('.result-wrap').innerHTML;
         this.resultPeopleView.showRejectedPeople(people, 'rejectedPeople');
     }
 
-    renderFilteredPeople (people) {
-	    this.resultPeopleView.showFilteredPeople(people, 'filteredPeople');
+    renderUnRejectedPeople() {
+        document.querySelector('.result-wrap').innerHTML = this.currentList;
     }
 
-    renderPeopleWithMarks (group) {
+    renderFilteredPeople(people) {
+        this.resultPeopleView.showFilteredPeople(people, 'filteredPeople');
+    }
+
+    renderPeopleWithMarks(group) {
         let people = group.people;
 
         this.resultPeopleView.showResult(people, 'peopleWithMarks');
     }
 
-    renderAddedPeople (people) {
+    renderAddedPeople(people) {
         this.resultPeopleView.showResult(people, 'peopleAdded');
     }
 
-    renderExistPeople (people) {
+    renderExistPeople(people) {
         this.resultPeopleView.showResult(people, 'errorExistPerson');
     }
 
-    renderTestResult (people) {
+    renderTestResult(people) {
         this.resultPeopleView.showResult(people, 'testResultsAdded');
     }
 
-    renderTestError (people) {
+    renderTestError(people) {
         this.resultPeopleView.showResult(people, 'errorNotExistPerson');
     }
 
-    renderTimeSlotPeople (people) {
+    renderTimeSlotPeople(people) {
         this.resultPeopleView.showResult(people, 'peopleAdded');
     }
 
