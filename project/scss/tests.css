@@ -1,0 +1,40 @@
+.test-item {
+  padding: 0;
+  margin-left: 10px;
+  min-height: 140px; }
+
+.t-f-list li {
+  min-width: 200px; }
+.t-f-list a {
+  position: relative;
+  display: block;
+  padding: .4em .4em .4em 2em;
+  margin: .5em 0;
+  background: #FAFAFA;
+  color: #444;
+  text-decoration: none;
+  border-radius: .3em;
+  transition: .3s ease-out; }
+  .t-f-list a:before {
+    content: '\2600';
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: #006DF1;
+    color: #fff;
+    height: 2.5em;
+    width: 2.5em;
+    line-height: 2em;
+    border: .3em solid white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    transition: all .3s ease-out; }
+  .t-f-list a:hover {
+    background: #E9E4E0; }
+    .t-f-list a:hover:before {
+      transform: rotate(360deg); }
+
+/*# sourceMappingURL=tests.css.map */

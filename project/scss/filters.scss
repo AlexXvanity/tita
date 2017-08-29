@@ -1,0 +1,66 @@
+#filter-section {
+  min-height: 150px;
+  position: relative;
+  .filter-controls {
+    text-align: right;
+  }
+  .add-custom-filter {
+    margin-right: 49px;
+  }
+  .filter-arrow {
+    font-size: 25px;
+    display: block;
+  }
+  .arrow-controls, .filter-item {
+    display: inline-block;
+  }
+  .filter-list {
+    font-size: 18px;
+    text-align: center;
+  }
+  .btn-toggle {
+    button {
+      margin: 2px;
+      padding: 5px;
+      width: 80px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+}
+
+.toogle-controls {
+  .btn-group {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.add-filter-containerA {
+  display: inline-block;
+  padding: 5px;
+  margin: 10px;
+  vertical-align: top;
+}
+
+.selected-tests {
+  list-style-type: none;
+}
+
+.test-for-filter {
+  background: #E9E4E0;
+  padding: 3px;
+  margin-top: 2px;
+  vertical-align: top;
+}
+
+.test-for-filter:hover {
+  background: #9ac5cc;
+  font-weight: bold;
+  color:blue;
+}
+
+.settings-add-filter {
+  margin-top: 10px;
+  vertical-align: top;
+}

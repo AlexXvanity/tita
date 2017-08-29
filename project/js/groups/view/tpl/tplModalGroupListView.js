@@ -4,7 +4,7 @@ let tpl = require('./tplModalSettings.js');
 
 tpl.modalGroupListViev = () => {
     return `
-    <div class="titleSection">Group</div>
+    <div class="title-section">Group</div>
     <div id="group-container">
       <i id="add-group" class="add-button fa fa-plus-circle" aria-hidden="true"></i>
     </div>

@@ -42,31 +42,8 @@ module.exports = {
         }) 
         ],
 
- /*   
-//minification
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          // don't show unreachable variables etc
-          warnings:     false,
-          drop_console: true,
-          unsafe:       true
-        }
-      })
-    ],
-    */
-
     module: {
         rules: [
-        /*
-            {
-                enforce: "pre",
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "eslint-loader",
-            },
-            */
-            
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -77,7 +54,6 @@ module.exports = {
                     }
                 }
             },
-
 
             { // sass / scss loader for webpack
                 test: /\.(sass|scss)$/,

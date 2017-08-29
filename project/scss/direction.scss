@@ -1,0 +1,85 @@
+.settings-main {
+  .settings-main-item {
+    display: inline-block;
+    vertical-align: middle;
+    &.direction-list {
+      display: block;
+    }
+    &.direction-dropdown {
+      margin-top: 20px;
+    }
+  }
+  .direction-wrap {
+    position: relative;
+    width: 200px;
+    box-sizing: border-box;
+    padding-right: 20px;
+    .input-new-direction {
+      width: 100%;
+      outline: none;
+      text-indent: 5px;
+    }
+    .add-direction {
+      position: absolute;
+      right: 0;
+      top: 2px;
+      font-size: 20px;
+    }
+  }
+
+  .direction-select {
+    margin-bottom: 10px;
+    display: block;
+    border: 1px solid #ccc;
+    width: 200px;
+    border-radius: 3px;
+    padding-right: 35px;
+    overflow: hidden;
+    .direction {
+      counter-reset: li;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+    }
+    select {
+      padding: 5px 8px;
+      width: 130%;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      background-image: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .button-wrap {
+    margin-left: 20px;
+    margin-top: 20px;
+    .btn {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .close-btn {
+    font-size: 46px;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+  }
+  .wrapper-list {
+    display: block;
+    margin-top: 15px;
+    position: relative;
+  }
+  .new-test-input {
+    .input {
+      width: 120px;
+      text-indent: 5px;
+    }
+  }
+}
+
+
+

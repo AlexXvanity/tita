@@ -198,8 +198,8 @@ tpl.addFilterModal =
 
 tpl.modalGroupListViev =
     `
-        <div class="titleSection">Group</div>
-        <div id="group-container">
+        <div class="title-section">Group</div>
+        <div id="group-container" class="clearfix">
           <i id="add-group" class="add-button fa fa-plus-circle" aria-hidden="true"></i>
         </div>
         <div class="config">
@@ -261,7 +261,7 @@ tpl.editGroupTestModal = `<div class="modal fade display in edit-group-test-moda
             </div>
         </div>
         `;
-tpl.testListView = `<div class="titleSection">Test list</div>
+tpl.testListView = `<div class="title-section">Test list</div>
                     <div id="test-list" class="clearfix"></div>
                     `;
 tpl.dayListView = `<div class="day-item col-xs-2 panel panel-primary"></div>`;

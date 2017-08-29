@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  background: #00A3DD;
+  box-shadow: inset 0 0 120px 20px rgba(0,0,0,0.9);
+  overflow-x: hidden;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+input[type="text"], textarea {
+  outline: none;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+
+input {
+  &::-webkit-calendar-picker-indicator {
+    background-image:url(http://beyondsuiterama8.com/images/ic-calendar.png);
+    background-repeat: no-repeat;
+    font-size: 21px;
+    opacity: 1;
+    color: rgba(0,0,0,0);
+    &:hover {
+      background-color:  rgba(0,0,0,0);
+    }
+  }
+  #day-input {
+    background-image: url(http://beyondsuiterama8.com/images/ic-calendar.png);
+    background-repeat: no-repeat;
+    background-position: 97% 62%;
+    cursor: pointer;
+  }
+}
+
+::-webkit-inner-spin-button,
+::-webkit-clear-button{
+  display: none;
+}
+
+textarea {
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+}
+
+main {
+  padding: 3% 0;
+  section {
+    margin: 1em;
+    padding: 2%;
+    position: relative;
+    min-height: 130px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  }
+}
+
+.result-wrap {
+  margin-top: 1em;
+  position: relative;
+  overflow-x: scroll;
+  #result-section {
+    margin: 0;
+    width: 48%;
+    position: fixed;
+    left: auto;
+    top: auto;
+    box-sizing: border-box;
+  }
+}
+
+.config {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+
+.config-button {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.title-section {
+  font-size: 26px;
+  text-align: left;
+}
+
+.add-button {
+  font-size: 60px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  &:hover {
+    color: #656565;
+  }
+}
+
+.small-add-button {
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.no-active {
+  color: #8B8B8B;
+  cursor: default;
+}
+
+.error-message {
+  font-size: 24px;
+  color: red;
+}
+
+footer {
+  font-size: 16px;
+  text-align: center;
+  padding: 1%;
+  color: #000;
+}
+
+footer img {
+  float: right;
+  width: 5%;
+}
+
+.display {
+  display: block;
+}
+
+.light-gray {
+  background-color: lightgray;
+}
+
+.add-people {
+  cursor: pointer;
+}
+.rejected {
+  vertical-align: bottom;
+}
+
+// modal
+.modalwin {
+  width: 600px;
+  min-height: 200px;
+  top: 20%;
+  right: 0;
+  left: 0;
+  font-size: 14px;
+  margin: 0 auto;
+  z-index: 2;
+  display: none;
+  position: fixed;
+  padding: 2%;
+  border: 3px outset gray;
+  border-radius: 10px;
+  box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  height: auto;
+  background: #fff;
+}
+
+.with-modal {
+  padding-right: 17px;
+}
+
+.shadow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: #000;
+  opacity: 0.5;
+  left: 0;
+  top: 0;
+}
+
+// editGroupTestModal
+.edit-group-test-modal {
+  .grade-input {
+    width: 30%;
+  }
+  .add-test-input {
+    width: 75%;
+  }
+  .add-exam-btn {
+    font-size: 33px;
+  }
+}
+
+.context-menu-group-modal {
+  .modal-body {
+    text-align: center;
+  }
+  .edit-group-btn {
+    margin-left: 100px;
+  }
+}
+
+.people-modal {
+  width: 400px;
+  height: 250px;
+  border: 1px solid black;
+}
+
+.button-open-people {
+  width: 20px;
+  height: 50px;
+}
+
+// special
+.test-input {
+  width: 30% !important;
+  margin: 1%;
+}
+
+.disable-btn {
+  pointer-events: none;
+}
+
+.able-btn {
+  pointer-events: auto;
+}
