@@ -80,7 +80,9 @@ class DayItemView {
         dayItem.addEventListener('contextmenu', this.editDayHandler.bind(this));
 
         timeSlotBtn.forEach((btn) => {
-            btn.addEventListener('click', (e)=> {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+
                 let data = {},
                     time = e.target.innerHTML;
 
@@ -90,24 +92,21 @@ class DayItemView {
                 mediator.pub('timeSlot:clicked', data);
             });
         });
-
-        timeSlotBtn.forEach((btn) => {
-            btn.addEventListener('contextmenu', (e)=> {
-                e.preventDefault();
-                let data = {},
-                    time = e.target.innerHTML,
-                    target = e.target;
-
-                data.time = time;
-
-                mediator.pub('timeSlotContextMenu:show', data.time);
-            });
-        });
     }
 
     editDayHandler (event) {
         event.preventDefault();
-        mediator.pub('dayContextMenu:show', this.selectDay);
+        if (event.target.classList.contains('time-slot')) {
+            // let data = {},
+            //     time = e.target.innerHTML,
+            //     target = e.target;
+            //
+            // data.time = time;
+
+            mediator.pub('timeSlotContextMenu:show', data.time);
+        } else {
+            mediator.pub('dayContextMenu:show', this.selectDay);
+        }
     }
 
     selectDayItemHandler () {
