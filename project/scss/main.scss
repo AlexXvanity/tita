@@ -16,9 +16,12 @@ th, td {
 }
 
 input[type="text"], textarea {
-  outline: none;
-  padding: 5px;
-  box-sizing: border-box;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 
@@ -69,7 +72,6 @@ main {
 .result-wrap {
   margin-top: 1em;
   position: relative;
-  overflow-x: scroll;
   #result-section {
     margin: 0;
     width: 48%;

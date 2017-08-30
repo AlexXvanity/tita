@@ -11,8 +11,8 @@ let settingsModal =  `
                 </div>
             </div>
             <div class="settings-main-item button-wrap">
-                <div class="btn"><img src="images/t.png" class="show-test-list"/></div>
-                <div class="btn"><img src="images/f.png" class="show-filter-list"/></div>
+                <div class="btn"><button type="button" class="show-test-list btn btn-primary">Test</button></div>
+                <div class="btn"><button type="button" class="show-filter-list btn btn-success">Filter</button></div>
             </div>
             <div class="settings-main-item direction-list">
                 <div class="tests-filters-container"></div>

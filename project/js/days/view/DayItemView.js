@@ -97,13 +97,12 @@ class DayItemView {
     editDayHandler (event) {
         event.preventDefault();
         if (event.target.classList.contains('time-slot')) {
-            // let data = {},
-            //     time = e.target.innerHTML,
-            //     target = e.target;
-            //
-            // data.time = time;
+            let data = {};
 
-            mediator.pub('timeSlotContextMenu:show', data.time);
+            data.time = event.target.innerHTML;
+            data.day = this.selectDay;
+
+            mediator.pub('timeSlotContextMenu:show', data);
         } else {
             mediator.pub('dayContextMenu:show', this.selectDay);
         }
